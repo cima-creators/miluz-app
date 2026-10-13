@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A2335">
+<title>Animados Mi Luz · CIMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif}
+:root{--bg:#FAF7F4;--card:#FFFFFF;--soft:#F6F0EC;--line:#EFE6E1;--line2:#E0D2CB;--txt:#2A1F1F;--mut:#8A7B76;--mut2:#B7A8A2;
+  --acc:#7A2335;--acc-bg:#F6E3E6;--ok:#3F8F6B;--ok-bg:#E7F2EC;--warn:#A8742A;--warn-bg:#F7EEDD;--bad:#B5523A;--bad-bg:#F8E7DF;--r:20px}
+body{background:var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+button,select{font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 22px 60px}
+@media (max-width:600px){.wrap{padding:20px 16px 60px}}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--mut);font-size:13px;margin-top:6px;max-width:70ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--card);color:var(--txt);border:1px solid var(--line);padding:10px 17px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;min-height:42px;text-decoration:none}
+.btn:hover{border-color:var(--line2)}
+.btn.dark{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn.no{color:var(--bad)}
+.top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,2fr);gap:11px;margin-bottom:18px}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}}
+.hero{border-radius:26px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#9A3A4D 0%,#5E1A29 64%);display:flex;align-items:center;gap:20px;min-height:180px}
+.hero .blob{position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;bottom:-100px}
+.ringbox{position:relative;width:112px;height:112px;flex-shrink:0}
+.ringbox svg{transform:rotate(-90deg);display:block}
+.ringbox .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ringbox .mid b{font-size:30px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.ringbox .mid u{text-decoration:none;font-size:10.5px;opacity:.75;margin-top:3px}
+.hero-msg{position:relative;min-width:0}
+.hero-msg .ey{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.hero-msg h3{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.025em;margin:6px 0 7px;color:#fff}
+.hero-msg p{font-size:12.5px;line-height:1.55;opacity:.85}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;min-height:84px;display:flex;flex-direction:column;cursor:pointer;text-align:left;transition:border-color .15s}
+.kpi:hover{border-color:var(--line2)}
+.kpi.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.kpi .l{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kpi .v{font-size:30px;font-weight:700;letter-spacing:-.035em;margin-top:auto;padding-top:8px;line-height:1}
+.kpi .h{font-size:11.5px;color:var(--mut2);margin-top:4px}
+.kpi.ok .v{color:var(--ok)} .kpi.alerta .v{color:var(--warn)} .kpi.mal .v{color:var(--bad)}
+.barra{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
+.marcas{display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:4px;max-width:100%;overflow-x:auto}
+.mt{border:0;background:transparent;color:var(--mut);font-weight:600;font-size:13px;padding:8px 14px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.mt.on{background:var(--card);color:var(--acc);box-shadow:0 1px 4px rgba(38,33,30,.08)}
+select{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:9px 13px;font-size:13px;font-weight:500;min-height:42px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;align-items:start}
+.item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.item.fuera{opacity:.55}
+.vid{aspect-ratio:4/5;width:100%;overflow:hidden;background:#1d1916;position:relative;border-bottom:1px solid var(--line)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#1d1916}
+.vid .tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(38,33,30,.72);color:#fff}
+.vid .tag.r{left:auto;right:10px}
+.vid .tag.nueva{background:var(--acc)}
+.vid .tag.hecho{background:var(--ok)}
+.cuerpo{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 14px 10px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--acc-bg);color:var(--acc);display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.who{min-width:0;flex:1}
+.who b{display:block;font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who small{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .meta{flex-wrap:nowrap;overflow:hidden;mask-image:linear-gradient(90deg,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.item .meta .pill{white-space:nowrap;flex-shrink:0}
+.clamp1{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fmt{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+.idea-c{font-size:13px;color:var(--mut)}
+.btn.sm{min-height:36px;padding:7px 10px;font-size:12.5px}
+.acciones .btn.sm{flex:0 0 auto;white-space:nowrap}
+.acciones .btn.sm.dark,.acciones .btn.sm.ok{flex:1}
+.extra{display:none;flex-direction:column;gap:9px}
+.item.abierta .extra{display:flex}
+.item.abierta .clamp2{-webkit-line-clamp:unset;display:block}
+
+.fila{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.nombre{font-size:16px;font-weight:700;letter-spacing:-.02em;line-height:1.25;overflow-wrap:anywhere}
+.estrellas{font-size:12px;color:var(--warn);white-space:nowrap;letter-spacing:1px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pill{display:inline-block;font-size:11.5px;font-weight:500;padding:4px 11px;border-radius:99px;background:var(--soft);color:var(--mut)}
+.pill.m{background:var(--acc);color:#fff}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.num{background:var(--soft);border-radius:14px;padding:8px 10px}
+.num b{display:block;font-size:19px;font-weight:700;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.num span{font-size:10.5px;color:var(--mut);font-weight:500}
+h4{font-size:10.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3px}
+.txt{font-size:13px;line-height:1.5}
+.unas{background:var(--acc-bg);border-radius:14px;padding:10px 12px}
+.unas h4{color:var(--acc)}
+.links{font-size:12px;color:var(--mut)}
+.links a{color:var(--txt);font-weight:500}
+.acciones{display:flex;gap:8px;margin-top:auto;padding-top:2px}
+.acciones .btn{flex:1}
+.acciones .btn.chico{flex:0 0 auto}
+.aviso{font-size:12.5px;font-weight:500;border-radius:14px;padding:10px 12px}
+.aviso.w{background:var(--warn-bg);color:var(--warn)}
+.aviso.ok{background:var(--ok-bg);color:var(--ok)}
+.aviso.mal{background:var(--bad-bg);color:var(--bad)}
+.final{border-bottom:3px solid var(--ok)}
+details{background:var(--soft);border-radius:14px;padding:10px 12px}
+summary{cursor:pointer;font-weight:600;font-size:13px}
+.des{display:flex;flex-direction:column;gap:10px;margin-top:10px;font-size:12.5px}
+.des ul{padding-left:17px}
+.esc{width:100%;border-collapse:collapse;font-size:12px;background:var(--card);border-radius:12px;overflow:hidden}
+.esc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top}
+.esc tr:first-child td{border-top:0}
+.esc td:first-child{white-space:nowrap;color:var(--mut2);font-variant-numeric:tabular-nums}
+.esc i{font-style:normal;color:var(--mut)}
+.vacio{text-align:center;color:var(--mut);padding:60px 20px;background:var(--card);border:1px dashed var(--line2);border-radius:var(--r);grid-column:1/-1}
+#login{max-width:360px;margin:14vh auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+#login h1{font-size:23px}
+#login input{width:100%;margin:16px 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font-size:15px;background:var(--soft);color:var(--txt)}
+#plan{position:fixed;inset:0;background:rgba(42,31,31,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+#plan.on{display:flex}
+#plan .box{background:var(--card);border-radius:var(--r);max-width:560px;width:100%;max-height:92vh;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+#plan h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
+#plan .ref{display:flex;gap:12px;align-items:flex-start}
+#plan .ref img{width:72px;height:90px;object-fit:cover;border-radius:12px;background:var(--soft);flex-shrink:0}
+#plan .ref p{font-size:12.5px;color:var(--mut)}
+#plan textarea{width:100%;min-height:210px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.55;background:var(--soft);color:var(--txt);resize:vertical}
+#plan textarea:focus{outline:none;border-color:var(--acc)}
+#plan .ayuda{font-size:12px;color:var(--mut)}
+.ang{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.ang.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.ang .cab{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.ang .cab input{margin-top:3px;accent-color:var(--acc);width:17px;height:17px;flex-shrink:0}
+.ang .cab b{font-size:14.5px}
+.ang .tag2{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--acc-bg);color:var(--acc);margin-top:3px}
+.ang .tag2.nuevo{background:var(--warn-bg);color:var(--warn)}
+.ang .fr{font-size:12.5px;color:var(--mut)}
+.ang textarea{min-height:150px!important}
+.ang:not(.on) textarea{display:none}
+.ang input.nom{width:100%;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:inherit;font-size:13.5px;background:var(--soft)}
+.mas-angs{display:flex;gap:8px;flex-wrap:wrap}
+.mas-angs select{flex:1;min-width:200px}
+#login .btn{width:100%}
+.acciones.ver .btn.sm{flex:1}
+.cambio textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;background:var(--soft);color:var(--txt);resize:vertical;margin-bottom:6px}
+.cambio textarea:focus{outline:none;border-color:var(--acc)}
+.acciones .btn.sm[data-acc="mas"]{border:0;background:none;color:var(--acc)}
+.err{color:var(--bad);font-size:12.5px;min-height:18px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--txt);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>Animados Mi Luz</h1>
+  <p class="sub">Propuestas diarias de anuncios animados que están escalando.</p>
+  <input id="clave" type="password" placeholder="Clave" autocomplete="current-password">
+  <div class="err" id="gerr"></div>
+  <button class="btn dark" id="entrar">Entrar</button>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <header>
+    <div>
+      <h1>Animados que escalan</h1>
+      <p class="sub">Anuncios 100% animados de cualquier nicho que siguen prendidos; todos los días se suman 20 nuevos. Tocá <b>La quiero</b> en los que te sirvan: el video de Mi Luz se produce solo y aparece en <b>Producidos</b>. Tocá <b>No</b> en los que no; los que no toques quedan para otro día.</p>
+    </div>
+  </header>
+
+  <div class="top">
+    <div class="hero">
+      <div class="blob"></div>
+      <div class="ringbox">
+        <svg width="112" height="112" viewBox="0 0 112 112"><circle cx="56" cy="56" r="48" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="10"/><circle id="aro" cx="56" cy="56" r="48" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6"/></svg>
+        <div class="mid"><b id="nAro">0</b><u id="uAro">de 10 elegidas</u></div>
+      </div>
+      <div class="hero-msg">
+        <div class="ey" id="ey">Hoy</div>
+        <h3 id="heroT">Cargando…</h3>
+        <p id="heroP"></p>
+      </div>
+    </div>
+    <div class="kpis">
+      <button class="kpi on" data-v="hoy"><span class="l">Para elegir</span><span class="v" id="kHoy">–</span><span class="h" id="kHoyH"></span></button>
+      <button class="kpi alerta" data-v="elegidas"><span class="l">En producción</span><span class="v" id="kEleg">–</span><span class="h">de a 3 por vez, sin tope</span></button>
+      <button class="kpi ok" data-v="hechos"><span class="l">Producidos</span><span class="v" id="kHechos">–</span><span class="h">aprobar o pedir cambios</span></button>
+      <button class="kpi mal" data-v="todas"><span class="l">Descartadas</span><span class="v" id="kDesc">–</span><span class="h">se pueden recuperar</span></button>
+    </div>
+  </div>
+
+  <div class="barra">
+    <div class="marcas" id="filtros">
+      <button class="mt on" data-f="">Todos</button>
+      <button class="mt" data-f="pixar">Pixar · Disney · LEGO</button>
+      <button class="mt" data-f="A1">A1 Canción</button>
+      <button class="mt" data-f="A2">A2 Problema habla</button>
+      <button class="mt" data-f="A3">A3 A vs B</button>
+      <button class="mt" data-f="A4">A4 Mentor</button>
+      <button class="mt" data-f="A5">A5 Experto</button>
+      <button class="mt" data-f="A6">A6 X días</button>
+      <button class="mt" data-f="otro">Otro</button>
+    </div>
+    <select id="orden" aria-label="Ordenar">
+      <option value="senal">Más señal primero</option>
+      <option value="dias">Más días activo</option>
+      <option value="dup">Más duplicados</option>
+      <option value="marca">Marca con más anuncios</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+<div id="plan" role="dialog" aria-modal="true" aria-labelledby="planT"><div class="box">
+  <h2 id="planT">¿Con qué ángulos lo hacemos?</h2>
+  <div class="ref"><img id="planImg" alt=""><div><b id="planMarca"></b><p id="planIdea"></p></div></div>
+  <div class="ayuda">Tildá 1, 2 o 3: cada ángulo sale como un video aparte. El plan de cada uno se puede editar; el video se hace <b>exactamente</b> con eso.</div>
+  <div id="angs"></div>
+  <div class="mas-angs">
+    <select id="vocExtra"><option value="">+ Sumar un dolor del VOC para variar…</option></select>
+    <button class="btn sm" id="angPropio">+ Escribir otro ángulo</button>
+  </div>
+  <div class="acciones"><button class="btn" id="planNo">Cancelar</button><button class="btn dark" id="planSi">Producir</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+const CLAVES = {"luz-2026":"Luz","miluz-2026":"Luz","cima-2026":"Nacho","vane-2026":"Vane","abril-2026":"Abril"};
+const FMT = {A1:"Canción narrada",A2:"El problema habla",A3:"Experimento A vs B",A4:"Storytime con mentor",A5:"Experto + anatomía",A6:"X días en Y segundos",otro:"Otro formato"};
+const EN_CURSO = ["elegida","lista","produciendo","fallo","cambiar"];
+const META = 10;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let quien = null, docs = [], vista = "hoy", filtro = "", orden = "senal", fs = null, hoy = "";
+try { quien = sessionStorage.getItem("anim_quien"); vista = localStorage.getItem("anim_vista") || "hoy"; } catch (e) {}
+
+function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("on"); setTimeout(() => el.classList.remove("on"), 1800); }
+
+$("#entrar").onclick = entrar;
+$("#clave").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
+function entrar(){
+  const n = CLAVES[$("#clave").value.trim().toLowerCase()];
+  if (!n) { $("#gerr").textContent = "Clave incorrecta"; return; }
+  quien = n; try { sessionStorage.setItem("anim_quien", n); } catch (e) {}
+  arrancar();
+}
+if (quien) arrancar();
+
+async function arrancar(){
+  $("#login").hidden = true; $("#app").hidden = false;
+  marcarVista();
+  const [{initializeApp},{getFirestore,collection,doc,onSnapshot,updateDoc,setDoc},{getAuth,signInAnonymously}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js")]);
+  const app = initializeApp({apiKey:"AIzaSyCTv4DiRCpbCpGYP6E86TPHlkPvaAZTN3g",authDomain:"cleargy-creators.firebaseapp.com",projectId:"cleargy-creators",storageBucket:"cleargy-creators.firebasestorage.app",messagingSenderId:"313543582398",appId:"1:313543582398:web:99fe78991adeea2e7cb4ef"});
+  await signInAnonymously(getAuth(app));
+  const db = getFirestore(app);
+  fs = {db, doc, updateDoc, setDoc};
+  onSnapshot(collection(db, "animados_luz"), snap => {
+    docs = snap.docs.map(d => ({id: d.id, ...d.data()})).filter(d => /^\d{4}-/.test(d.fecha || ""))
+      .filter(d => d.estado !== "nueva" || (d.duracion || 0) >= 40);   // Nacho, 9/10: mínimo 40 s
+    pintar();
+  }, err => { $("#grid").innerHTML = `<div class="vacio">No se pudo cargar (${esc(err.code)}). Recargá la página.</div>`; });
+}
+
+function marcarVista(){ document.querySelectorAll(".kpi").forEach(b => b.classList.toggle("on", b.dataset.v === vista)); }
+document.querySelectorAll(".kpi").forEach(b => b.onclick = () => {
+  vista = b.dataset.v; try { localStorage.setItem("anim_vista", vista); } catch (e) {}
+  marcarVista(); pintar();
+});
+document.querySelectorAll("#filtros .mt").forEach(b => b.onclick = () => {
+  filtro = b.dataset.f; document.querySelectorAll("#filtros .mt").forEach(x => x.classList.toggle("on", x === b)); pintar();
+});
+$("#orden").onchange = e => { orden = e.target.value; pintar(); };
+
+function pintar(){
+  const fechas = [...new Set(docs.map(d => d.fecha))].sort().reverse();
+  hoy = fechas[0] || "";
+  const nuevas = docs.filter(d => d.estado === "nueva");
+  const curso = docs.filter(d => EN_CURSO.includes(d.estado));
+  const hechos = docs.filter(d => d.estado === "producido" || d.estado === "aprobado");
+  const descartadas = docs.filter(d => d.estado === "descartada");
+  const deHoy = docs.filter(d => d.fecha === hoy).length;
+  const elegidasTot = curso.length + hechos.length;
+  $("#kHoy").textContent = nuevas.length; $("#kHoyH").textContent = deHoy ? `${deHoy} nuevas hoy` : "";
+  $("#kEleg").textContent = curso.length; $("#kHechos").textContent = hechos.length; $("#kDesc").textContent = descartadas.length;
+  $("#nAro").textContent = elegidasTot;
+  $("#aro").setAttribute("stroke-dashoffset", 301.6 * (1 - Math.min(1, elegidasTot / META)));
+  if (hoy) {
+    $("#ey").textContent = new Date(hoy + "T12:00").toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long"});
+    $("#heroT").textContent = nuevas.length ? `${nuevas.length} animados para elegir` : "Todo revisado";
+    $("#heroP").textContent = curso.length ? `${curso.length} en producción y ${hechos.length} listos. Cada video tarda alrededor de una hora.`
+      : elegidasTot >= META ? "Ya elegiste 10. Podés seguir eligiendo o descartar lo que no sirve."
+      : `Elegí ${META - elegidasTot} más. Cada uno trae cuántos días lleva prendido, cuántas veces lo duplicó la marca y cómo se haría para uñas.`;
+  } else { $("#heroT").textContent = "Todavía no hay propuestas"; $("#heroP").textContent = "La primera tanda se está armando."; }
+  let lista = vista === "hoy" ? nuevas : vista === "elegidas" ? curso : vista === "hechos" ? hechos : descartadas;
+  const esPixar = d => /pixar|disney|lego|brick|bloques/i.test(d.estilo || "");
+  if (filtro === "pixar") lista = lista.filter(esPixar);
+  else if (filtro) lista = lista.filter(d => (d.formato || "otro") === filtro);
+  const k = {senal: d => (d.senal||0)*10 + (d.calidad||0), dias: d => d.dias||0, dup: d => d.dup||0, marca: d => d.marcaAds||0}[orden];
+  lista.sort((a, b) => vista === "hechos" ? (b.producidoEn||"").localeCompare(a.producidoEn||"") : ((b.fecha||"").localeCompare(a.fecha||"") || k(b) - k(a)));
+  if (!lista.length) {
+    $("#grid").innerHTML = `<div class="vacio">${{elegidas:"No hay nada en producción. Tocá <b>La quiero</b> en Para elegir.", hechos:"Todavía no hay videos producidos.", todas:"No descartaste ninguno.", hoy:"No hay anuncios con este filtro."}[vista]}</div>`;
+    return;
+  }
+  $("#grid").innerHTML = lista.map(tarjeta).join("");
+  $("#grid").querySelectorAll("[data-acc]").forEach(b => b.onclick = () => accion(b.dataset.id, b.dataset.acc));
+}
+
+function fmtN(n){ return n >= 1000 ? (n/1000).toFixed(n >= 10000 ? 0 : 1).replace(".", ",") + " mil" : String(n ?? "–"); }
+
+function desarmado(d){
+  const x = d.desarmado || {};
+  if (!x.granIdea && !(x.escenas||[]).length) return "";
+  return `<details><summary>Ver el desarmado de la referencia</summary><div class="des">
+      ${x.granIdea ? `<div><h4>Gran idea</h4>${esc(x.granIdea)}</div>` : ""}
+      ${(x.porQue||[]).length ? `<div><h4>Por qué funciona</h4><ul>${x.porQue.map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>` : ""}
+      ${(x.estructura||[]).length ? `<div><h4>Estructura</h4><ul>${x.estructura.map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>` : ""}
+      ${(x.escenas||[]).length ? `<div><h4>Escenas</h4><table class="esc">${x.escenas.map(s => `<tr><td>${esc(s.t)}</td><td>${esc(s.dice)}${s.ve ? `<br><i>${esc(s.ve)}</i>` : ""}</td></tr>`).join("")}</table></div>` : ""}
+    </div></details>`;
+}
+
+function estadoProd(d){
+  if (d.estado === "elegida") return `<div class="aviso w">Desarmando la referencia…</div>`;
+  if (d.estado === "lista") return `<div class="aviso w">${d.turno === "mañana" ? "En fila para producir" : "En fila para producir"}</div>`;
+  if (d.estado === "produciendo") return `<div class="aviso w">Produciendo el video de Mi Luz… (alrededor de una hora)</div>`;
+  if (d.estado === "cambiar") return `<div class="aviso w">Haciendo el cambio: ${esc(d.cambioNota || "")}</div>`;
+  if (d.estado === "aprobado") return `<div class="aviso ok">${d.enDrive ? "✓ En Drive · " + esc(d.enDrive) : "✓ Aprobado · pasando a Drive…"}</div>`;
+  if (d.estado === "fallo") return `<div class="aviso mal">No salió: ${esc(d.falloMotivo || "se reintenta")}</div>`;
+  return "";
+}
+
+function tarjeta(d){
+  const f = d.formato || "otro";
+  const fuente = (d.fuente || "").replace("GetHookd · ", "");
+  const prod = d.estado === "producido" || d.estado === "aprobado";
+  const s = d.senal || 1;
+  let botones = "";
+  const mas = `<button class="btn sm" data-acc="mas" data-id="${esc(d.id)}">Más</button>`;
+  if (d.estado === "nueva") botones = `${mas}<button class="btn sm no" data-acc="descartar" data-id="${esc(d.id)}">No</button><button class="btn sm dark" data-acc="elegir" data-id="${esc(d.id)}">La quiero</button>`;
+  if (d.estado === "elegida" || d.estado === "lista") botones = `${mas}<button class="btn sm" data-acc="soltar" data-id="${esc(d.id)}">Cancelar</button>`;
+  if (d.estado === "descartada") botones = `${mas}<button class="btn sm" data-acc="volver" data-id="${esc(d.id)}">Recuperar</button>`;
+  if (d.estado === "produciendo" || d.estado === "fallo") botones = mas;
+  if (d.estado === "producido") botones = `${mas}<button class="btn sm" data-acc="cambiar" data-id="${esc(d.id)}">Cambiar</button><button class="btn sm dark" data-acc="aprobar" data-id="${esc(d.id)}">Aprobar</button>`;
+  if (d.estado === "aprobado") botones = `${mas}<button class="btn sm dark" data-acc="iterar" data-id="${esc(d.id)}">Iterar</button>${d.driveUrl ? `<a class="btn sm ok" href="${esc(d.driveUrl)}" target="_blank" rel="noopener">Ver en Drive</a>` : `<span class="btn sm" style="flex:1">Pasando a Drive…</span>`}`;
+  const caja = d.estado === "producido" ? `<div class="cambio" hidden><textarea placeholder="¿Qué cambiamos? Ej: al principio, cuando dice las semanas, mostrá la uña pintándose" rows="3"></textarea><div class="acciones"><button class="btn sm" data-acc="nocambio" data-id="${esc(d.id)}">Cancelar</button><button class="btn sm dark" data-acc="enviarcambio" data-id="${esc(d.id)}">Enviar cambio</button></div></div>` : "";
+  const bajar = prod ? `<div class="links"><a href="${esc(d.finalSubs || d.final)}" target="_blank" rel="noopener" download>Bajar con subtítulos</a>${d.finalSubs ? ` · <a href="${esc(d.final)}" target="_blank" rel="noopener" download>sin subtítulos</a>` : ""}</div>` : "";
+  const nueva = d.fecha === hoy && d.estado === "nueva";
+  return `<article class="item ${d.estado === "descartada" ? "fuera" : ""}" data-card="${esc(d.id)}">
+    <div class="chead"><div class="av">${esc((d.marca || "?").charAt(0).toUpperCase())}</div>
+      <div class="who"><b>${esc(d.marca)}</b><small>${esc(d.dias)} días · ${fmtN(d.marcaAds)} ads de la marca</small></div></div>
+    ${prod ? `<div class="vid final"><video src="${esc(d.finalSubs || d.final)}" preload="metadata" controls playsinline></video><span class="tag hecho">Mi Luz · ${esc(d.codigo || "")}</span></div>` : `<div class="vid">
+      <video src="${esc(d.video)}" poster="${esc(d.thumb)}" preload="none" controls playsinline></video>
+      <span class="tag ${nueva ? "nueva" : ""}">${nueva ? "Nueva · " : ""}${esc(d.duracion || "?")} s</span>
+      <span class="tag r">${esc(d.fuente?.startsWith("TrendTrack") ? "TrendTrack" : "GetHookd")}</span></div>`}
+    <div class="cuerpo">
+      <div class="meta"><span class="pill" style="background:var(--acc-bg);color:var(--acc)">${"★".repeat(s)}${"☆".repeat(5-s)}</span><span class="pill">${esc(d.dup)} dup.</span>${d.estilo ? `<span class="pill">${esc(d.estilo)}</span>` : ""}${d.mixto ? `<span class="pill" style="background:var(--warn-bg);color:var(--warn)" title="${esc(d.mixto)}">Tomas reales</span>` : ""}${d.anguloElegido ? `<span class="pill" style="background:var(--acc-bg);color:var(--acc)">${esc(d.anguloElegido)}</span>` : ""}</div>
+      <div class="fmt clamp1">${esc(f === "otro" ? "Otro formato" : f + " · " + FMT[f])}</div>
+      <div class="idea-c clamp2">${esc(d.idea || d.hook || "")}</div>
+      ${estadoProd(d)}
+      <div class="extra">
+        ${bajar}
+        ${d.plan ? `<div class="unas"><h4>Plan aprobado</h4><div class="txt" style="white-space:pre-line">${esc(d.plan)}</div></div>` : ""}
+        <div class="unas"><h4>Para uñas</h4><div class="txt">${esc(d.bajada || "")}</div>
+          ${d.fraseVoc ? `<div class="txt" style="margin-top:6px"><b>Palabras de la clienta:</b> «${esc(d.fraseVoc)}»${d.cuantasVoc ? ` · lo dicen ${esc(d.cuantasVoc)} personas (${esc(d.anguloVoc)})` : ""}</div>` : ""}</div>
+        ${d.producto ? `<div class="links">Vende: ${esc(d.producto)}</div>` : ""}
+        <div class="links">${esc(fuente)} · desde ${esc(d.inicio || "?")}${d.pais ? " · " + esc(d.pais) : ""} · <a href="${esc(d.link)}" target="_blank" rel="noopener">ver anuncio</a></div>
+        ${prod ? `<div class="vid" style="aspect-ratio:16/9"><video src="${esc(d.video)}" preload="none" controls playsinline></video><span class="tag">Referencia</span></div>` : ""}
+        ${d.estado === "nueva" || d.estado === "descartada" ? "" : desarmado(d)}
+      </div>
+      ${prod ? `<div class="acciones ver">
+        <a class="btn sm" href="${esc(d.finalSubs || d.final)}" target="_blank" rel="noopener">Ver</a>
+        ${d.driveLink ? `<a class="btn sm" href="${esc(d.driveLink)}" target="_blank" rel="noopener">Drive</a>` : `<span class="btn sm" style="opacity:.5">Drive…</span>`}
+      </div>` : ""}
+      ${caja}
+      <div class="acciones">${botones}</div>
+    </div>
+  </article>`;
+}
+
+async function accion(id, acc){
+  if (acc === "mas") { const c = document.querySelector(`[data-card="${CSS.escape(id)}"]`); c.classList.toggle("abierta");
+    c.querySelector('[data-acc="mas"]').textContent = c.classList.contains("abierta") ? "Menos" : "Más"; return; }
+  const card = document.querySelector(`[data-card="${CSS.escape(id)}"]`);
+  if (acc === "cambiar") { card.querySelector(".cambio").hidden = false; card.querySelector("textarea").focus(); return; }
+  if (acc === "nocambio") { card.querySelector(".cambio").hidden = true; return; }
+  if (acc === "enviarcambio") {
+    const nota = card.querySelector("textarea").value.trim();
+    if (!nota) { toast("Escribí qué cambiamos"); return; }
+    try { await fs.updateDoc(fs.doc(fs.db, "animados_luz", id), {estado: "cambiar", cambioNota: nota, cambioEn: new Date().toISOString(), cambio: quien}); toast("Enviado: se rehace con tu cambio"); }
+    catch (e) { toast("No se pudo guardar: " + e.code); }
+    return;
+  }
+  if (acc === "aprobar") {
+    try { await fs.updateDoc(fs.doc(fs.db, "animados_luz", id), {estado: "aprobado", aprobadoEn: new Date().toISOString(), aprobo: quien}); toast("Aprobado: va al Drive del día"); }
+    catch (e) { toast("No se pudo guardar: " + e.code); }
+    return;
+  }
+  if (acc === "elegir") { abrirPlan(id); return; }
+  if (acc === "iterar") { abrirIterar(id); return; }
+  const estado = {elegir:"elegida", soltar:"nueva", descartar:"descartada", volver:"nueva"}[acc];
+  const extra = acc === "elegir" ? {eligio: quien, eligioEn: new Date().toISOString()} : {};
+  try { await fs.updateDoc(fs.doc(fs.db, "animados_luz", id), {estado, ...extra}); toast({elegir:"Elegida: se produce sola ✓", descartar:"Descartada", volver:"Recuperada", soltar:"Cancelada"}[acc]); }
+  catch (e) { toast("No se pudo guardar: " + e.code); }
+}
+
+let planId = null, vocExtra = [], modo = "elegir";
+fetch("voc-extra.json").then(r => r.json()).then(x => {
+  vocExtra = x;
+  $("#vocExtra").innerHTML = '<option value="">+ Sumar un dolor del VOC para variar…</option>' +
+    x.map((v, i) => `<option value="${i}">${esc(v.dolor)} · ${v.cuantas} personas</option>`).join("");
+}).catch(() => {});
+
+function planTexto(d, a){
+  const f = d.formato || "otro";
+  return [
+    `Ángulo: ${a.nombre || ""}${a.enfoque ? " · sub-ángulo: " + a.enfoque : ""}`,
+    a.frase ? `Palabras de la clienta: «${a.frase}»${a.cuantas ? ` (lo dicen ${a.cuantas} personas)` : ""}` : `Palabras de la clienta: `,
+    ``,
+    `Idea para Mi Luz: ${a.bajada !== undefined ? a.bajada : (d.bajada || "")}`,
+    ``,
+    `Formato: ${f === "otro" ? "el mismo de la referencia" : FMT[f]}, con la misma estructura y el mismo ritmo que la referencia.`,
+    `Personaje: mujer de 45-64 (la que compra), siempre la misma en todo el video.`,
+    `Producto: Tratamiento Fénix (foto real del frasco). Cuando se habla del tratamiento, se ve la uña pintándose.`,
+    ``,
+    `Qué NO va: `,
+  ].join("\n");
+}
+function bloqueAng(d, a, on, propio, tipo, texto){
+  const el = document.createElement("div");
+  el.className = "ang" + (on ? " on" : "");
+  el.dataset.nombre = a.nombre || "";
+  el.dataset.tipo = tipo || "";
+  el.innerHTML = `<label class="cab"><input type="checkbox" ${on ? "checked" : ""}><div>
+      ${propio ? `<input class="nom" placeholder="Nombre del ángulo (ej: me da vergüenza mostrar las manos)">` : `<b>${esc(a.nombre)}</b>${a.enfoque ? ` <span class="fr">· ${esc(a.enfoque)}</span>` : ""}`}
+      ${a.tag ? `<div><span class="tag2 ${a.validado === false ? "nuevo" : ""}">${esc(a.tag)}</span></div>` : ""}
+      ${a.frase ? `<div class="fr">«${esc(a.frase)}»${a.cuantas ? ` · ${esc(a.cuantas)} personas` : ""}</div>` : ""}
+    </div></label><textarea>${esc(texto || (propio ? planTexto(d, {nombre: "", bajada: ""}) : planTexto(d, a)))}</textarea>`;
+  const cb = el.querySelector("input[type=checkbox]");
+  cb.onchange = () => el.classList.toggle("on", cb.checked);
+  if (propio) el.querySelector(".nom").oninput = e => {
+    el.dataset.nombre = e.target.value;
+    const t = el.querySelector("textarea"); t.value = t.value.replace(/^Ángulo:.*$/m, "Ángulo: " + e.target.value);
+  };
+  $("#angs").appendChild(el);
+  return el;
+}
+function abrirPlan(id){
+  const d = docs.find(x => x.id === id); if (!d) return;
+  planId = id; modo = "elegir";
+  $("#planT").textContent = "¿Con qué ángulos lo hacemos?";
+  $("#planSi").textContent = "Producir";
+  const f = d.formato || "otro";
+  $("#planImg").src = d.thumb || "";
+  $("#planMarca").textContent = `${d.marca} · ${f === "otro" ? "Otro formato" : f + " · " + FMT[f]}`;
+  $("#planIdea").textContent = "Referencia: " + (d.idea || d.hook || "");
+  $("#angs").innerHTML = "";
+  const angs = (d.angulos && d.angulos.length) ? d.angulos
+    : [{nombre: "Mis uñas no crecen", tag: "Ganador de la cuenta", frase: d.fraseVoc, cuantas: d.cuantasVoc, bajada: d.bajada}];
+  angs.forEach((a, i) => bloqueAng(d, a, i === 0));
+  $("#vocExtra").value = "";
+  $("#plan").classList.add("on");
+}
+
+window.abrirIterar = id => abrirIterar(id);
+const ESTILOS_IT = ["Pixar / Disney 3D", "Bloques de juguete tipo LEGO", "2D dibujo animado", "CGI realista", "Plastilina (claymation)"];
+function abrirIterar(id){
+  const d = docs.find(x => x.id === id); if (!d) return;
+  planId = id; modo = "iterar";
+  $("#planT").textContent = "¿Cómo lo iteramos?";
+  $("#planSi").textContent = "Producir iteraciones";
+  $("#planImg").src = d.thumb || "";
+  $("#planMarca").textContent = `${d.codigo || ""} · ${d.marca}${d.anguloElegido ? " · " + d.anguloElegido : ""}`;
+  $("#planIdea").textContent = "Tildá las que quieras: cada una sale como un video nuevo. El plan de cada una se puede editar.";
+  $("#angs").innerHTML = "";
+  const tit = t => { const h = document.createElement("div"); h.className = "ayuda"; h.innerHTML = `<b>${t}</b>`; $("#angs").appendChild(h); };
+  tit("Mismo guion y misma voz, otra animación");
+  ESTILOS_IT.forEach(e => bloqueAng(d, {nombre: "Otra animación · " + e}, false, false, "otra_animacion",
+    `Iteración de ${d.codigo}: mismo guion y mismo audio, solo cambia la animación.\nEstilo: ${e}\n\nQué NO va: `));
+  tit("Mismo video, otro ángulo");
+  (d.angulos || []).filter(a => a.nombre !== d.anguloElegido).forEach(a => bloqueAng(d, a, false, false, "otro_angulo",
+    `Iteración de ${d.codigo}: misma estructura y ritmo, otro ángulo.\n` + planTexto(d, a)));
+  tit("Mismo video, otro hook (solo los primeros 3 segundos)");
+  const otras = (d.angulos || []).map(a => a.frase).filter(f => f && f !== d.fraseVoc);
+  bloqueAng(d, {nombre: "Otro hook"}, false, false, "otro_hook",
+    `Iteración de ${d.codigo}: mismo video, solo cambia el hook (lo que se dice, la placa y los clips de los primeros ~3 s).\n` +
+    `Hook nuevo con la frase de la clienta: «${otras[0] || ""}»\nPlaca: \n\nQué NO va: `);
+  $("#vocExtra").value = "";
+  $("#plan").classList.add("on");
+}
+$("#vocExtra").onchange = e => {
+  const v = vocExtra[+e.target.value]; if (!v) return;
+  const d = docs.find(x => x.id === planId);
+  bloqueAng(d, {nombre: v.dolor, tag: "Del VOC · " + v.angulo, validado: false, frase: v.frases[0], cuantas: v.cuantas, bajada: ""}, true, false, modo === "iterar" ? "otro_angulo" : "");
+  e.target.value = "";
+};
+$("#angPropio").onclick = () => { const d = docs.find(x => x.id === planId); bloqueAng(d, {}, true, true, modo === "iterar" ? "otro_angulo" : "").querySelector(".nom").focus(); };
+function cerrarPlan(){ $("#plan").classList.remove("on"); planId = null; }
+$("#planNo").onclick = cerrarPlan;
+$("#plan").addEventListener("click", e => { if (e.target.id === "plan") cerrarPlan(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && planId) cerrarPlan(); });
+const slug = t => (t || "propio").toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 30) || "propio";
+$("#planSi").onclick = async () => {
+  const id = planId, d = docs.find(x => x.id === id);
+  const elegidos = [...document.querySelectorAll("#angs .ang.on")].map(el => ({nombre: el.dataset.nombre, tipo: el.dataset.tipo, plan: el.querySelector("textarea").value.trim()}));
+  if (!elegidos.length) { toast("Tildá al menos una opción"); return; }
+  if (elegidos.some(x => !x.plan)) { toast("Hay un plan vacío"); return; }
+  const marca = {eligio: quien, eligioEn: new Date().toISOString()};
+  if (modo === "iterar") {
+    const base = {...d}; delete base.id;
+    for (const k of ["final","finalSubs","finalLocal","finalSubsLocal","codigo","enDrive","driveUrl","driveId","driveLink","driveRuta",
+                     "producidoEn","aprobadoEn","aprobo","cambioNota","cambioEn","costoUsd","produciendoDesde","turno","falloMotivo","productor"]) delete base[k];
+    try {
+      for (const [k, x] of elegidos.entries()) {
+        await fs.setDoc(fs.doc(fs.db, "animados_luz", `${id}__it-${slug(x.nombre)}-${Date.now() % 100000 + k}`),
+          {...base, estado: "lista", plan: x.plan, anguloElegido: x.nombre, iteracion: {tipo: x.tipo || "otro_angulo", base: d.codigo, baseDoc: id}, ...marca});
+      }
+      cerrarPlan(); toast(`${elegidos.length} iteraci${elegidos.length > 1 ? "ones" : "ón"} en producción ✓`);
+    } catch (e) { toast("No se pudo guardar: " + e.code); }
+    return;
+  }
+  try {
+    await fs.updateDoc(fs.doc(fs.db, "animados_luz", id), {estado: "elegida", plan: elegidos[0].plan, anguloElegido: elegidos[0].nombre, ...marca});
+    const base = {...d}; delete base.id;
+    for (const [k, x] of elegidos.slice(1).entries()) {
+      await fs.setDoc(fs.doc(fs.db, "animados_luz", `${id}__${slug(x.nombre)}-${k + 2}`),
+        {...base, estado: "elegida", plan: x.plan, anguloElegido: x.nombre, origen: id, ...marca});
+    }
+    cerrarPlan(); toast(elegidos.length > 1 ? `Elegida en ${elegidos.length} ángulos: salen ${elegidos.length} videos ✓` : "Elegida: se produce con tu plan ✓");
+  } catch (e) { toast("No se pudo guardar: " + e.code); }
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Variantes de ganadores · CIMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif}
+:root{--bg:#FAF7F4;--card:#FFFFFF;--soft:#F6F2EE;--line:#EFE8E3;--line2:#E2D8D1;--txt:#26211E;--mut:#8A7E77;--mut2:#B5A79F;
+  --ok:#3F8F6B;--ok-bg:#E7F2EC;--warn:#B07B2E;--warn-bg:#F7EEDD;--bad:#C1613C;--bad-bg:#F8E7DF;--r:22px}
+body{background:var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 22px 60px}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--mut);font-size:13px;margin-top:6px}
+.btn{background:var(--card);color:var(--txt);border:1px solid var(--line);padding:10px 17px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;min-height:42px}
+.btn:hover{border-color:var(--line2)}
+.btn.dark{background:var(--txt);color:#fff;border-color:var(--txt)}
+.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn.no{color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:default}
+.mtop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.mform{gap:12px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.mgrid label,.mnota{display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:600;color:var(--mut)}
+.mgrid input,.mgrid select{border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:13px;background:var(--card);color:var(--txt);font-weight:400}
+.partes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+@media (max-width:600px){.partes{grid-template-columns:1fr}}
+.pt{border:1px solid var(--line);background:var(--card);color:var(--mut);font-weight:700;font-size:14px;padding:13px 16px;border-radius:16px;cursor:pointer;text-align:left}
+.pt.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.pt b{display:inline-block;margin-left:8px;min-width:22px;padding:0 7px;border-radius:99px;background:var(--acc-bg);color:var(--acc);font-size:11.5px;text-align:center}
+.marcas{display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:4px;width:max-content;max-width:100%;overflow-x:auto;margin-bottom:18px}
+.mt{border:0;background:transparent;color:var(--mut);font-weight:600;font-size:13px;padding:8px 16px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.mt.on{background:var(--card);color:var(--txt);box-shadow:0 1px 4px rgba(38,33,30,.08)}
+.mt b{display:inline-block;margin-left:7px;min-width:20px;padding:0 6px;border-radius:99px;background:var(--warn-bg);color:var(--warn);font-size:11px;font-weight:600}
+.top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,2fr);gap:11px;margin-bottom:18px}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}}
+.hero{border-radius:26px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#51463F 0%,#26211E 64%);display:flex;align-items:center;gap:20px;min-height:200px}
+.hero .blob{position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;bottom:-100px}
+.ringbox{position:relative;width:112px;height:112px;flex-shrink:0}
+.ringbox svg{transform:rotate(-90deg);display:block}
+.ringbox .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ringbox .mid b{font-size:30px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.ringbox .mid u{text-decoration:none;font-size:10.5px;opacity:.75;margin-top:3px}
+.hero-msg{position:relative;min-width:0}
+.hero-msg .ey{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.hero-msg h3{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.025em;margin:6px 0 7px;color:#fff;text-transform:none}
+.hero-msg p{font-size:12.5px;line-height:1.55;opacity:.85}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+@media (max-width:600px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;min-height:94px;display:flex;flex-direction:column;cursor:pointer;text-align:left;transition:border-color .15s}
+.kpi:hover{border-color:var(--line2)}
+.kpi.on{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)}
+.kpi .l{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kpi .v{font-size:30px;font-weight:700;letter-spacing:-.035em;margin-top:auto;padding-top:8px;line-height:1}
+.kpi.alerta .v{color:var(--warn)} .kpi.mal .v{color:var(--bad)}
+.grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:8px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.cab{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.cab .av{width:34px;height:34px;border-radius:50%;background:var(--txt);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;flex-shrink:0}
+.cab .t{min-width:0;flex:1}
+.cab .t b{display:block;font-size:13.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cab .t small{display:flex;align-items:center;gap:6px;color:var(--mut);font-size:11.5px}
+.cab .t small i{width:7px;height:7px;border-radius:50%;background:var(--warn);display:inline-block}
+.cab .t small i.ok{background:var(--ok)} .cab .t small i.mal{background:var(--bad)}
+.cab a{color:var(--mut);font-size:15px;text-decoration:none}
+.links-cab{display:flex;align-items:center;gap:8px}
+.cab a.drive{font-size:11.5px;font-weight:600;color:var(--acc);background:var(--acc-bg);padding:3px 9px;border-radius:99px}
+.vid{aspect-ratio:1/1;background:var(--soft);position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vid img{height:100%;width:auto;max-width:100%;object-fit:contain;display:block}
+.vid .play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(38,33,30,.82);display:grid;place-items:center}
+.vid .play:after{content:"";border-left:17px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+.vid .tag{position:absolute;left:10px;bottom:10px;background:rgba(38,33,30,.78);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px}
+.vid .marco{position:relative;height:100%;aspect-ratio:9/16;overflow:hidden;background:#1d1916}
+.vid .marco iframe{position:absolute;top:0;left:-6%;width:112%;height:100%;border:0}
+.vid.img .marco{aspect-ratio:4/5}
+.vid .ph{color:var(--mut2);font-size:12.5px;text-align:center;padding:20px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.pill{display:inline-block;font-size:11.5px;font-weight:500;padding:4px 11px;border-radius:99px;background:var(--soft);color:var(--mut)}
+.pill.m{background:var(--txt);color:#fff}
+.pill.e-revisar{background:var(--warn-bg);color:var(--warn)}
+.pill.e-error,.pill.e-rechazado{background:var(--bad-bg);color:var(--bad)}
+.pill.e-subido,.pill.e-aprobado{background:var(--ok-bg);color:var(--ok)}
+.links{font-size:12.5px;color:var(--mut);margin-bottom:14px}
+.links a{color:var(--txt);font-weight:500}
+h3{margin:4px 0 8px;font-size:10.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em}
+.subs{max-height:400px;overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.subs label{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:4px;padding:3px 8px;border-top:1px solid var(--line)}
+.subs label:first-child{border-top:0}
+.subs span{color:var(--mut2);font-size:11.5px;text-align:right;font-variant-numeric:tabular-nums}
+.subs input{width:100%;border:1px solid transparent;background:transparent;color:var(--txt);font-size:13.5px;padding:7px 9px;border-radius:10px}
+.subs input:focus{outline:none;border-color:var(--line2);background:var(--soft)}
+.cambio{background:var(--warn-bg)!important;color:var(--warn)!important}
+.nota{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 13px;font-size:13.5px;background:var(--card);color:var(--txt);resize:vertical}
+.nota:focus{outline:none;border-color:var(--line2)}
+.chk{display:flex;gap:7px;align-items:center;font-size:12.5px;color:var(--mut);margin-top:9px}
+.acciones{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:auto;padding-top:6px}
+.acciones .btn{padding:9px 10px;min-height:38px;font-size:12.5px;border-radius:12px}
+.editor{display:none;flex-direction:column;gap:6px}
+.editor.on{display:flex}
+.editor .texto{font-size:13px;padding:9px 11px}
+.editor .nota{font-size:12.5px;padding:9px 11px}
+.ayuda{font-size:12px;color:var(--mut2);margin-top:8px}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:12px;padding:8px 10px;font-size:11.5px;white-space:pre-wrap;max-height:90px;overflow:auto}
+.hist{font-size:11.5px;color:var(--mut);background:var(--soft);border-radius:12px;padding:7px 10px}
+.vacio{text-align:center;color:var(--mut);padding:60px 20px;background:var(--card);border:1px dashed var(--line2);border-radius:var(--r)}
+#login{max-width:360px;margin:14vh auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+#login h1{font-size:23px}
+#login input{width:100%;margin:16px 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font-size:15px;background:var(--soft);color:var(--txt)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--txt);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+.cuerpo{padding:10px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.cambio-t{font-size:13.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.txt{font-size:12.5px;color:var(--mut);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.dato{font-size:12px;color:var(--mut)}
+.dato b{font-size:10.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em;display:block;margin-bottom:2px}
+.texto{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 13px;font-size:15px;font-weight:600;background:var(--card);color:var(--txt)}
+.texto:focus{outline:none;border-color:var(--line2);background:var(--soft)}
+.grupo{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:24px 0 12px}
+.grupo h2{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.grupo a{color:var(--mut);font-size:12.5px}
+.item.guion .cuerpo{gap:10px}
+.hkop{display:flex;gap:8px;align-items:flex-start;margin-top:6px;font-size:13px;font-weight:600;cursor:pointer}
+.hkop small.voc{color:var(--acc);font-weight:500}
+.hkop input{margin-top:3px;accent-color:var(--acc)} .hkop small{display:block;font-weight:400;color:var(--mut);font-size:11.5px}
+.ref summary{color:var(--acc)} .refvid{display:block;width:100%;max-width:260px;aspect-ratio:9/16;background:#1d1916;border-radius:12px;margin-top:8px;object-fit:contain}
+.transc{max-height:260px;overflow:auto;font-size:12.5px;background:var(--soft);border-radius:12px;padding:8px 10px;margin-top:6px}
+.transc p{margin:3px 0} .md h4{font-size:14px;margin:8px 0 4px} .md h5{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:10px 0 4px}
+.md p{font-size:12.5px;margin:2px 0}
+@media (min-width:760px){.item.guion{grid-column:span 2}}
+.hk{font-size:13px;font-weight:600;margin-top:4px}.hk small{display:block;font-weight:400;color:var(--mut);font-size:11.5px}
+.iv{margin:4px 0 0 16px;font-size:12.5px;color:var(--txt)}
+details summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--acc)}
+.tg{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px}.tg th,.tg td{border:1px solid var(--line);padding:5px;vertical-align:top;text-align:left}
+.tg th:nth-child(1),.tg td:nth-child(1){width:14%}.tg th:nth-child(2),.tg td:nth-child(2){width:42%}
+.pill.roas{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.st{background:var(--soft);border-radius:12px;padding:7px 10px 8px}
+.st span{display:block;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--mut)}
+.st b{display:block;font-size:22px;font-weight:700;letter-spacing:-.03em;line-height:1.15}
+.st.ok b{color:var(--ok)} .st.warn b{color:var(--warn)}
+.sub2{font-size:11.5px;color:var(--mut)}
+.mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.mini div{font-size:13px;font-weight:600;line-height:1.25}
+.mini span{display:block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.barras{display:flex;align-items:flex-end;gap:3px;height:34px;padding:0 2px}
+.barras i{flex:1;background:var(--line2);border-radius:3px 3px 0 0;min-height:2px}
+.barras i.en{background:var(--ok)}
+[hidden]{display:none!important}
+#vvar{position:fixed;inset:0;background:rgba(38,33,30,.45);z-index:20;overflow:auto;padding:24px 16px}
+#vvar .panel{max-width:1240px;margin:0 auto;background:var(--bg);border-radius:26px;padding:22px 22px 40px;position:relative}
+#vvar .cerrar{position:absolute;right:18px;top:18px}
+#vvar h2.tt{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0 50px 14px 0}
+.revbtn{background:var(--warn-bg);color:var(--warn);border:0;border-radius:12px;font-weight:600;font-size:13px;padding:9px 14px;cursor:pointer;min-height:40px}
+.cuantas{display:none;grid-template-columns:auto 1fr 1fr 1fr;gap:6px;align-items:center}
+.cuantas.on{display:grid}
+.cuantas .nota-p,#vit .nota-p{grid-column:1/-1;font-size:12.5px;padding:9px 11px}
+.cuantas span{font-size:12px;color:var(--mut);font-weight:600;margin-right:2px}
+body.modal{overflow:hidden}
+#vit{position:fixed;inset:0;background:rgba(38,33,30,.45);z-index:30;display:flex;align-items:center;justify-content:center;padding:16px}
+#vit .panel{max-width:440px;width:100%;background:var(--bg);border-radius:22px;padding:20px;position:relative}
+#vit h3{font-size:18px;margin:0 40px 4px 0}
+#vit .op{border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:12px;background:var(--card)}
+#vit .op b{display:block;font-size:14px}
+#vit .op small{display:block;color:var(--mut);font-size:12px;margin:2px 0 10px}
+#vit .op .ns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+#vit .cerrar{position:absolute;right:14px;top:14px}
+.filtros{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:12px 14px;margin-bottom:14px;display:flex;flex-direction:column;gap:10px}
+.aplicados{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:13px;font-weight:600}
+.aplicados .ap{display:inline-flex;align-items:center;gap:6px;background:var(--txt);color:#fff;border-radius:99px;padding:5px 7px 5px 13px;font-weight:500;font-size:12.5px}
+.aplicados .ap b{font-weight:700}
+.aplicados .ap button{border:0;background:rgba(255,255,255,.22);color:#fff;width:18px;height:18px;border-radius:50%;font-size:11px;line-height:18px;cursor:pointer;padding:0}
+.drops{display:flex;gap:8px;flex-wrap:wrap}
+.drop{position:relative}
+.drop>button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-weight:500;font-size:13px;padding:9px 13px;border-radius:12px;cursor:pointer;min-height:40px}
+.drop>button svg{width:15px;height:15px;stroke:var(--mut);fill:none;stroke-width:1.8}
+.drop>button .car{color:var(--mut);font-size:10px}
+.drop>button .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.drop.on>button{border-color:var(--txt)}
+.menu{position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(38,33,30,.12);padding:6px;min-width:170px;z-index:5;display:none}
+.drop.on .menu{display:block}
+.menu button{display:flex;justify-content:space-between;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:9px;font-size:13px;color:var(--txt);cursor:pointer}
+.menu button:hover{background:var(--soft)}
+.menu button.sel{font-weight:700}
+.menu button.sel:after{content:"✓";color:var(--ok)}
+.resumen-sem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:14px}
+@media (max-width:700px){.resumen-sem{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.resumen-sem .kpi{cursor:default}
+.badge{position:absolute;right:10px;top:10px;background:var(--ok);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px}
+/* Paleta Mi Luz (Nacho 9/10: "la estética para Luz va así"): bordó + rosa suave */
+:root{--acc:#7B2340;--acc-bg:#F8E6EB;--acc2:#5E1A31}
+.btn.ok{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.ok:hover{background:var(--acc2)}
+.btn.no{color:var(--acc)}
+.cab .av{background:var(--acc-bg);color:var(--acc)}
+.pill.roas{background:var(--acc-bg);color:var(--acc)}
+.st.ok b{color:var(--acc)}
+.barras i.en{background:var(--acc)}
+.barras i{cursor:pointer;transition:opacity .12s}
+.barras:hover i{opacity:.45} .barras i:hover{opacity:1}
+#tip{position:fixed;z-index:30;pointer-events:none;background:#2A201E;color:#fff;border-radius:12px;padding:9px 12px;font-size:12px;line-height:1.5;box-shadow:0 8px 24px rgba(38,33,30,.25);display:none;min-width:150px}
+#tip b{display:block;font-size:12.5px;margin-bottom:3px}
+#tip div{display:flex;justify-content:space-between;gap:14px}
+#tip span{opacity:.7}
+.badge{background:var(--acc)}
+.chip.on,.aplicados .ap,.btn.dark{background:#2A201E;border-color:#2A201E}
+.revbtn{background:var(--acc-bg);color:var(--acc)}
+.drop>button .dot{background:var(--acc)}
+.menu button.sel:after{color:var(--acc)}
+.kpi.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.kpi.alerta .v{color:var(--acc)}
+.cab .t small i.ok{background:#3F8F6B}
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>Variantes de ganadores</h1>
+  <p class="sub">Entrá con tu clave.</p>
+  <input id="clave" type="password" placeholder="Clave" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false">
+  <button class="btn dark" id="entrar" style="width:100%">Entrar</button>
+  <p id="login-e" class="sub" style="color:var(--bad)"></p>
+</div>
+<div class="wrap" id="app" hidden>
+  <header>
+    <div><h1>Variantes de ganadores</h1><div class="sub" id="resumen">Cargando…</div></div>
+    <button class="btn" id="salir">Salir</button>
+  </header>
+  <div class="partes" id="partes"></div>
+  <div class="marcas" id="vistas"></div>
+  <div class="marcas" id="marcas"></div>
+  <div id="vest" hidden><div class="aplicados" id="estFiltro" style="margin-bottom:12px"></div><div id="gest"></div></div>
+  <div id="vsem" hidden><div id="manualBox"></div><div class="filtros" id="filtros"></div><div class="resumen-sem" id="rsem"></div><div class="grilla" id="gsem"></div></div>
+  <div id="vit" hidden><div class="panel"><button class="btn cerrar" id="cerrarVit">✕</button><h3>¿Cómo lo iterás?</h3><div class="sub2" id="vitAd"></div>
+    <textarea id="vitNota" class="nota nota-p" rows="2" placeholder="Indicación (opcional): fondo rosa, que el titular hable de las uñas que se pelan, más corto…"></textarea>
+    <div class="op"><b>Mismo formato</b><small id="vitFmt">Variantes del mismo anuncio. Van a «Para aprobar» de esta parte.</small><div class="ns"></div></div>
+    <div class="op"><b>Guiones founder (Luz)</b><small>Mismo ángulo, guion para que lo grabe Luz. Primero los hooks en «UGC · Founder › Hooks para aprobar».</small><div class="ns"></div></div>
+  </div></div>
+  <div id="vvar" hidden><div class="panel"><button class="btn cerrar" id="cerrarVar">✕ Cerrar</button><h2 class="tt" id="ttVar">Variantes</h2><div class="top"><div class="hero" id="hero"></div><div class="kpis" id="tabs"></div></div>
+  <div id="lista"></div></div></div>
+</div>
+<div class="toast" id="toast"></div>
+<div id="tip"></div>
+<script type="module">
+// Bot 5 (9/10/2026): a la 1:00 la marca manda los anuncios con ROAS >= 3 del día; la Mac de CIMA
+// (creativos/variantes/variantes.py) genera 3-5 variantes de cada uno y las deja acá. Aprobada → Drive de la marca.
+const CLAVES = {"vane-2026":"Vane","cima-2026":"Nacho","abril-2026":"Abril","miluz-2026":"Luz"};
+// clave de una marca: solo ve lo suyo (Luz entra desde su panel cima-creators.github.io/miluz-app/sistemas)
+const SOLO_MARCA = {"miluz-2026":"miluz"};
+let soloMarca = null;
+try { soloMarca = SOLO_MARCA[localStorage.getItem("revision_clave")] || null; } catch(e) {}
+const $ = s => document.querySelector(s);
+const ESTADOS = [["revisar","Para revisar"],["procesando","Generándose"],["corregir","Corrigiéndose"],["subido","Aprobadas"],["rechazado","Descartadas"],["error","Con error"]];
+const TIPO = {estatico:"Estático", video:"Video", animado:"Animado"};
+let quien = null, items = {}, filtro = "revisar", fb = null, pendiente = false, semana = {};
+let soloAd = null, manuales = {}, formAbierto = false, mForzar = false;
+const F = {vista:"semana", per:7, roas:1.8, ventas:10, orden:"ventas", tipo:"todos"};
+const TIPOS_SEM = {ugc:"UGC", founder:"Founder", broll:"B-roll", animado:"Animado", estatico:"Estático"};
+// Nacho 9/10: solo se cargan e iteran estáticos, animados y B-roll. UGC y founder necesitan otra grabación: no van acá.
+const ITERABLES = ["estatico","animado","broll"];
+try { Object.assign(F, JSON.parse(localStorage.getItem("variantes_filtros")||"{}")); } catch(e) {}
+let marcaF = new URLSearchParams(location.search).get("marca") || (()=>{ try { return localStorage.getItem("variantes_marca") } catch(e){ return null } })() || "todas";
+try { quien = CLAVES[localStorage.getItem("revision_clave")] || null; } catch(e) {}
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on"); setTimeout(()=>el.classList.remove("on"),2200); }
+function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function entrar(){
+  const k = $("#clave").value.trim().toLowerCase().replace(/\s+/g,"");
+  if(!CLAVES[k]){ $("#login-e").textContent = "Esa clave no es. Probá de nuevo."; return; }
+  try { localStorage.setItem("revision_clave", k); } catch(e) {}
+  quien = CLAVES[k]; soloMarca = SOLO_MARCA[k] || null; arrancar();
+}
+$("#entrar").addEventListener("click", entrar);
+$("#clave").addEventListener("keydown", e => { if(e.key==="Enter") entrar(); });
+$("#salir").addEventListener("click", () => { try { localStorage.removeItem("revision_clave"); } catch(e) {} location.reload(); });
+
+async function arrancar(){
+  $("#login").hidden = true; $("#app").hidden = false;
+  const [{initializeApp},{getFirestore,collection,doc,onSnapshot,updateDoc,addDoc},{getAuth,signInAnonymously}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js")]);
+  const app = initializeApp({apiKey:"AIzaSyCTv4DiRCpbCpGYP6E86TPHlkPvaAZTN3g",authDomain:"cleargy-creators.firebaseapp.com",projectId:"cleargy-creators",storageBucket:"cleargy-creators.firebasestorage.app",messagingSenderId:"313543582398",appId:"1:313543582398:web:99fe78991adeea2e7cb4ef"});
+  await signInAnonymously(getAuth(app));
+  const db = getFirestore(app);
+  fb = {db, doc, updateDoc, addDoc, collection, app};
+  onSnapshot(collection(db,"variantes_manual"), snap => {
+    snap.docChanges().forEach(c => { if(c.type==="removed" || (soloMarca && c.doc.data().marca!==soloMarca)) delete manuales[c.doc.id]; else manuales[c.doc.id] = c.doc.data(); });
+    pintar();
+  }, err => console.warn(err));
+  onSnapshot(collection(db,"variantes_semana"), snap => {
+    snap.docChanges().forEach(c => { if(c.type==="removed" || (soloMarca && c.doc.id!==soloMarca)) delete semana[c.doc.id]; else semana[c.doc.id] = c.doc.data(); });
+    pintar();
+  }, err => console.warn(err));
+  onSnapshot(collection(db,"variantes_cola"), snap => {
+    snap.docChanges().forEach(c => { if(c.type==="removed" || (soloMarca && c.doc.data().marca!==soloMarca)) delete items[c.doc.id]; else items[c.doc.id] = c.doc.data(); });
+    pintar();
+  }, err => { $("#resumen").textContent = "No se pudo leer la cola: " + err.message; });
+}
+
+const fdia = f => (f||"").slice(0,10).split("-").reverse().slice(0,2).join("/");
+const num = n => Number(n||0).toLocaleString("es-AR",{maximumFractionDigits:0});
+
+function guardarF(){ try { localStorage.setItem("variantes_filtros", JSON.stringify(F)); } catch(e) {} }
+function abrirVariantes(ad){ soloAd = ad || null; filtro = "revisar"; $("#vvar").hidden = false; document.body.classList.add("modal"); pintar(); }
+function cerrarVariantes(){ $("#vvar").hidden = true; document.body.classList.remove("modal"); soloAd = null; pintar(); }
+document.addEventListener("keydown", e => { if(e.key==="Escape" && !$("#vit").hidden) { cerrarIterar(); return; } if(e.key==="Escape" && !$("#vvar").hidden) cerrarVariantes(); });
+$("#cerrarVit").addEventListener("click", cerrarIterar);
+$("#vit").addEventListener("click", e => { if(e.target.id==="vit") cerrarIterar(); });
+// Pestañas (Nacho 9/10): Ganadores → elegís · En proceso → lo que se está haciendo · Para aprobar · Aprobados
+// Dos partes (Nacho 10/10): 1 = variantes de B-roll, animados y estáticos · 2 = UGC y founder, todo lo de guiones
+const PARTES = [["p2","UGC · Founder · guiones variantes"],["p1","B-roll · Animado · Estático"]];   // foco: UGC y founder (Nacho 10/10)
+const VISTAS_P = {p1:[["semana","Ganadores"],["aprobar","Para aprobar"],["proceso","En proceso"],["aprobados","Aprobados"]],
+                  p2:[["ugcf","Ganadores"],["g_hooks","Hooks para aprobar"],["g_ugc","Guiones UGC"],["g_founder","Guiones Founder"]]};
+const VISTAS = [...VISTAS_P.p1, ...VISTAS_P.p2];
+const ES_GUION = it => it.tipo==="hooks" || it.tipo==="guion" || it.tipo==="guion_broll";
+const EN_BROLL = it => it.tipo==="guion_broll";   // Nacho 11/10: los guiones B-roll se aprueban y se arman SOLO en la app de b-roll (cima-creators.github.io/miluz-app/broll)   // Nacho 11/10: TODO guion (también los de B-roll) va en la parte de UGC · Founder
+const ESTADOS_VISTA = {proceso:["procesando","corregir"], aprobar:["revisar","error"], aprobados:["subido","aprobado"]};
+function pedidosEnCurso(){
+  const out = [];
+  for(const [m,doc] of Object.entries(semana)) for(const [ad,p] of Object.entries(doc.pedidos||{}))
+    if(p && (p.estado==="pedido" || p.estado==="procesando")) out.push({m, ad, p, a:(doc.anuncios||[]).find(x=>x.id===ad)||{id:ad}, mini:(doc.miniaturas||{})[ad]});
+  return out;
+}
+function pintar(){
+  const vivos = Object.values(items).filter(it => it.estado!=="rechazado");
+  const G = {g_hooks:it=>it.tipo==="hooks" && it.estado==="revisar", g_ugc:it=>it.tipo==="guion" && it.version_g!=="founder" && it.estado==="revisar",
+             g_founder:it=>it.tipo==="guion" && it.version_g==="founder" && it.estado==="revisar", g_aprobados:()=>false};
+  const cuenta = v => v==="proceso" ? vivos.filter(it=>!ES_GUION(it) && ESTADOS_VISTA.proceso.includes(it.estado)).length + pedidosEnCurso().filter(x=>x.p.tipo!=="guiones").length
+                    : (v==="semana" || v==="ugcf") ? 0
+                    : G[v] ? vivos.filter(G[v]).length + (v==="g_hooks" ? pedidosEnCurso().filter(x=>x.p.tipo==="guiones").length : 0)
+                    : vivos.filter(it=>!ES_GUION(it) && ESTADOS_VISTA[v].includes(it.estado)).length;
+  F.parte = F.parte || "p2";
+  if(!VISTAS_P[F.parte].some(x=>x[0]===F.vista)) F.vista = VISTAS_P[F.parte][0][0];
+  const totalParte = p => VISTAS_P[p].reduce((t,[v])=> t + (["aprobar","g_hooks","g_ugc","g_founder"].includes(v) ? cuenta(v) : 0), 0);
+  $("#partes").innerHTML = PARTES.map(([p,t]) => { const n = totalParte(p); return `<button class="pt ${F.parte===p?"on":""}" data-parte="${p}">${t}${n?`<b>${n}</b>`:""}</button>`; }).join("");
+  document.querySelectorAll("[data-parte]").forEach(b=>b.onclick=()=>{ F.parte=b.dataset.parte; F.vista=VISTAS_P[F.parte][0][0]; soloAd=null; guardarF(); pintar(); window.scrollTo(0,0); });
+  $("#vistas").hidden = false;
+  $("#vistas").innerHTML = VISTAS_P[F.parte].map(([v,t]) => { const n = cuenta(v); return `<button class="mt ${F.vista===v?"on":""}" data-vista="${v}">${t}${n?`<b>${n}</b>`:""}</button>`; }).join("");
+  document.querySelectorAll("[data-vista]").forEach(b=>b.onclick=()=>{ F.vista=b.dataset.vista; if(F.vista==="semana"||F.vista==="ugcf") soloAd=null; guardarF(); pintar(); window.scrollTo(0,0); });
+  const sem = F.vista==="semana" || F.vista==="ugcf";
+  $("#vsem").hidden = !sem; $("#vest").hidden = sem;
+  $("#marcas").hidden = true;
+  $("#resumen").textContent = `Hola ${quien}`;
+  if(sem) pintarSemana();
+  else if(F.vista.startsWith("g_")){ F.gsub = F.vista.slice(2); pintarGuiones(); }
+  else pintarEstado(F.vista);
+}
+function irA(vista, ad){ F.vista = vista; F.parte = VISTAS_P.p2.some(x=>x[0]===vista) ? "p2" : "p1"; soloAd = ad || null; guardarF(); pintar(); window.scrollTo(0,0); }
+
+// ---------------- Guiones (Nacho 10/10): hooks para aprobar → guiones UGC / founder → Drive
+function mdHtml(md){
+  const L = (md||"").split("\n"); let h = "", i = 0;
+  const inl = t => esc(t).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"$1");
+  while(i < L.length){
+    const l = L[i];
+    if(l.startsWith("|")){ const fs=[]; while(i<L.length && L[i].startsWith("|")){ if(!/^\|\s*-/.test(L[i])) fs.push(L[i].trim().replace(/^\||\|$/g,"").split("|").map(c=>c.trim())); i++; }
+      h += `<table class="tg">${fs.map((f,r)=>`<tr>${f.map(c=>r?`<td>${inl(c)}</td>`:`<th>${inl(c)}</th>`).join("")}</tr>`).join("")}</table>`; continue; }
+    if(l.startsWith("## ")) h += `<h4>${inl(l.slice(3))}</h4>`; else if(l.startsWith("### ")) h += `<h5>${inl(l.slice(4))}</h5>`;
+    else if(l.trim() && !/^`{3,}/.test(l.trim())) h += `<p>${inl(l)}</p>`;
+    i++;
+  }
+  return h;
+}
+// La referencia siempre a mano (Nacho 10/10): video del winner, link al anuncio y transcripción
+function refWinner(it){
+  const o = items[it.origen] || {};
+  const video = it.videoRef || o.videoRef || "";
+  const tr = (it.transcripcion && it.transcripcion.length) ? it.transcripcion : (o.transcripcion || []);
+  const pl = it.permalink || o.permalink || "";
+  const link = pl ? (pl.startsWith("/") ? "https://www.facebook.com"+pl : pl) : "";
+  if(!video && !tr.length && !link) return "";
+  return `<details class="ref"><summary>▶ Ver el winner (video y transcripción)</summary>
+    ${video?`<video src="${esc(video)}#t=0.1" controls playsinline preload="metadata" class="refvid"></video>`:""}
+    ${link?`<div class="sub2"><a href="${esc(link)}" target="_blank" rel="noopener">Abrir el anuncio en Meta ↗</a></div>`:""}
+    ${tr.length?`<div class="transc">${tr.map(t=>`<p>${t.etapa?`<b>${esc(t.etapa)}</b> `:""}${esc(t.texto)}</p>`).join("")}</div>`:""}</details>`;
+}
+function tarjetaHooks(id,it){
+  const editable = it.estado==="revisar"; const m = it.metricas||{};
+  if(it.estado==="aprobado" || it.estado==="procesando"){
+    // ya los aprobó: tarjeta chica que dice qué se está escribiendo y dónde van a aparecer
+    const el = it.elegidos||[]; const nu = el.filter(e=>e.v==="ugc").length, nf = el.filter(e=>e.v==="founder").length;
+    const hk = e => ((e.v==="ugc"?it.hooksUgc:it.hooksFounder)||[])[e.i]||{};
+    const hechos = Object.values(items).filter(x=>x.origen===id && x.tipo==="guion").length;
+    return `<div class="item" id="it-${esc(id)}"><div class="cab"><div class="av">✓</div><div class="t"><b>Hooks aprobados · ${esc(it.adNombre||"")}</b>
+      <small><i class="ok"></i>${it.estado==="aprobado"?"En cola":"Escribiendo"} ${el.length} guiones (${nu} UGC + ${nf} founder) · van saliendo en «Guiones UGC» y «Guiones Founder»${hechos?` · ${hechos} listos`:""}</small></div></div>
+      <div class="cuerpo">${el.map(e=>`<div class="hk">${e.v==="ugc"?"UGC":"Founder"} · "${esc(hk(e).hook||"")}"</div>`).join("")}${it.masHooks?`<div class="sub2">+ ${esc(it.masHooks)} hooks nuevos en camino</div>`:""}${refWinner(it)}</div></div>`;
+  }
+  const lista = (v, hs) => hs.map((x,i)=>`<label class="hkop"><input type="checkbox" data-v="${v}" data-i="${i}" ${editable?"":"disabled"}><span>"${esc(x.hook)}"${x.voc&&x.voc.cita?`<small class="voc">VOC: «${esc(x.voc.cita)}»${x.voc.cantidad?` · <b>${esc(x.voc.cantidad)} citas</b>`:""}${x.voc.dolor?` · ${esc(x.voc.dolor)}`:""}</small>`:""}<small>Placa: ${esc(x.placa||"")} · sale de: ${esc(x.referencia||"")}</small></span></label>`).join("");
+  return `<div class="item guion" id="it-${esc(id)}">
+    <div class="cab"><div class="av">H</div><div class="t"><b>${it.modo==="broll"?"B-roll · hooks":"Hooks"} · ${esc(it.adNombre||it.codigo||"")}</b><small><i class="${it.estado==="error"?"mal":""}"></i>${esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])} · winner ${esc(it.origenTipo||"")} · ROAS ${Number(m.roas||0).toFixed(2)} · ${num(m.compras)} ventas</small></div>
+      ${it.permalink?`<span class="links-cab"><a href="${esc(it.permalink.startsWith("/")?"https://www.facebook.com"+it.permalink:it.permalink)}" target="_blank" rel="noopener" title="Ver el winner">↗</a></span>`:""}</div>
+    <div class="cuerpo">
+      <div class="dato"><b>Cómo era el hook del winner</b>"${esc(it.ganoCon||"")}"</div>
+      <div class="dato"><b>Ángulo</b>${esc(it.angulo||"")}${it.creencia?`<br><span class="sub2">${esc(it.creencia)}</span>`:""}</div>
+      ${refWinner(it)}
+      <div class="dato"><b>${it.modo==="broll"?"Hooks para la voz en off (B-roll, creadora en primera persona)":"Hooks · versión UGC (creadora, primera persona)"}</b>${lista("ugc", it.hooksUgc||[])}</div>
+      ${it.modo==="broll"?"":`<div class="dato"><b>Hooks · versión Founder (Luz)</b>${lista("founder", it.hooksFounder||[])}</div>`}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${editable?`<textarea class="nota" rows="2" placeholder="Si ninguno sirve: qué cambiar para pedir otros hooks"></textarea>
+      <div class="acciones" style="grid-template-columns:1fr 1fr"><button class="btn ok escribir" disabled>Escribir los guiones marcados</button><button class="btn dark escribir-mas" disabled>Escribir los marcados + 3 nuevos</button></div>
+      <div class="acciones" style="grid-template-columns:1fr auto"><button class="btn otros">Ninguno sirve: otros hooks</button><button class="btn no rechazar" title="Descartar">✕</button></div>`:""}
+      ${it.estado==="procesando"?`<div class="sub2">Escribiendo los guiones de los hooks elegidos…</div>`:""}
+      ${it.estado==="error"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+    </div></div>`;
+}
+function conectarHooks(id){
+  const el = document.getElementById("it-"+id); if(!el) return;
+  const ref = fb.doc(fb.db,"variantes_cola",id);
+  const marcar = async (d,msg) => { try { await fb.updateDoc(ref,{...d,revisadoPor:quien,actualizado:new Date().toISOString()}); toast(msg); pintar(); } catch(e){ toast("No se pudo guardar: "+e.message); } };
+  const cbs = [...el.querySelectorAll("input[type=checkbox]")], esc_ = el.querySelector(".escribir");
+  const mas = el.querySelector(".escribir-mas");
+  cbs.forEach(c=>c.addEventListener("change",()=>{ const n=cbs.filter(x=>x.checked).length; esc_.disabled=!n; mas.disabled=!n;
+    esc_.textContent = n?`Escribir ${n} ${n===1?"guion":"guiones"}`:"Escribir los guiones marcados"; mas.textContent = n?`Escribir ${n} + 3 hooks nuevos`:"Escribir los marcados + 3 nuevos"; }));
+  const elegidos = () => cbs.filter(x=>x.checked).map(x=>({v:x.dataset.v,i:+x.dataset.i}));
+  esc_?.addEventListener("click",()=>marcar({estado:"aprobado", elegidos:elegidos()},"Listo: los guiones salen en unos minutos"));
+  mas?.addEventListener("click",()=>marcar({estado:"aprobado", elegidos:elegidos(), masHooks:3},"Listo: 3 hooks nuevos en ~5 min y después los guiones"));
+  el.querySelector(".otros")?.addEventListener("click",()=>{ const n=el.querySelector(".nota").value.trim(); marcar({estado:"corregir", pedido:{nota:n}},"Pidiendo otros hooks"); });
+  el.querySelector(".rechazar")?.addEventListener("click",()=>marcar({estado:"rechazado"},"Descartado"));
+  el.querySelector(".reintentar")?.addEventListener("click",()=>marcar({estado:it_estado(id)},"Se vuelve a intentar"));
+}
+function it_estado(id){ return (items[id]||{}).elegidos ? "aprobado" : "corregir"; }
+function pintarGuiones(){
+  if(document.querySelector("#gest .editor.on") || (document.activeElement && document.activeElement.closest("#gest input[type=text], #gest textarea, #gest input.texto"))){ pendiente = true; return; }
+  const vivos = Object.entries(items).filter(([,it]) => ES_GUION(it) && !EN_BROLL(it) && it.estado!=="rechazado" && (!soloAd || it.adId===soloAd));
+  const SUBS = [["hooks","Hooks para aprobar", ([,it])=>it.tipo==="hooks" && it.estado!=="subido"],
+    ["ugc","Guiones UGC", ([,it])=>it.tipo==="guion" && it.version_g!=="founder"],   // Nacho 11/10: todos, los aprobados también (abajo)
+    ["founder","Guiones Founder", ([,it])=>it.tipo==="guion" && it.version_g==="founder"],
+    ["aprobados","Aprobados", ([,it])=>it.tipo==="guion" && ["subido","aprobado"].includes(it.estado)]];
+  F.gsub = F.gsub || "hooks";
+  const filtro_ = (SUBS.find(x=>x[0]===F.gsub)||SUBS[0])[2];
+  const nombreAd = soloAd ? ((vivos[0]||[,{}])[1].adNombre || soloAd) : "";
+  $("#estFiltro").innerHTML = `${soloAd?`<span style="margin-left:8px">Solo: <span class="ap"><b>${esc(nombreAd)}</b><button id="quitarAd">✕</button></span></span>`:""}
+    <span class="sub2" style="margin-left:8px">Aprobados van a Drive: «Mi Luz · Guiones Winners – UGC» / «– Founder»</span>`;
+  document.querySelectorAll("[data-gsub]").forEach(b=>b.onclick=()=>{ F.gsub=b.dataset.gsub; guardarF(); pintar(); });
+  $("#quitarAd") && ($("#quitarAd").onclick = () => { soloAd = null; pintar(); });
+  const hecho_ = it => ["subido","aprobado"].includes(it.estado) ? 1 : 0;   // primero lo que falta revisar, después lo aprobado
+  const lista = vivos.filter(filtro_).sort((a,b)=> hecho_(a[1])-hecho_(b[1]) || (b[1].n||0)-(a[1].n||0) || (b[1].actualizado||"").localeCompare(a[1].actualizado||""));
+  const vacio = {hooks:"No hay hooks esperando. Tocá «Guiones» en un winner y en ~30 min aparecen acá.", ugc:"No hay guiones UGC para revisar.", founder:"No hay guiones founder para revisar.", broll:"No hay guiones de B-roll para revisar.", aprobados:"Todavía no aprobaste guiones."}[F.gsub];
+  const cola_ = F.gsub==="hooks" ? pedidosEnCurso().filter(x=>x.p.tipo==="guiones" && (!soloAd || x.ad===soloAd)) : [];
+  const enCola = cola_.length ? `<div class="grupo"><h2>En cola</h2><span class="pill">salen en ~5 min</span></div><div class="grilla">${cola_.map(x=>`<div class="item"><div class="cab"><div class="av">H</div><div class="t"><b>${esc(x.a.nombre||x.ad)}</b><small><i></i>${x.p.estado==="procesando"?"Escribiendo hooks…":"Hooks en cola"} · pidió ${esc(x.p.quien||"")}</small></div></div></div>`).join("")}</div>` : "";
+  // Nacho 11/10: los guiones separados por quién los graba; en cada pestaña, primero lo que falta revisar y después lo aprobado
+  const pend_ = lista.filter(([,it])=>!hecho_(it)), apro_ = lista.filter(([,it])=>hecho_(it));
+  const bloque_ = (t, l) => l.length ? `<div class="grupo"><h2>${t}</h2><span class="pill">${l.length}</span></div><div class="grilla">${l.map(([id,it]) => tarjeta(id,it)).join("")}</div>` : "";
+  const cuerpo_ = F.gsub==="hooks" ? (lista.length ? `<div class="grilla">${lista.map(([id,it]) => tarjeta(id,it)).join("")}</div>` : "")
+                : F.gsub==="founder" ? bloque_("Para revisar", pend_) + bloque_("Para grabar", apro_.filter(([,it])=>!it.grabado)) + bloque_("Grabados", apro_.filter(([,it])=>it.grabado))
+                : bloque_("Para revisar", pend_) + bloque_("Aprobados · en Drive", apro_);
+  $("#gest").innerHTML = enCola + (cuerpo_ || (enCola ? "" : `<div class="vacio">${vacio}</div>`));
+  lista.forEach(([id,it]) => it.tipo==="hooks" ? conectarHooks(id) : conectar(id));
+}
+
+function pintarEstado(v){
+  // si está escribiendo una corrección, no se le borra: se repinta cuando suelta
+  if(document.querySelector("#gest .editor.on") || (document.activeElement && document.activeElement.closest("#gest input, #gest textarea"))){ pendiente = true; return; }
+  const nombreAd = id => { for(const d of Object.values(semana)){ const a=(d.anuncios||[]).find(x=>x.id===id); if(a) return a.nombre; } const it=Object.values(items).find(x=>x.adId===id); return it?.adNombre||id; };
+  $("#estFiltro").innerHTML = soloAd ? `Mostrando solo: <span class="ap"><b>${esc(nombreAd(soloAd))}</b><button id="quitarAd" title="Ver todos">✕</button></span>` : "";
+  $("#quitarAd") && ($("#quitarAd").onclick = () => { soloAd = null; pintar(); });
+  const lista = Object.entries(items).filter(([,it]) => !ES_GUION(it) && ESTADOS_VISTA[v].includes(it.estado) && (!soloAd || it.adId===soloAd))
+    .sort((a,b)=>(b[1].fecha||"").localeCompare(a[1].fecha||"") || ((b[1].metricas||{}).ganancia||0)-((a[1].metricas||{}).ganancia||0) || (a[1].clave||"").localeCompare(b[1].clave||"") || (a[1].n||0)-(b[1].n||0));
+  let html = "";
+  if(v==="proceso"){
+    const ps = pedidosEnCurso().filter(x => x.p.tipo!=="guiones" && (!soloAd || x.ad===soloAd));
+    if(ps.length){
+      html += `<div class="grupo"><h2>En cola</h2><span class="pill">la Mac los toma en la próxima vuelta (cada 30 min)</span></div><div class="grilla">` + ps.map(x => {
+        const img = x.mini ? (/^https?:/.test(x.mini) ? x.mini : `https://drive.google.com/thumbnail?id=${esc(x.mini)}&sz=w600`) : "";
+        return `<div class="item"><div class="cab"><div class="av">${esc(x.p.n||4)}</div><div class="t"><b>${esc(x.a.nombre||x.ad)}</b><small><i></i>${x.p.estado==="procesando"?"Generando ahora":"En cola"} · pidió ${esc(x.p.quien||"")}</small></div></div>
+          <div class="vid">${img?`<img src="${esc(img)}" alt="" loading="lazy">`:`<div class="ph">Sin miniatura</div>`}<span class="tag">${x.p.estado==="procesando"?(x.p.tipo==="guiones"?"Escribiendo…":"Generando…"):`${esc(x.p.n||4)} ${x.p.tipo==="guiones"?"guiones":"variantes"} en cola`}</span></div>
+          <div class="cuerpo"><div class="sub2">Pedido ${x.p.cuando?new Date(x.p.cuando).toLocaleString("es-AR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):""}. Cuando estén listas pasan a "Para aprobar".</div>
+          ${x.p.estado==="pedido"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn no cancelar-it" data-m="${esc(x.m)}" data-ad="${esc(x.ad)}">Cancelar</button></div>`:""}</div></div>`;
+      }).join("") + `</div>`;
+    }
+  }
+  let grupo = "";
+  for(const [id,it] of lista){
+    const g = (it.fecha||"")+"|"+it.marca+"|"+it.clave;
+    if(g!==grupo){ if(grupo) html += "</div>"; grupo = g; const m = it.metricas||{};
+      html += `<div class="grupo"><h2>${esc(it.adNombre||it.codigo||it.adId)}</h2><span class="pill roas">ROAS ${Number(m.roas||0).toFixed(2)}</span><span class="pill">${num(m.compras)} ventas</span><span class="pill">Iterado el ${fdia(it.fecha)}</span></div><div class="grilla">`; }
+    html += tarjeta(id,it);
+  }
+  if(grupo) html += "</div>";
+  const vacio = {proceso:"No hay nada haciéndose. Tocá Iterar en un ganador y aparece acá.", aprobar:"No hay variantes esperando tu OK.", aprobados:"Todavía no aprobaste ninguna. Lo aprobado también queda en Drive, en «Mi Luz · Variantes»."}[v];
+  $("#gest").innerHTML = html || `<div class="vacio">${vacio}</div>`;
+  lista.forEach(([id,it]) => it.tipo==="hooks" ? conectarHooks(id) : conectar(id));
+  document.querySelectorAll("#gest .cancelar-it").forEach(b=>b.onclick=()=>pedirIterar(b.dataset.m, b.dataset.ad, "cancelado"));
+}
+
+const BE = {miluz:1.8};
+function ventana(a, hasta){
+  const fechas = [...new Set((a.dias||[]).map(d=>d.f))].sort();
+  const corte = new Date(hasta+"T12:00:00"); corte.setDate(corte.getDate()-F.per+1);
+  const desde = corte.toISOString().slice(0,10);
+  const ds = (a.dias||[]).filter(d=>d.f>=desde && d.f<=hasta);
+  const sum = k => ds.reduce((x,d)=>x+(d[k]||0),0);
+  const g = sum("g"), c = sum("c"), v = sum("v"), i = sum("i"), l = sum("l"), p3 = sum("p3");
+  return {g, c, v, i, l, p3, roas: g? v/g : 0, cpa: c? g/c : 0, ctr: i? l/i*100 : null, hook: (i && p3)? p3/i*100 : null, desde};
+}
+// ---------------- Cargar un anuncio a mano (Nacho 10/10): link o archivo, de la marca o de otra → variantes o guiones
+const TIPOS_MAN = [["estatico","Estático (imagen)"],["animado","Animado"],["broll","B-roll / voz en off"],["ugc","UGC (creadora)"],["founder","Founder"]];
+function accionDe(tipo, otra){ return tipo==="broll" ? "broll" : (tipo==="ugc"||tipo==="founder"||(otra && tipo!=="estatico")) ? "guiones" : "variantes"; }
+const CREADORAS_BROLL = [["majo","Majo"],["nikol","Nikol"],["vane","Vane"],["luz","Luz"],["juli","Juli"]];
+function pintarManual(){
+  // con el formulario abierto no se repinta (si no, los datos en vivo le borran lo que está escribiendo)
+  if(formAbierto && document.querySelector("#manualBox .mform") && !mForzar) return;
+  mForzar = false;
+  const marca = soloMarca || Object.keys(semana)[0] || "miluz";
+  const nomMarca = "Mi Luz";
+  const lista = Object.entries(manuales).filter(([,m])=>m.marca===marca).sort((a,b)=>(b[1].creado||"").localeCompare(a[1].creado||"")).slice(0,6);
+  const estado = m => ({pedido:"En cola · ~5 min", procesando:"Trabajando…", hecho: m.accion==="guiones"?"Listo · en «Hooks para aprobar»":"Listo · en «Para aprobar» (parte B-roll)", error:"No salió: "+(m.error||""), cancelado:"Cancelado"})[m.estado]||m.estado;
+  const form = formAbierto ? `<div class="filtros mform">
+      <div class="dato"><b>Cargar un anuncio para sacarle variantes o guiones</b><span class="sub2">De ${nomMarca} o de otra marca. Si es de otra marca: una imagen se rehace con el packaging de ${nomMarca}; un video se adapta en guiones (no se usa su video).</span></div>
+      <div class="mgrid">
+        <label>Link del anuncio<input id="mLink" placeholder="Instagram, Facebook, TikTok o link directo a la imagen"></label>
+        <label>O subí el archivo<input id="mFile" type="file" accept="video/*,image/png,image/jpeg"></label>
+        <label>Tipo<select id="mTipo">${TIPOS_MAN.map(([v,t])=>`<option value="${v}">${t}</option>`).join("")}</select></label>
+        <label>¿De qué marca es?<input id="mOrigen" value="${nomMarca}"></label>
+        <label>Nombre (opcional)<input id="mNombre" placeholder="Ej. MLZ-P-F05-N2-12 o «el de la lata»"></label>
+        <label>ROAS (opcional)<input id="mRoas" inputmode="decimal" placeholder="3,4"></label>
+        <label>Ventas (opcional)<input id="mVentas" inputmode="numeric" placeholder="120"></label>
+        <label>¿Cuántas?<select id="mN"><option>3</option><option selected>5</option><option>9</option></select></label>
+        <label id="mCreadoraL">Creadora (tomas para el B-roll)<select id="mCreadora">${CREADORAS_BROLL.map(([v,t])=>`<option value="${v}">${t}</option>`).join("")}</select></label>
+      </div>
+      <label class="mnota">Nota (qué querés, qué ángulo, qué no)<textarea id="mNota" class="nota" rows="2"></textarea></label>
+      <div class="sub2" id="mQue"></div>
+      <div class="acciones" style="grid-template-columns:1fr auto"><button class="btn ok" id="mEnviar">Cargar y generar</button><button class="btn" id="mCerrar">Cancelar</button></div>
+    </div>` : "";
+  $("#manualBox").innerHTML = `<div class="mtop"><button class="btn dark" id="mAbrir">+ Cargar un anuncio</button>
+    ${lista.map(([id,m])=>`<span class="pill ${m.estado==="hecho"?"roas":""}" title="${esc(m.link||"")}">${esc(m.nombre||m.origen||"Anuncio")} · ${esc((TIPOS_MAN.find(x=>x[0]===m.tipo)||[,m.tipo])[1])} · ${esc(estado(m))}</span>`).join("")}</div>${form}`;
+  $("#mAbrir").onclick = () => { formAbierto = !formAbierto; mForzar = true; pintar(); };
+  if(!formAbierto) return;
+  const que = () => { const otra = $("#mOrigen").value.trim().toLowerCase() && !$("#mOrigen").value.trim().toLowerCase().includes("luz");
+    const ac = accionDe($("#mTipo").value, otra); $("#mCreadoraL").style.display = ac==="broll" ? "" : "none";
+    $("#mQue").textContent = ac==="broll" ? "→ Propone hooks para la voz en off; con tu OK escribe el guion nuevo; con tu OK arma el video con las tomas de la creadora." : ac==="guiones" ? "→ Va a proponer hooks (UGC + founder) para aprobar y después escribe los guiones." : "→ Va a sacar variantes y te llegan a «Para aprobar»."; };
+  ["mTipo","mOrigen"].forEach(i=>$("#"+i).addEventListener("input",que)); que();
+  $("#mCerrar").onclick = () => { formAbierto = false; mForzar = true; pintar(); };
+  $("#mEnviar").onclick = async () => {
+    const link = $("#mLink").value.trim(), file = $("#mFile").files[0];
+    if(!link && !file){ toast("Pegá un link o subí el archivo"); return; }
+    const b = $("#mEnviar"); b.disabled = true; b.textContent = file ? "Subiendo el archivo…" : "Cargando…";
+    try {
+      let archivoUrl = "";
+      if(file){
+        const {getStorage, ref, uploadBytes, getDownloadURL} = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js");
+        const r = ref(getStorage(fb.app), `animados_luz/luz/manual/manual-${Date.now()}-${file.name.replace(/[^\w.-]/g,"_")}`);
+        try { await uploadBytes(r, file, {contentType: file.type}); }
+        catch(e){ await new Promise(z=>setTimeout(z,1500)); await uploadBytes(r, file, {contentType: file.type}); }   // la sesión a veces tarda
+        archivoUrl = await getDownloadURL(r);
+      }
+      const origen = $("#mOrigen").value.trim() || nomMarca, otra = !origen.toLowerCase().includes("luz");
+      const tipo = $("#mTipo").value;
+      await fb.addDoc(fb.collection(fb.db,"variantes_manual"), {marca, link, archivoUrl, tipo, origen, nombre:$("#mNombre").value.trim(),
+        roas:parseFloat(($("#mRoas").value||"0").replace(",","."))||0, ventas:parseInt($("#mVentas").value||"0")||0, nota:$("#mNota").value.trim(),
+        n:+$("#mN").value, accion:accionDe(tipo, otra), creadora: $("#mCreadora").value, estado:"pedido", quien, creado:new Date().toISOString()});
+      formAbierto = false; mForzar = true; toast("Cargado: en ~5 min arranca"); pintar();
+    } catch(e){ toast("No se pudo cargar: "+e.message); b.disabled = false; b.textContent = "Cargar y generar"; }
+  };
+}
+
+function pintarSemana(){
+  pintarManual();
+  const marcas = Object.keys(semana).sort();
+  $("#marcas").innerHTML = marcas.length>1 ? ["todas",...marcas].map(m=>`<button class="mt ${m===marcaF?"on":""}" data-m="${m}">${m==="todas"?"Todas las marcas":esc(m)}</button>`).join("") : "";
+  document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{marcaF=b.dataset.m; try{localStorage.setItem("variantes_marca",marcaF)}catch(e){} pintar();});
+  $("#marcas").hidden = marcas.length<2;
+  const IC = {per:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+    roas:'<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>',
+    ventas:'<svg viewBox="0 0 24 24"><path d="M6 6h15l-2 9H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>',
+    tipo:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+    orden:'<svg viewBox="0 0 24 24"><path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/></svg>'};
+  const OPS = {per:[[1,"Ayer"],[3,"3 días"],[7,"7 días"]], roas:[[1.8,"1,8+"],[2.5,"2,5+"],[3.5,"3,5+"],[4,"4+"]],
+    ventas:[[10,"10+"],[20,"20+"],[50,"50+"]], tipo:[["todos","Todos"],["estatico","Estático"],["animado","Animado"],["broll","B-roll"]],
+    orden:[["ventas","Ventas"],["roas","ROAS"],["facturacion","Facturación"],["ganancia","Ganancia"],["cpa","CPA más bajo"],["ctr","CTR"],["hook","Hook rate"]]};
+  const NOM = {per:"Período", roas:"ROAS", ventas:"Ventas", tipo:"Tipo", orden:"Ordenar"};
+  const DEF = {per:7, roas:1.8, ventas:10, tipo:"todos", orden:"ventas"};
+  const lab = k => (OPS[k].find(o=>o[0]===F[k])||[,""])[1];
+  if(F.vista==="ugcf") delete OPS.tipo;
+  const ap = Object.keys(DEF).filter(k=>F[k]!==DEF[k] && OPS[k]);
+  $("#filtros").innerHTML = `
+    <div class="aplicados">Filtros aplicados (${ap.length}):${ap.length?ap.map(k=>`<span class="ap">${NOM[k]} <b>${lab(k)}</b><button data-quitar="${k}" title="Quitar">✕</button></span>`).join(""):` <span style="font-weight:400;color:var(--mut)">ninguno · 7 días, ROAS 1,8+, 10+ ventas</span>`}</div>
+    <div class="drops">${Object.keys(OPS).map(k=>`<div class="drop" data-drop="${k}"><button>${IC[k]}${NOM[k]}: <b>${lab(k)}</b>${F[k]!==DEF[k]?'<span class="dot"></span>':''}<span class="car">▾</span></button>
+      <div class="menu">${OPS[k].map(([v,t])=>`<button class="${F[k]===v?"sel":""}" data-f="${k}" data-val="${v}">${t}</button>`).join("")}</div></div>`).join("")}</div>`;
+  document.querySelectorAll("[data-drop]>button").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const d=b.parentElement, on=d.classList.contains("on");
+    document.querySelectorAll(".drop.on").forEach(x=>x.classList.remove("on")); if(!on) d.classList.add("on"); });
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{ const v=b.dataset.val; F[b.dataset.f] = isNaN(+v)? v : +v; guardarF(); pintar(); });
+  document.querySelectorAll("[data-quitar]").forEach(b=>b.onclick=()=>{ F[b.dataset.quitar]=DEF[b.dataset.quitar]; guardarF(); pintar(); });
+  const filas = [];
+  for(const m of marcas){ if(marcaF!=="todas" && marcas.length>1 && m!==marcaF) continue;
+    const doc = semana[m]; const mini = doc.miniaturas||{};
+    for(const a of doc.anuncios||[]){ const w = ventana(a, doc.hasta);
+      const tipo = (doc.tipos||{})[a.id] || ((a.video_id||/VIDEO/i.test(a.objeto||"")) ? "" : "estatico");
+      const esGuion = tipo==="ugc" || tipo==="founder";
+      if(F.vista==="ugcf" ? !esGuion : esGuion) continue;     // UGC / founder van en su pestaña: guiones, no variantes
+      if(F.vista!=="ugcf" && F.tipo!=="todos" && tipo!==F.tipo) continue;
+      if(w.c>=F.ventas && w.roas>=F.roas) filas.push({m, a, w, tipo, mon:doc.moneda||"", mini:mini[a.id], hasta:doc.hasta, ganancia: w.v - w.g*(BE[m]||1.8)}); } }
+  const key = {ventas:x=>x.w.c, roas:x=>x.w.roas, facturacion:x=>x.w.v, ganancia:x=>x.ganancia, cpa:x=>-(x.w.cpa||1e9), ctr:x=>x.w.ctr||0, hook:x=>x.w.hook||0}[F.orden] || (x=>x.w.c);
+  filas.sort((x,y)=>key(y)-key(x));
+  const tot = filas.reduce((t,x)=>({c:t.c+x.w.c, g:t.g+x.w.g, v:t.v+x.w.v}),{c:0,g:0,v:0});
+  // orden también por CPA (menor primero), CTR y hook rate
+  const mon = filas[0]?.mon || "";
+  const hasta = Object.values(semana)[0]?.hasta;
+  $("#rsem").innerHTML = `<div class="kpi"><span class="l">Anuncios</span><span class="v">${filas.length}</span></div>
+    <div class="kpi"><span class="l">Ventas</span><span class="v">${num(tot.c)}</span></div>
+    <div class="kpi"><span class="l">ROAS juntos</span><span class="v">${tot.g?(tot.v/tot.g).toFixed(2):"—"}</span></div>
+    <div class="kpi"><span class="l">CPA juntos ${esc(mon)}</span><span class="v">${tot.c? num(tot.g/tot.c) : "—"}</span></div>`;
+  $("#resumen").textContent = `Hola ${quien} · ${F.per===1?"ayer":`últimos ${F.per} días`}${hasta?` hasta el ${fdia(hasta)}`:""} · datos de Meta de la 1:00`;
+  if(!filas.length){ $("#gsem").innerHTML = `<div class="vacio" style="grid-column:1/-1">${Object.keys(semana).length?"Ningún anuncio pasa esos filtros. Bajá el ROAS o las ventas.":"Todavía no llegaron datos de la semana: llegan con la rutina de la 1:00 de la marca."}</div>`; return; }
+  const conVar = {}, porRev = {};
+  Object.values(items).filter(it=>it.estado!=="rechazado").forEach(it=>{ conVar[it.adId]=(conVar[it.adId]||0)+1; if(it.estado==="revisar") porRev[it.adId]=(porRev[it.adId]||0)+1; });
+  $("#gsem").innerHTML = filas.map((x,i)=>tarjetaSemana(x,i,conVar[x.a.id]||0,porRev[x.a.id]||0)).join("");
+  document.querySelectorAll("#gsem .iterar").forEach(b=>b.onclick=()=>abrirIterar(b.dataset.m, b.dataset.ad, b.dataset.tipo, b.dataset.nombre));
+  document.querySelectorAll("#gsem .iterar-b").forEach(b=>b.onclick=()=>{ document.querySelector(`[data-cuantasb="${b.dataset.ad}"]`).classList.toggle("on"); });
+  document.querySelectorAll("#gsem .pedir-b").forEach(b=>b.onclick=async()=>{ try { await fb.updateDoc(fb.doc(fb.db,"variantes_semana",b.dataset.m), {[`pedidos.${b.dataset.ad}`]: {estado:"pedido", tipo:"broll", quien, n:+b.dataset.n, nota:notaDe(b), cuando:new Date().toISOString()}}); toast("Listo: los hooks salen en ~5 min en «Para aprobar»"); } catch(e){ toast("No se pudo: "+e.message); } });
+  document.querySelectorAll("#gsem .iterar-g").forEach(b=>b.onclick=()=>{ document.querySelector(`[data-cuantasg="${b.dataset.ad}"]`).classList.toggle("on"); });
+  document.querySelectorAll("#gsem .ver-g").forEach(b=>b.onclick=()=>irA("g_hooks", b.dataset.ad));
+  document.querySelectorAll("#gsem .pedir-g").forEach(b=>b.onclick=()=>pedirGuiones(b.dataset.m, b.dataset.ad, +b.dataset.n, notaDe(b)));
+  document.querySelectorAll("#gsem .pedir").forEach(b=>b.onclick=()=>pedirIterar(b.dataset.m, b.dataset.ad, "pedido", +b.dataset.n, notaDe(b)));
+  document.querySelectorAll("#gsem .cancelar-it").forEach(b=>b.onclick=()=>pedirIterar(b.dataset.m, b.dataset.ad, "cancelado"));
+  document.querySelectorAll("#gsem .ver-var").forEach(b=>b.onclick=()=>irA(b.textContent.includes("revisar")?"aprobar":"aprobados", b.dataset.ad));
+  document.querySelectorAll("#gsem .vid[data-drive]").forEach(vd=>vd.addEventListener("click",()=>{ const u=vd.dataset.link; if(u) window.open(u,"_blank","noopener"); }));
+}
+function tarjetaSemana(x, i, nvar, nrev){
+  const {a, w} = x;
+  const img = x.mini ? (/^https?:/.test(x.mini) ? x.mini : `https://drive.google.com/thumbnail?id=${esc(x.mini)}&sz=w600`) : (a.miniatura||a.imagen_url||"");
+  const link = a.permalink ? (a.permalink.startsWith("/")?"https://www.facebook.com"+a.permalink:a.permalink) : "";
+  const dias = [...(a.dias||[])].sort((p,q)=>p.f.localeCompare(q.f));
+  const max = Math.max(1, ...dias.map(d=>d.c));
+  const rc = w.roas>=3 ? "ok" : w.roas<2.5 ? "warn" : "";
+  const esVideo = a.video_id || /VIDEO/i.test(a.objeto||"");
+  return `<div class="item">
+    <div class="cab"><div class="av">${i+1}</div>
+      <div class="t"><b>${esc(a.nombre||a.id)}</b><small>${esc(TIPOS_SEM[x.tipo]||(esVideo?"Video":"Imagen"))} · gastó ${num(w.g)} ${esc(x.mon)}</small></div>
+      ${link?`<a href="${esc(link)}" target="_blank" rel="noopener" title="Ver el anuncio">↗</a>`:""}</div>
+    <div class="vid" data-drive="${esc(x.mini||"")}" data-link="${esc(link)}">${img?`<img src="${esc(img)}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div class="ph">Sin miniatura todavía</div>`}${esVideo&&img?`<span class="play"></span>`:""}${nrev?`<span class="badge">${nrev} para revisar</span>`:nvar?`<span class="badge">${nvar} ${nvar===1?"variante":"variantes"}</span>`:""}</div>
+    <div class="cuerpo">
+      <div class="stats"><div class="st ${rc}"><span>ROAS</span><b>${w.roas.toFixed(2)}</b></div><div class="st"><span>Ventas</span><b>${num(w.c)}</b></div></div>
+      <div class="mini"><div><span>CPA</span>${num(w.cpa)} ${esc(x.mon)}</div><div><span>CTR</span>${w.ctr==null?"—":w.ctr.toFixed(2)+"%"}</div><div><span>Hook rate</span>${w.hook==null?"—":w.hook.toFixed(0)+"%"}</div></div>
+      <div class="barras" title="Ventas por día">${dias.map(d=>`<i class="${d.f>=w.desde?"en":""}" style="height:${Math.max(4,Math.round(d.c/max*100))}%" data-f="${d.f}" data-c="${d.c}" data-g="${d.g}" data-v="${d.v}" data-i="${d.i||0}" data-l="${d.l||0}" data-p="${d.p3||0}" data-mon="${esc(x.mon)}"></i>`).join("")}</div>
+      <div class="sub2">Facturó ${num(w.v)} ${esc(x.mon)} · pasá el mouse por las barras para ver cada día</div>
+      ${botonIterar(x, nvar, nrev)}
+      ${F.vista==="semana" && x.tipo==="broll" ? botonBroll(x) : ""}
+
+    </div></div>`;
+}
+
+function botonBroll(x){
+  const p = ((semana[x.m]||{}).pedidos||{})[x.a.id] || {};
+  const att = `data-m="${esc(x.m)}" data-ad="${esc(x.a.id)}"`;
+  if(p.tipo==="broll" && (p.estado==="pedido"||p.estado==="procesando")) return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn dark" disabled>Guion nuevo: ${p.estado==="pedido"?"en cola":"escribiendo hooks…"}</button></div>`;
+  return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn iterar-b" ${att}>Guion nuevo + video</button></div>
+    <div class="cuantas" data-cuantasb="${esc(x.a.id)}"><span>¿Cuántos hooks?</span>${[3,5].map(k=>`<button class="btn dark pedir-b" ${att} data-n="${k}">${k}</button>`).join("")}<textarea class="nota nota-p" rows="2" placeholder="Indicación (opcional): fondo rosa, que el titular hable de las uñas que se pelan, más corto…"></textarea></div>`;
+}
+function botonGuiones(x, chico){
+  const p = ((semana[x.m]||{}).pedidos||{})[x.a.id] || {};
+  const att = `data-m="${esc(x.m)}" data-ad="${esc(x.a.id)}"`;
+  const cuantas = `<div class="cuantas" data-cuantasg="${esc(x.a.id)}"><span>¿Cuántos hooks?</span>${[3,5,9].map(k=>`<button class="btn dark pedir-g" ${att} data-n="${k}">${k}</button>`).join("")}<textarea class="nota nota-p" rows="2" placeholder="Indicación (opcional): fondo rosa, que el titular hable de las uñas que se pelan, más corto…"></textarea></div>`;
+  const gs = Object.values(items).filter(it=>it.adId===x.a.id && ES_GUION(it) && !EN_BROLL(it) && it.estado!=="rechazado");
+  const rev = gs.filter(it=>it.estado==="revisar").length;
+  if(p.tipo==="guiones" && p.estado==="pedido") return `<div class="acciones" style="grid-template-columns:1fr auto"><button class="btn dark" disabled>Hooks en cola · ~30 min</button><button class="btn no cancelar-it" ${att} title="Cancelar">✕</button></div>`;
+  if(p.tipo==="guiones" && p.estado==="procesando") return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn dark" disabled>Escribiendo hooks…</button></div>`;
+  if(gs.length) return `<div class="acciones" style="grid-template-columns:1fr 1fr"><button class="btn ${chico?"":"ok"} ver-g" data-ad="${esc(x.a.id)}">${rev?`Guiones: ${rev} para revisar`:`Guiones (${gs.length})`}</button><button class="btn iterar-g" ${att}>Más guiones</button></div>${cuantas}`;
+  return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn ${chico?"":"ok"} iterar-g" ${att}>${chico?"Guiones UGC + founder":"Pedir guiones (UGC + founder)"}</button></div>${cuantas}`;
+}
+// Luz 13/10: indicación opcional al pedir (fondo rosa, que el titular hable de…): va como pedidos.<id>.nota y el bot la usa como indicación principal
+function notaDe(b){ const t = b.closest(".cuantas")?.querySelector(".nota-p"); return t ? t.value.trim() : ""; }
+async function pedirGuiones(m, ad, n, nota=""){
+  try { await fb.updateDoc(fb.doc(fb.db,"variantes_semana",m), {[`pedidos.${ad}`]: {estado:"pedido", tipo:"guiones", quien, n, nota, cuando:new Date().toISOString()}});
+    toast(`Listo: ${n} hooks por versión en cola. Salen en ~5 min en «Parte 2 › Hooks para aprobar»`);
+  } catch(e){ toast("No se pudo guardar: "+e.message); }
+}
+function botonIterar(x, nvar, nrev){
+  if(F.vista==="ugcf") return botonGuiones(x);
+  if(!x.tipo) return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn" disabled>Viendo qué tipo de anuncio es…</button></div>`;
+  const p = ((semana[x.m]||{}).pedidos||{})[x.a.id] || {};
+  const att = `data-m="${esc(x.m)}" data-ad="${esc(x.a.id)}" data-tipo="${esc(x.tipo||"")}" data-nombre="${esc(x.a.nombre||x.a.id)}"`;
+  if(p.tipo==="founder" && (p.estado==="pedido"||p.estado==="procesando")) return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn dark" disabled>Guiones founder: ${p.estado==="pedido"?"hooks en cola":"escribiendo hooks…"}</button></div>`;
+  if(p.estado==="pedido") return `<div class="acciones" style="grid-template-columns:1fr auto"><button class="btn dark" disabled>${p.n||4} en cola · salen en ~30 min</button><button class="btn no cancelar-it" ${att} title="Cancelar">✕</button></div>`;
+  if(p.estado==="procesando") return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn dark" disabled>Generando variantes…</button></div>`;
+  const cuantas = `<div class="cuantas" data-cuantas="${esc(x.a.id)}"><span>¿Cuántas?</span>${[3,5,9].map(k=>`<button class="btn dark pedir" ${att} data-n="${k}">${k}</button>`).join("")}<textarea class="nota nota-p" rows="2" placeholder="Indicación (opcional): fondo rosa, que el titular hable de las uñas que se pelan, más corto…"></textarea></div>`;
+  if(nvar) return `<div class="acciones" style="grid-template-columns:1fr 1fr"><button class="btn ok ver-var" data-ad="${esc(x.a.id)}">${nrev?`${nrev} para revisar`:`Variantes (${nvar})`}</button><button class="btn iterar" ${att}>Iterar de nuevo</button></div>${cuantas}`;
+  return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn ok iterar" ${att}>Iterar este</button></div>${cuantas}`;
+}
+// Nacho 11/10: al tocar Iterar se elige: mismo formato (variantes) o guiones founder
+function abrirIterar(m, ad, tipo, nombre){
+  const v = $("#vit"); v.hidden = false; document.body.classList.add("modal");
+  $("#vitAd").textContent = nombre || ad;
+  $("#vitFmt").textContent = `Variantes ${({estatico:"de la imagen", animado:"del animado", broll:"del B-roll"})[tipo]||"del anuncio"}, en el mismo formato. Van a «Para aprobar» de esta parte.`;
+  const [nsF, nsG] = v.querySelectorAll(".ns");
+  nsF.innerHTML = [3,5,9].map(k=>`<button class="btn dark" data-k="${k}">${k}</button>`).join("");
+  nsG.innerHTML = [3,5,9].map(k=>`<button class="btn ok" data-k="${k}">${k} hooks</button>`).join("");
+  $("#vitNota").value = "";
+  nsF.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const n_=$("#vitNota").value.trim(); cerrarIterar(); pedirIterar(m, ad, "pedido", +b.dataset.k, n_); });
+  nsG.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const n_=$("#vitNota").value.trim(); cerrarIterar(); pedirFounder(m, ad, +b.dataset.k, n_); });
+}
+function cerrarIterar(){ $("#vit").hidden = true; if($("#vvar").hidden) document.body.classList.remove("modal"); }
+async function pedirFounder(m, ad, n, nota=""){
+  try { await fb.updateDoc(fb.doc(fb.db,"variantes_semana",m), {[`pedidos.${ad}`]: {estado:"pedido", tipo:"founder", quien, n, nota, cuando:new Date().toISOString()}});
+    toast(`Listo: ${n} hooks founder en cola. Salen en ~30 min en «UGC · Founder › Hooks para aprobar»`);
+  } catch(e){ toast("No se pudo guardar: "+e.message); }
+}
+async function pedirIterar(m, ad, estado, n, nota=""){
+  try { await fb.updateDoc(fb.doc(fb.db,"variantes_semana",m), {[`pedidos.${ad}`]: {estado, quien, n:n||4, nota, cuando:new Date().toISOString()}});
+    toast(estado==="pedido" ? "Listo: lo ves en «En proceso». Salen en ~30 min" : "Cancelado");
+  } catch(e){ toast("No se pudo guardar: "+e.message); }
+}
+
+function pintarVariantes(){
+  const todos = Object.entries(items).filter(([,it]) => !soloAd || it.adId===soloAd);
+  const g0 = todos[0] && todos[0][1];
+  $("#ttVar").textContent = soloAd ? `Variantes de ${g0?.adNombre||g0?.codigo||"este anuncio"}` : "Variantes de los ganadores";
+  const marcas = [...new Set(todos.map(([,it])=>it.marca))].sort(); const nom = m => (todos.find(([,it])=>it.marca===m)||[,{}])[1].marcaNombre||m;
+  const deMarca = todos.filter(([,it]) => marcaF==="todas" || it.marca===marcaF);
+  const cuenta = e => deMarca.filter(([,it])=>it.estado===e).length;
+  const hora = new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+  $("#resumen").textContent = `Hola ${quien} · actualizado ${hora} · datos en vivo`;
+  const ultima = deMarca.map(([,it])=>it.fecha||"").sort().pop() || "";
+  const delDia = deMarca.filter(([,it]) => it.fecha===ultima);
+  const listos = delDia.filter(([,it]) => ["subido","aprobado","rechazado"].includes(it.estado)).length;
+  const ganadores = new Set(delDia.map(([,it])=>it.marca+it.clave)).size;
+  const total = delDia.length, pct = total ? Math.round(listos/total*100) : 0, R = 48, C = 2*Math.PI*R;
+  const pend = cuenta("revisar"), enCurso = cuenta("procesando")+cuenta("corregir");
+  $("#hero").innerHTML = `<div class="blob"></div>
+    <div class="ringbox"><svg width="112" height="112"><circle cx="56" cy="56" r="${R}" stroke="rgba(255,255,255,.14)" stroke-width="9" fill="none"/>
+      <circle cx="56" cy="56" r="${R}" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct/100)}"/></svg>
+      <div class="mid"><b>${pct}%</b><u>revisado</u></div></div>
+    <div class="hero-msg"><div class="ey">${marcaF==="todas"?"Todas las marcas":esc(nom(marcaF))} · ganadores del ${fdia(ultima)||"—"}</div>
+      <h3>${ganadores} ${ganadores===1?"ganador":"ganadores"} · ${listos} de ${total} variantes revisadas</h3>
+      <p>${pend?`<b>${pend} ${pend===1?"espera":"esperan"} tu revisión.</b> `:"No hay nada esperando. "}${enCurso?`${enCurso} ${enCurso===1?"se está generando":"se están generando"}.`:""}${cuenta("error")?` ${cuenta("error")} con error.`:""}</p></div>`;
+  const cls = e => e==="revisar"&&cuenta(e)?"alerta":e==="error"&&cuenta(e)?"mal":"";
+  $("#tabs").innerHTML = ESTADOS.map(([e,t]) => `<button class="kpi ${cls(e)} ${e===filtro?"on":""}" data-e="${e}"><span class="l">${t}</span><span class="v">${cuenta(e)}</span></button>`).join("");
+  if(marcaF!=="todas" && !marcas.includes(marcaF) && marcas.length) marcaF = "todas";
+  const porRevisar = m => todos.filter(([,it]) => (m==="todas"||it.marca===m) && it.estado==="revisar").length;
+  document.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>{filtro=b.dataset.e;pintar();});
+  document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{marcaF=b.dataset.m; try{localStorage.setItem("variantes_marca",marcaF)}catch(e){} pintar();});
+  const lista = deMarca.filter(([,it])=>it.estado===filtro)
+    .sort((a,b)=>(b[1].fecha||"").localeCompare(a[1].fecha||"") || ((b[1].metricas||{}).ganancia||0)-((a[1].metricas||{}).ganancia||0) || (a[1].clave||"").localeCompare(b[1].clave||"") || (a[1].n||0)-(b[1].n||0));
+  if(!lista.length){ $("#lista").innerHTML = `<div class="vacio">${filtro==="revisar"?"No hay variantes para revisar. Aparecen acá cuando tocás Iterar en un ganador (salen en ~30 min).":"Nada por acá."}</div>`; return; }
+  // si está escribiendo una corrección, no le borramos lo que tipeó: se repinta cuando suelta
+  const editando = document.querySelectorAll("#lista .cambio").length || (document.activeElement && document.activeElement.closest("#lista input, #lista textarea"));
+  if(editando){ pendiente = true; return; }
+  pendiente = false;
+  let html = "", grupo = "";
+  for(const [id,it] of lista){
+    const g = (it.fecha||"")+"|"+it.marca+"|"+it.clave;
+    if(g!==grupo){ if(grupo) html += "</div>"; grupo = g; const m = it.metricas||{};
+      const link = it.permalink ? (it.permalink.startsWith("/")?"https://www.facebook.com"+it.permalink:it.permalink) : "";
+      html += `<div class="grupo"><h2>${esc(it.adNombre||it.codigo||it.adId)}</h2>
+        <span class="pill roas">ROAS ${Number(m.roas||0).toFixed(2)}</span><span class="pill">${num(m.compras)} compras</span>
+        <span class="pill">Gasto ${num(m.gasto)} ${esc(it.moneda||"")}</span><span class="pill">Facturó ${num(m.facturacion)} ${esc(it.moneda||"")}</span>
+        <span class="pill">Ganó el ${fdia(it.fecha)}</span>${link?`<a href="${esc(link)}" target="_blank" rel="noopener">ver el original ↗</a>`:""}</div><div class="grilla">`; }
+    html += tarjeta(id,it);
+  }
+  if(grupo) html += "</div>";
+  $("#lista").innerHTML = html;
+  lista.forEach(([id]) => conectar(id));
+}
+document.addEventListener("focusout", () => setTimeout(() => { if(pendiente && !document.querySelector("#lista .cambio, #gest .cambio")) { pendiente = false; pintar(); } }, 200));
+
+function tablaGuion(g){
+  const fila = (n,f) => `<tr><td>${esc(n)}</td><td>${esc(f.dice||"")}</td><td>${esc(f.pantalla||"")}</td><td>${esc(f.filma||"")}</td></tr>`;
+  return `<table class="tg"><tr><th>#</th><th>Lo que dice</th><th>Texto en pantalla</th><th>Qué se filma</th></tr>
+    ${(g.hooks||[]).slice(0,1).map(h=>fila("HOOK 0-3s",h)).join("")}${(g.filas||[]).map(f=>fila(`${f.n||""} · ${f.etapa||""}`,f)).join("")}${g.cta?fila("CTA",g.cta):""}</table>`;
+}
+function tarjetaGuion(id,it){
+  if(it.guionMd && !it.guion) return tarjetaGuionMd(id,it);
+  const g = it.guion||{}; const editable = it.estado==="revisar"; const m = it.metricas||{};
+  const punto = it.estado==="subido" ? "ok" : it.estado==="error" ? "mal" : "";
+  return `<div class="item guion" id="it-${esc(id)}">
+    <div class="cab"><div class="av">G${esc(it.n)}</div><div class="t"><b>${esc(it.codigo||"Guion")}${it.version>1?` · v${esc(it.version)}`:""}</b>
+      <small><i class="${punto}"></i>${esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])} · Guion ${esc(g.formato||"")} · ${esc(g.duracion_s||"")}s</small></div></div>
+    <div class="cuerpo">
+      <div class="cambio-t">${esc(g.titulo||it.cambio)}</div>
+      <div class="dato"><b>3 hooks</b>${(g.hooks||[]).map((h,i)=>`<div class="hk">${i+1}. "${esc(h.dice)}"<small>${esc(h.filma||"")}</small></div>`).join("")}</div>
+      <div class="dato"><b>Ideas para lo visual</b><ul class="iv">${(g.ideas_visuales||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+      <details><summary>Ver el guion completo</summary>${tablaGuion(g)}<div class="dato" style="margin-top:6px"><b>Caption</b>${esc(g.caption||"")}</div>
+        <button class="btn copiar" style="margin-top:6px">Copiar guion</button></details>
+      ${it.ganoCon?`<div class="dato">Ganó con: "${esc(it.ganoCon)}"</div>`:""}
+      ${it.qa?`<div class="err">Verificador del SOP: ${esc(it.qa)}</div>`:""}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${(it.notas||[]).length?`<div class="hist">Correcciones: ${(it.notas||[]).map(esc).join(" · ")}</div>`:""}
+      ${editable?`<div class="editor"><input class="texto" value="${esc(it.texto)}" data-orig="${esc(it.texto)}" title="Hook 1">
+        <textarea class="nota" rows="2" placeholder="Qué cambiar: más corto, otro testigo, el hook 2 no va…"></textarea>
+        <button class="btn dark corregir" disabled>Mandar corrección</button></div>
+      <div class="acciones"><button class="btn ok aprobar">Aprobar</button><button class="btn abrir-ed">Corregir</button><button class="btn no rechazar" title="Descartar">✕</button></div>`:""}
+      ${it.estado==="error"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+    </div></div>`;
+}
+// Nacho 11/10: Luz marca los founder que ya grabó → pasan de «Para grabar» a «Grabados»
+function grabadoHtml(it){
+  if(it.version_g!=="founder" || !["subido","aprobado"].includes(it.estado)) return "";
+  if(it.grabado) return `<div class="acciones" style="grid-template-columns:1fr auto"><button class="btn ok" disabled>✓ Grabado${it.grabadoCuando?` el ${esc(fdia(it.grabadoCuando))}`:""}${it.grabadoPor?` · ${esc(it.grabadoPor)}`:""}</button><button class="btn degrabar" title="Volver a «Para grabar»">Deshacer</button></div>`;
+  return `<div class="acciones" style="grid-template-columns:1fr"><button class="btn ok grabado">🎬 Ya lo grabé</button></div>`;
+}
+function tarjetaGuionMd(id,it){
+  const editable = it.estado==="revisar"; const h = it.hook||{};
+  const punto = it.estado==="subido" ? "ok" : it.estado==="error" ? "mal" : "";
+  return `<div class="item guion" id="it-${esc(id)}">
+    <div class="cab"><div class="av">${it.version_g==="founder"?"F":"U"}${esc(it.n)}</div><div class="t"><b>${esc(it.codigo||"Guion")}${it.version>1?` · v${esc(it.version)}`:""}</b>
+      <small><i class="${it.estado==="aprobado"?"ok":punto}"></i>${it.estado==="aprobado"?"Aprobado · guardando en Drive…":it.estado==="subido"?"Aprobado · en Drive":esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])} · Guion ${it.version_g==="founder"?"Founder":"UGC"} · winner ${esc(it.adNombre||"")}</small></div>
+      ${it.driveLink?`<span class="links-cab"><a class="drive" href="${esc(it.driveLink)}" target="_blank" rel="noopener">Drive</a></span>`:""}</div>
+    <div class="cuerpo">
+      <div class="cambio-t">${esc(it.cambio||"")}</div>
+      <div class="dato"><b>${(it.hooks||[]).length>1?`${it.hooks.length} hooks para testear (un solo cuerpo)`:"Hook"}</b>${(it.hooks&&it.hooks.length?it.hooks:[h]).map((x,i)=>`<div class="hk">${(it.hooks||[]).length>1?(i+1)+". ":""}"${esc(x.hook||it.texto||"")}"</div>`).join("")}</div>
+      <div class="dato"><b>Ángulo del winner</b>${esc(it.angulo||"")} · hook original: "${esc(it.ganoCon||"")}"</div>
+      ${refWinner(it)}
+      ${grabadoHtml(it)}
+      <details><summary>Ver el guion completo</summary><div class="md">${mdHtml(it.guionMd)}</div><button class="btn copiar" style="margin-top:6px">Copiar guion</button></details>
+      ${it.qa?`<div class="err">Verificador del SOP: ${esc(it.qa)}</div>`:""}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${(it.notas||[]).length?`<div class="hist">Correcciones: ${(it.notas||[]).map(esc).join(" · ")}</div>`:""}
+      ${editable?`<div class="editor"><input class="texto" value="${esc(h.hook||it.texto||"")}" data-orig="${esc(h.hook||it.texto||"")}" title="Hook">
+        <textarea class="nota" rows="2" placeholder="Qué cambiar: más corto, otro testigo, el CTA…"></textarea>
+        <button class="btn dark corregir" disabled>Mandar corrección</button></div>
+      <div class="acciones"><button class="btn ok aprobar">Aprobar</button><button class="btn abrir-ed">Corregir</button><button class="btn no rechazar" title="Descartar">✕</button></div>`:""}
+      ${it.estado==="error"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+    </div></div>`;
+}
+function tarjetaGuionBroll(id,it){
+  const editable = it.estado==="revisar"; const h = it.hook||{};
+  return `<div class="item guion" id="it-${esc(id)}">
+    <div class="cab"><div class="av">B${esc(it.n)}</div><div class="t"><b>${esc(it.codigo||"Guion B-roll")}${it.version>1?` · v${esc(it.version)}`:""}</b>
+      <small><i class="${it.estado==="error"?"mal":""}"></i>${it.estado==="procesando"?"Armando el video…":esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])} · guion de voz en off · creadora ${esc(it.creadora||"")} · ${esc(it.palabras||"")} palabras</small></div></div>
+    <div class="cuerpo">
+      <div class="cambio-t">${esc(it.cambio||"")}</div>
+      <div class="dato"><b>Hook</b>"${esc(h.hook||it.texto||"")}"${h.voc&&h.voc.cita?`<small class="sub2"> · VOC: «${esc(h.voc.cita)}» (${esc(h.voc.cantidad||"")} citas)</small>`:""}</div>
+      <details open><summary>Guion de voz en off</summary><table class="tg"><tr><th>Etapa</th><th>Voz en off</th><th>Toma</th><th>Placa</th></tr>
+        ${(it.filas||[]).map(f=>`<tr><td>${esc(f.etapa)}</td><td>${esc(f.texto)}</td><td>${esc(f.broll)}</td><td>${esc(f.placa||"")}</td></tr>`).join("")}</table></details>
+      ${(it.cambios||[]).length?`<details><summary>Qué cambió contra el winner</summary><ul class="iv">${it.cambios.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></details>`:""}
+      ${refWinner(it)}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${editable?`<div class="editor"><input class="texto" value="${esc(h.hook||it.texto||"")}" data-orig="${esc(h.hook||it.texto||"")}" title="Hook">
+        <textarea class="nota" rows="2" placeholder="Qué cambiar del guion"></textarea><button class="btn dark corregir" disabled>Mandar corrección</button></div>
+      <div class="acciones"><button class="btn ok aprobar">Aprobar y armar el video</button><button class="btn abrir-ed">Corregir</button><button class="btn no rechazar" title="Descartar">✕</button></div>`:""}
+      ${it.estado==="error"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+    </div></div>`;
+}
+function tarjeta(id,it){
+  if(it.tipo==="hooks") return tarjetaHooks(id,it);
+  if(it.tipo==="guion_broll") return tarjetaGuionBroll(id,it);
+  if(it.tipo==="guion") return tarjetaGuion(id,it);
+  const esImg = /\.(png|jpe?g|webp)$/i.test(it.archivo||"") || it.tipo==="estatico";
+  const editable = it.estado==="revisar";
+  const m = it.metricas||{};
+  // vista previa: Storage (cuando lo generó la Mac de la marca) o Drive (Mac de CIMA)
+  const media = it.url
+    ? (esImg ? `<img src="${esc(it.url)}" alt="" loading="lazy">` : `<div class="marco"><video src="${esc(it.url)}#t=0.1" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;background:#1d1916"></video></div>`) + `<span class="tag">${esc(TIPO[it.tipo]||it.tipo)}</span>`
+    : it.driveId
+    ? `<img src="https://drive.google.com/thumbnail?id=${esc(it.driveId)}&sz=w600" alt="" loading="lazy" onerror="this.style.display='none'">${esImg?"":`<span class="play"></span>`}<span class="tag">${esc(TIPO[it.tipo]||it.tipo)}</span>`
+    : `<div class="ph">${it.estado==="error"?"No salió":it.estado==="revisar"?"Subiendo a Drive…":"Generándose…"}</div>`;
+  const punto = it.estado==="subido"||it.estado==="aprobado" ? "ok" : it.estado==="error"||it.estado==="rechazado" ? "mal" : "";
+  return `<div class="item" id="it-${esc(id)}">
+    <div class="cab"><div class="av">V${esc(it.n)}</div>
+      <div class="t"><b>${esc(it.codigo||it.adNombre||"Variante")}${it.version>1?` · v${esc(it.version)}`:""}</b>
+        <small><i class="${punto}"></i>${esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])} · ${esc(TIPO[it.tipo]||it.tipo)}</small></div>
+      <span class="links-cab">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener" title="Abrir el archivo">↗</a>`:""}${(it.driveLink||it.driveId)?`<a class="drive" href="${esc(it.driveLink||`https://drive.google.com/file/d/${it.driveId}/view`)}" target="_blank" rel="noopener" title="El mismo archivo en Drive">Drive</a>`:""}</span></div>
+    <div class="vid ${esImg?"img":""}" data-drive="${esc(it.url?"":(it.driveId||""))}">${media}</div>
+    <div class="cuerpo">
+      <div class="stats"><div class="st ok"><span>ROAS del ganador</span><b>${Number(m.roas||0).toFixed(2)}</b></div><div class="st"><span>Ventas ese día</span><b>${num(m.compras)}</b></div></div>
+      <div class="cambio-t">${esc(it.cambio)}</div>
+      <div class="txt">"${esc(it.texto)}"</div>
+      ${it.voz?`<div class="dato">Voz: "${esc(it.voz)}"</div>`:""}
+      ${it.ganoCon?`<div class="dato">Ganó con: "${esc(it.ganoCon)}"</div>`:""}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${it.qa?`<div class="err">Revisión automática: ${esc(it.qa)}</div>`:""}
+      ${(it.notas||[]).length?`<div class="hist">Correcciones: ${(it.notas||[]).map(n=>esc(String(n).replace(/^Rehacé SOLO[^)]*\), con el mismo tipo de cambio\. ?/,""))).join(" · ")}</div>`:""}
+      ${editable?`
+      <div class="editor">
+        <input class="texto" value="${esc(it.texto)}" data-orig="${esc(it.texto)}" title="${it.tipo==="animado"?"Verso del hook":"Texto nuevo"}">
+        <textarea class="nota" rows="2" placeholder="Qué cambiar: el texto tapa la uña · otra toma para arrancar…"></textarea>
+        <button class="btn dark corregir" disabled>Mandar corrección</button>
+      </div>
+      <div class="acciones">
+        <button class="btn ok aprobar">Aprobar</button>
+        <button class="btn abrir-ed">Corregir</button>
+        <button class="btn no rechazar" title="Descartar">✕</button>
+      </div>`:""}
+      ${it.estado==="error"?`<div class="acciones" style="grid-template-columns:1fr"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+    </div></div>`;
+}
+
+function conectar(id){
+  const el = document.getElementById("it-"+id); if(!el) return;
+  const corr = el.querySelector(".corregir"), nt = el.querySelector(".nota"), tx = el.querySelector(".texto");
+  const hayCambios = () => (tx && tx.value.trim()!==tx.dataset.orig) || (nt && nt.value.trim());
+  nt && nt.addEventListener("input", () => { nt.classList.toggle("cambio", !!nt.value.trim()); corr.disabled = !hayCambios(); });
+  tx && tx.addEventListener("input", () => { tx.classList.toggle("cambio", tx.value.trim()!==tx.dataset.orig); corr.disabled = !hayCambios(); });
+  el.querySelector(".abrir-ed")?.addEventListener("click", () => { el.querySelector(".editor").classList.toggle("on"); tx?.focus(); });
+  el.querySelector(".copiar")?.addEventListener("click", async () => { try { await navigator.clipboard.writeText(items[id].guionMd||""); toast("Guion copiado"); } catch(e){ toast("No se pudo copiar"); } });
+  const vd = el.querySelector(".vid");
+  vd && vd.addEventListener("click", () => { const d = vd.dataset.drive; if(!d || vd.querySelector("iframe")) return;
+    vd.innerHTML = `<div class="marco"><iframe src="https://drive.google.com/file/d/${d}/preview" allow="autoplay"></iframe></div>`; });
+  const ref = fb.doc(fb.db,"variantes_cola",id);
+  const marcar = async (datos,msg) => { try { await fb.updateDoc(ref,{...datos,revisadoPor:quien,actualizado:new Date().toISOString()}); toast(msg);
+      el.querySelectorAll(".cambio").forEach(i=>i.classList.remove("cambio")); el.querySelector(".editor")?.classList.remove("on"); document.activeElement?.blur(); pintar(); } catch(e){ toast("No se pudo guardar: "+e.message); } };
+  el.querySelector(".grabado")?.addEventListener("click", () => marcar({grabado:true, grabadoPor:quien, grabadoCuando:new Date().toISOString()}, "Listo: pasa a «Grabados»"));
+  el.querySelector(".degrabar")?.addEventListener("click", () => marcar({grabado:false}, "Vuelve a «Para grabar»"));
+  el.querySelector(".aprobar")?.addEventListener("click", () => marcar({estado:"aprobado"}, items[id]?.tipo==="guion" ? "Aprobado: está en «Aprobados» y se guarda en Drive en ~5 min" : "Aprobada: pasa al Drive de la marca"));
+  corr?.addEventListener("click", () => marcar({estado:"corregir", pedido:{texto:(tx?tx.value.trim():""), nota:(nt?nt.value.trim():"")}}, "Listo: vuelve corregida en ~30 min"));
+  el.querySelector(".rechazar")?.addEventListener("click", () => marcar({estado:"rechazado", nota:(nt?nt.value.trim():"")}, "Descartada"));
+  el.querySelector(".reintentar")?.addEventListener("click", () => marcar({estado:"corregir", pedido:{}}, "Se vuelve a intentar"));
+}
+
+document.addEventListener("click", () => document.querySelectorAll(".drop.on").forEach(x=>x.classList.remove("on")));
+// cartel al pasar por una barra: el día completo
+const DIAS = ["dom","lun","mar","mié","jue","vie","sáb"];
+document.addEventListener("mouseover", e => {
+  const b = e.target.closest && e.target.closest(".barras i"); const tip = $("#tip");
+  if(!b){ tip.style.display = "none"; return; }
+  const g = +b.dataset.g, v = +b.dataset.v, c = +b.dataset.c, f = b.dataset.f, mon = b.dataset.mon, im = +b.dataset.i, cl = +b.dataset.l, p3 = +b.dataset.p;
+  const d = new Date(f+"T12:00:00");
+  tip.innerHTML = `<b>${DIAS[d.getDay()]} ${fdia(f)}</b><div><span>Ventas</span>${num(c)}</div><div><span>ROAS</span>${g? (v/g).toFixed(2) : "—"}</div><div><span>CPA</span>${c? num(g/c)+" "+mon : "—"}</div><div><span>CTR</span>${im? (cl/im*100).toFixed(2)+"%" : "—"}</div><div><span>Hook rate</span>${im&&p3? (p3/im*100).toFixed(0)+"%" : "—"}</div><div><span>Gasto</span>${num(g)} ${mon}</div><div><span>Facturó</span>${num(v)} ${mon}</div>`;
+  tip.style.display = "block";
+  const r = b.getBoundingClientRect(), t = tip.getBoundingClientRect();
+  tip.style.left = Math.max(8, Math.min(innerWidth - t.width - 8, r.left + r.width/2 - t.width/2)) + "px";
+  tip.style.top = Math.max(8, r.top - t.height - 8) + "px";
+});
+if(quien) arrancar();
+</script>
+</body>
+</html>

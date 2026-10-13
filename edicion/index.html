@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Edición del día · Mi Luz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif}
+:root{--bg:#FAF7F4;--card:#FFFFFF;--soft:#F6F2EE;--line:#EFE8E3;--line2:#E2D8D1;--txt:#26211E;--mut:#8A7E77;--mut2:#B5A79F;
+  --ok:#3F8F6B;--ok-bg:#E7F2EC;--warn:#B07B2E;--warn-bg:#F7EEDD;--bad:#C1613C;--bad-bg:#F8E7DF;--r:22px}
+body{background:var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 22px 60px}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--mut);font-size:13px;margin-top:6px}
+.btn{background:var(--card);color:var(--txt);border:1px solid var(--line);padding:10px 17px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;min-height:42px}
+.btn:hover{border-color:var(--line2)}
+.btn.dark{background:var(--txt);color:#fff;border-color:var(--txt)}
+.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn.no{color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:default}
+.marcas{display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:4px;width:max-content;max-width:100%;overflow-x:auto;margin-bottom:18px}
+.mt{border:0;background:transparent;color:var(--mut);font-weight:600;font-size:13px;padding:8px 16px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.mt.on{background:var(--card);color:var(--txt);box-shadow:0 1px 4px rgba(38,33,30,.08)}
+.mt b{display:inline-block;margin-left:7px;min-width:20px;padding:0 6px;border-radius:99px;background:var(--warn-bg);color:var(--warn);font-size:11px;font-weight:600}
+.top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,2fr);gap:11px;margin-bottom:18px}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}}
+.hero{border-radius:26px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#51463F 0%,#26211E 64%);display:flex;align-items:center;gap:20px;min-height:200px}
+.hero .blob{position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;bottom:-100px}
+.ringbox{position:relative;width:112px;height:112px;flex-shrink:0}
+.ringbox svg{transform:rotate(-90deg);display:block}
+.ringbox .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ringbox .mid b{font-size:30px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.ringbox .mid u{text-decoration:none;font-size:10.5px;opacity:.75;margin-top:3px}
+.hero-msg{position:relative;min-width:0}
+.hero-msg .ey{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.hero-msg h3{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.025em;margin:6px 0 7px;color:#fff;text-transform:none}
+.hero-msg p{font-size:12.5px;line-height:1.55;opacity:.85}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+@media (max-width:600px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;min-height:94px;display:flex;flex-direction:column;cursor:pointer;text-align:left;transition:border-color .15s}
+.kpi:hover{border-color:var(--line2)}
+.kpi.on{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)}
+.kpi .l{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kpi .v{font-size:30px;font-weight:700;letter-spacing:-.035em;margin-top:auto;padding-top:8px;line-height:1}
+.kpi.alerta .v{color:var(--warn)} .kpi.mal .v{color:var(--bad)}
+.item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:22px}
+@media (max-width:760px){.item{grid-template-columns:minmax(0,1fr)}}
+.vid{aspect-ratio:9/16;width:100%;border-radius:16px;overflow:hidden;background:#1d1916;position:relative}
+.vid iframe{position:absolute;top:0;left:-6%;width:112%;height:100%;border:0}
+.vid .ph{position:absolute;inset:0;display:grid;place-items:center;color:#b5a79f;font-size:13px;text-align:center;padding:20px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.pill{display:inline-block;font-size:11.5px;font-weight:500;padding:4px 11px;border-radius:99px;background:var(--soft);color:var(--mut)}
+.pill.m{background:var(--txt);color:#fff}
+.pill.e-revisar{background:var(--warn-bg);color:var(--warn)}
+.pill.e-error,.pill.e-rechazado{background:var(--bad-bg);color:var(--bad)}
+.pill.e-subido,.pill.e-aprobado{background:var(--ok-bg);color:var(--ok)}
+.links{font-size:12.5px;color:var(--mut);margin-bottom:14px}
+.links a{color:var(--txt);font-weight:500}
+h3{margin:4px 0 8px;font-size:10.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em}
+.subs{max-height:400px;overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.subs label{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:4px;padding:3px 8px;border-top:1px solid var(--line)}
+.subs label:first-child{border-top:0}
+.subs span{color:var(--mut2);font-size:11.5px;text-align:right;font-variant-numeric:tabular-nums}
+.subs input{width:100%;border:1px solid transparent;background:transparent;color:var(--txt);font-size:13.5px;padding:7px 9px;border-radius:10px}
+.subs input:focus{outline:none;border-color:var(--line2);background:var(--soft)}
+.cambio{background:var(--warn-bg)!important;color:var(--warn)!important}
+.nota{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 13px;font-size:13.5px;background:var(--card);color:var(--txt);resize:vertical}
+.nota:focus{outline:none;border-color:var(--line2)}
+.chk{display:flex;gap:7px;align-items:center;font-size:12.5px;color:var(--mut);margin-top:9px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.ayuda{font-size:12px;color:var(--mut2);margin-top:8px}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:14px;padding:11px 13px;font-size:12.5px;white-space:pre-wrap;margin-bottom:12px}
+.hist{font-size:12.5px;color:var(--mut);margin-top:12px;background:var(--soft);border-radius:14px;padding:10px 13px}
+.vacio{text-align:center;color:var(--mut);padding:60px 20px;background:var(--card);border:1px dashed var(--line2);border-radius:var(--r)}
+#login{max-width:360px;margin:14vh auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+#login h1{font-size:23px}
+#login input{width:100%;margin:16px 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font-size:15px;background:var(--soft);color:var(--txt)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--txt);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>Edición del día · Mi Luz</h1>
+  <p class="sub">Entrá con tu clave.</p>
+  <input id="clave" type="password" placeholder="Clave" autocomplete="current-password">
+  <button class="btn dark" id="entrar" style="width:100%">Entrar</button>
+  <p id="login-e" class="sub" style="color:var(--bad)"></p>
+</div>
+<div class="wrap" id="app" hidden>
+  <header>
+    <div><h1>Edición del día · Mi Luz</h1><div class="sub" id="resumen">Cargando…</div></div>
+    <button class="btn" id="salir">Salir</button>
+  </header>
+  <div class="marcas" id="marcas" style="display:none"></div>
+  <div class="top"><div class="hero" id="hero"></div><div class="kpis" id="tabs"></div></div>
+  <div id="lista"></div>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module">
+const CLAVES = {"miluz-2026":"Luz","cima-2026":"Nacho"};
+const $ = s => document.querySelector(s);
+const ESTADOS = [["revisar","Para revisar"],["procesando","Editándose"],["corregir","Corrigiéndose"],["subido","Aprobados"],["rechazado","Rechazados"],["error","Con error"]];
+let quien = null, items = {}, filtro = "revisar", fb = null;
+let marcaF = "miluz"; const _x = new URLSearchParams(location.search).get("marca") || (()=>{ try { return localStorage.getItem("miluz_edicion_marca") } catch(e){ return null } })() || "todas";
+try { quien = CLAVES[localStorage.getItem("miluz_edicion_clave")] || null; } catch(e) {}
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on"); setTimeout(()=>el.classList.remove("on"),2200); }
+function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function entrar(){
+  const k = $("#clave").value.trim();
+  if(!CLAVES[k]){ $("#login-e").textContent = "Esa clave no es. Probá de nuevo."; return; }
+  try { localStorage.setItem("miluz_edicion_clave", k); } catch(e) {}
+  quien = CLAVES[k]; arrancar();
+}
+$("#entrar").addEventListener("click", entrar);
+$("#clave").addEventListener("keydown", e => { if(e.key==="Enter") entrar(); });
+$("#salir").addEventListener("click", () => { try { localStorage.removeItem("miluz_edicion_clave"); } catch(e) {} location.reload(); });
+
+async function arrancar(){
+  $("#login").hidden = true; $("#app").hidden = false;
+  const [{initializeApp},{getFirestore,collection,doc,onSnapshot,updateDoc},{getAuth,signInAnonymously}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js")]);
+  const app = initializeApp({apiKey:"AIzaSyCTv4DiRCpbCpGYP6E86TPHlkPvaAZTN3g",authDomain:"cleargy-creators.firebaseapp.com",projectId:"cleargy-creators",storageBucket:"cleargy-creators.firebasestorage.app",messagingSenderId:"313543582398",appId:"1:313543582398:web:99fe78991adeea2e7cb4ef"});
+  await signInAnonymously(getAuth(app));
+  const db = getFirestore(app);
+  fb = {db, doc, updateDoc};
+  onSnapshot(collection(db,"edicion_cola"), snap => {
+    snap.docChanges().forEach(c => { if(c.type==="removed") delete items[c.doc.id]; else items[c.doc.id] = c.doc.data(); });
+    pintar();
+  }, err => { $("#resumen").textContent = "No se pudo leer la cola: " + err.message; });
+}
+
+function pintar(){
+  const todos = Object.entries(items).filter(([,it]) => it.marca === "miluz");
+  const marcas = [...new Set(todos.map(([,it])=>it.marca))].sort(); const nom = m => (todos.find(([,it])=>it.marca===m)||[,{}])[1].marcaNombre||m;
+  const deMarca = todos.filter(([,it]) => marcaF==="todas" || it.marca===marcaF);
+  const cuenta = e => deMarca.filter(([,it])=>it.estado===e).length;
+  const hora = new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+  $("#resumen").textContent = `Hola ${quien} · actualizado ${hora} · datos en vivo`;
+  const hoy = new Date().toISOString().slice(0,10);
+  const deHoy = deMarca.filter(([,it]) => (it.creado||"").slice(0,10)===hoy || (it.actualizado||"").slice(0,10)===hoy);
+  const listos = deHoy.filter(([,it]) => ["subido","aprobado","rechazado"].includes(it.estado)).length;
+  const total = deHoy.length, pct = total ? Math.round(listos/total*100) : 0, R = 48, C = 2*Math.PI*R;
+  const pend = cuenta("revisar"), enCurso = cuenta("procesando")+cuenta("corregir");
+  $("#hero").innerHTML = `<div class="blob"></div>
+    <div class="ringbox"><svg width="112" height="112"><circle cx="56" cy="56" r="${R}" stroke="rgba(255,255,255,.14)" stroke-width="9" fill="none"/>
+      <circle cx="56" cy="56" r="${R}" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct/100)}"/></svg>
+      <div class="mid"><b>${pct}%</b><u>revisado hoy</u></div></div>
+    <div class="hero-msg"><div class="ey">${marcaF==="todas"?"Todas las marcas":esc(nom(marcaF))} · hoy</div>
+      <h3>${listos} de ${total} ${total===1?"video revisado":"videos revisados"}</h3>
+      <p>${pend?`<b>${pend} ${pend===1?"espera":"esperan"} tu revisión.</b> `:"No hay nada esperando. "}${enCurso?`${enCurso} ${enCurso===1?"se está editando":"se están editando"}.`:""}${cuenta("error")?` ${cuenta("error")} con error.`:""}</p></div>`;
+  const cls = e => e==="revisar"&&cuenta(e)?"alerta":e==="error"&&cuenta(e)?"mal":"";
+  $("#tabs").innerHTML = ESTADOS.map(([e,t]) => `<button class="kpi ${cls(e)} ${e===filtro?"on":""}" data-e="${e}"><span class="l">${t}</span><span class="v">${cuenta(e)}</span></button>`).join("");
+  if(marcaF!=="todas" && !marcas.includes(marcaF) && marcas.length) marcaF = "todas";
+  const porRevisar = m => todos.filter(([,it]) => (m==="todas"||it.marca===m) && it.estado==="revisar").length;
+  $("#marcas").innerHTML = ["todas",...marcas].map(m=>`<button class="mt ${m===marcaF?"on":""}" data-m="${m}">${m==="todas"?"Todas las marcas":esc(nom(m))}${porRevisar(m)?`<b>${porRevisar(m)}</b>`:""}</button>`).join("");
+  document.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>{filtro=b.dataset.e;pintar();});
+  document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{marcaF=b.dataset.m; try{localStorage.setItem("miluz_edicion_marca",marcaF)}catch(e){} pintar();});
+  const lista = deMarca.filter(([,it])=>it.estado===filtro).sort((a,b)=>(a[1].fechaCrudo||"").localeCompare(b[1].fechaCrudo||""));
+  if(!lista.length){ $("#lista").innerHTML = `<div class="vacio">${filtro==="revisar"?"No hay videos para revisar. Los de hoy aparecen solos cuando terminan de editarse.":"Nada por acá."}</div>`; return; }
+  // si está escribiendo una corrección, no le borramos lo que tipeó: se repinta cuando suelta
+  const editando = [...document.querySelectorAll("#lista .cambio, #lista .otro-broll:checked")].length || (document.activeElement && document.activeElement.closest("#lista input, #lista textarea"));
+  if(editando){ pendiente = true; return; }
+  pendiente = false;
+  $("#lista").innerHTML = lista.map(([id,it]) => tarjeta(id,it)).join("");
+  lista.forEach(([id]) => conectar(id));
+}
+let pendiente = false;
+document.addEventListener("focusout", () => setTimeout(() => { if(pendiente && !document.querySelector("#lista .cambio, #lista .otro-broll:checked")) pintar(); }, 200));
+
+function tarjeta(id,it){
+  const verId = it.vistaId || it.driveId;   // la versión liviana: Drive la prepara en 1-2 min
+  const vid = verId
+    ? `<iframe src="https://drive.google.com/file/d/${esc(verId)}/preview" allow="autoplay" loading="lazy"></iframe>`
+    : `<div class="ph">${it.estado==="revisar"?"El video se está terminando de subir a Drive…":"Editándose…"}</div>`;
+  const fecha = (it.fechaCrudo||"").slice(0,10).split("-").reverse().join("/");
+  const subs = (it.pantallas||[]).map((t,i)=>`<label><span>${i+1}</span><input data-i="${i}" value="${esc(t)}" data-orig="${esc(t)}"></label>`).join("");
+  const editable = it.estado==="revisar";
+  return `<div class="item" id="it-${esc(id)}">
+    <div class="vid">${vid}</div>
+    <div>
+      <div class="meta"><span class="pill m">${esc(it.marcaNombre||it.marca)}</span><span class="pill">Guion ${esc(it.guion||"—")}</span><span class="pill">${esc(it.creadora||"")}</span><span class="pill">${fecha}</span><span class="pill e-${esc(it.estado)}">${esc((ESTADOS.find(e=>e[0]===it.estado)||[,it.estado])[1])}</span></div>
+      ${it.driveId?`<div class="links"><a href="https://drive.google.com/file/d/${esc(it.driveId)}/view" target="_blank" rel="noopener">Abrir en Drive</a> · <a href="${esc(it.crudoLink)}" target="_blank" rel="noopener">Ver el crudo</a></div>`:""}
+      ${it.error?`<div class="err">${esc(it.error)}</div>`:""}
+      ${subs?`<h3>Subtítulos ${editable?"· tocá uno para corregirlo":""}</h3><div class="subs">${subs}</div>`:""}
+      ${editable?`
+      <h3 style="margin-top:16px">Qué hay que cambiar</h3>
+      <textarea class="nota" rows="3" placeholder="Ej.: seg 23 el b-roll no tiene que ver, poné algo de enzimas · seg 50 sacá el del cinturón"></textarea>
+      <label class="chk"><input type="checkbox" class="otro-broll"> Elegir todo el b-roll de nuevo</label>
+      <div class="acciones">
+        <button class="btn ok aprobar">Aprobar</button>
+        <button class="btn dark corregir" disabled>Mandar correcciones</button>
+        <button class="btn no rechazar" title="Solo si el crudo no sirve: audio cortado, mal grabado">Rechazar el crudo</button>
+      </div>
+      <p class="ayuda">Las correcciones vuelven editadas en ~20 min. "Rechazar el crudo" es solo si hay que volver a grabarlo.</p>`:""}
+      ${it.estado==="error"?`<div class="acciones"><button class="btn reintentar">Volver a intentar</button></div>`:""}
+      ${it.nota?`<div class="hist">Nota: ${esc(it.nota)}</div>`:""}
+      ${(it.notas||[]).length?`<div class="hist"><b>Versión ${it.version||1}.</b> Correcciones pedidas: ${(it.notas||[]).map(esc).join(" · ")}</div>`:""}
+    </div></div>`;
+}
+
+function conectar(id){
+  const el = document.getElementById("it-"+id); if(!el) return;
+  const corr = el.querySelector(".corregir"), ob = el.querySelector(".otro-broll");
+  const nt = el.querySelector(".nota");
+  const hayCambios = () => [...el.querySelectorAll(".subs input")].some(i=>i.value!==i.dataset.orig) || (ob && ob.checked) || (nt && nt.value.trim());
+  nt && nt.addEventListener("input", () => { nt.classList.toggle("cambio", !!nt.value.trim()); corr.disabled = !hayCambios(); });
+  el.querySelectorAll(".subs input").forEach(i => i.addEventListener("input", () => { i.classList.toggle("cambio", i.value!==i.dataset.orig); if(corr) corr.disabled=!hayCambios(); }));
+  ob && ob.addEventListener("change", () => { corr.disabled = !hayCambios(); });
+  const ref = fb.doc(fb.db,"edicion_cola",id);
+  const marcar = async (datos,msg) => { try { await fb.updateDoc(ref,{...datos,revisadoPor:quien,actualizado:new Date().toISOString()}); toast(msg);
+      el.querySelectorAll(".cambio").forEach(i=>i.classList.remove("cambio")); if(ob) ob.checked=false; document.activeElement?.blur(); pintar(); } catch(e){ toast("No se pudo guardar: "+e.message); } };
+  el.querySelector(".aprobar")?.addEventListener("click", () => marcar({estado:"aprobado"}, "Aprobado: pasa a Editados y a la app"));
+  corr?.addEventListener("click", () => {
+    const pantallas = [...el.querySelectorAll(".subs input")].map(i=>i.value);
+    marcar({estado:"corregir", pedido:{pantallas, broll:!!(ob&&ob.checked), nota:(nt?nt.value.trim():"")}}, "Listo: vuelve editado en ~20 min");
+  });
+  el.querySelector(".rechazar")?.addEventListener("click", () => {
+    const n = el.querySelector(".nota").value.trim();
+    if(!n){ el.querySelector(".nota").focus(); toast("Escribí por qué no sirve el crudo"); return; }
+    if(!confirm("¿Rechazar el crudo? Es solo si hay que volver a grabarlo. Para cambios de edición usá \"Mandar correcciones\".")) return;
+    marcar({estado:"rechazado", nota:n}, "Rechazado");
+  });
+  el.querySelector(".reintentar")?.addEventListener("click", () => marcar({estado:"corregir", pedido:{}}, "Se vuelve a intentar"));
+}
+
+if(quien) arrancar();
+</script>
+</body>
+</html>

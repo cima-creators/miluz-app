@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A2335">
+<title>Ads Random · Mi Luz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif}
+:root{--bg:#FAF7F4;--card:#FFFFFF;--soft:#F6F0EC;--line:#EFE6E1;--line2:#E0D2CB;--txt:#2A1F1F;--mut:#8A7B76;--mut2:#B7A8A2;
+  --acc:#7A2335;--acc-bg:#F6E3E6;--ok:#3F8F6B;--ok-bg:#E7F2EC;--warn:#A8742A;--warn-bg:#F7EEDD;--bad:#B5523A;--bad-bg:#F8E7DF;--r:20px}
+body{background:var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+button,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 22px 60px}
+@media (max-width:600px){.wrap{padding:20px 16px 60px}}
+header{margin-bottom:22px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--mut);font-size:13px;margin-top:6px;max-width:78ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--card);color:var(--txt);border:1px solid var(--line);padding:10px 17px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;min-height:42px;text-decoration:none}
+.btn:hover{border-color:var(--line2)}
+.btn.dark{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn.no{color:var(--bad)}
+.btn.sm{min-height:36px;padding:7px 10px;font-size:12.5px}
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr);gap:11px;margin-bottom:18px}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}}
+.hero{border-radius:26px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#9A3A4D 0%,#5E1A29 64%);display:flex;align-items:center;gap:20px;min-height:170px}
+.hero .blob{position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;bottom:-100px}
+.hero .big{position:relative;font-size:54px;font-weight:700;letter-spacing:-.04em;line-height:1;min-width:84px;text-align:center}
+.hero-msg{position:relative;min-width:0}
+.hero-msg .ey{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.hero-msg h3{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.025em;margin:6px 0 7px}
+.hero-msg p{font-size:12.5px;line-height:1.55;opacity:.85}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 15px;min-height:84px;display:flex;flex-direction:column;cursor:pointer;text-align:left}
+.kpi:hover{border-color:var(--line2)}
+.kpi.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.kpi .l{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.kpi .v{font-size:28px;font-weight:700;letter-spacing:-.035em;margin-top:auto;padding-top:8px;line-height:1}
+.kpi.ok .v{color:var(--ok)} .kpi.alerta .v{color:var(--warn)} .kpi.toca .v{color:var(--acc)} .kpi.mal .v{color:var(--bad)}
+.barra{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
+.marcas{display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:4px;max-width:100%;overflow-x:auto}
+.mt{border:0;background:transparent;color:var(--mut);font-weight:600;font-size:13px;padding:8px 13px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.mt.on{background:var(--card);color:var(--acc);box-shadow:0 1px 4px rgba(38,33,30,.08)}
+.mt small{font-weight:500;opacity:.7;margin-left:3px}
+select{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:9px 13px;font-size:13px;font-weight:500;min-height:42px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;align-items:start}
+.item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.item.fuera{opacity:.55}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 14px 10px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--acc-bg);color:var(--acc);display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.who{min-width:0;flex:1}
+.who b{display:block;font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who small{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vid{aspect-ratio:9/16;width:100%;overflow:hidden;background:#1d1916;position:relative;border-bottom:1px solid var(--line)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#1d1916}
+.vid .tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(38,33,30,.72);color:#fff}
+.vid .tag.r{left:auto;right:10px}
+.vid .tag.nueva{background:var(--acc)}
+.vid .tag.hecho{background:var(--ok)}
+.vid.final{border-bottom:3px solid var(--ok)}
+.cuerpo{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pill{display:inline-block;font-size:11.5px;font-weight:500;padding:4px 11px;border-radius:99px;background:var(--soft);color:var(--mut);white-space:nowrap}
+.pill.a{background:var(--acc-bg);color:var(--acc)}
+.pill.v{background:var(--ok-bg);color:var(--ok)}
+.hook{font-size:14.5px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.orig{font-size:12px;color:var(--mut);font-style:italic}
+.unas{background:var(--acc-bg);border-radius:14px;padding:10px 12px}
+.unas h4,h4{font-size:10.5px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3px}
+.unas h4{color:var(--acc)}
+.txt{font-size:13px;line-height:1.5}
+.links{font-size:12px;color:var(--mut)}
+.links a{color:var(--txt);font-weight:500}
+.extra{display:none;flex-direction:column;gap:9px}
+.item.abierta .extra{display:flex}
+.acciones{display:flex;gap:8px;margin-top:auto;padding-top:2px}
+.acciones .btn{flex:1}
+.acciones .btn.chico{flex:0 0 auto}
+.acciones [data-acc="mas"]{flex:0 0 auto;border:0;background:none;color:var(--acc)}
+.aviso{font-size:12.5px;font-weight:500;border-radius:14px;padding:10px 12px}
+.aviso.w{background:var(--warn-bg);color:var(--warn)}
+.aviso.ok{background:var(--ok-bg);color:var(--ok)}
+.aviso.mal{background:var(--bad-bg);color:var(--bad)}
+details{background:var(--soft);border-radius:14px;padding:10px 12px}
+summary{cursor:pointer;font-weight:600;font-size:13px}
+.guion{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.guion td{border-top:1px solid var(--line);padding:6px 6px;vertical-align:top}
+.guion td:first-child{white-space:nowrap;color:var(--acc);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;width:1%}
+.cambio textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;background:var(--soft);resize:vertical;margin-bottom:6px}
+.vacio{text-align:center;color:var(--mut);padding:60px 20px;background:var(--card);border:1px dashed var(--line2);border-radius:var(--r);grid-column:1/-1}
+#login{max-width:360px;margin:14vh auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+#login h1{font-size:23px}
+#login input{width:100%;margin:16px 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font-size:15px;background:var(--soft)}
+#login .btn{width:100%}
+.err{color:var(--bad);font-size:12.5px;min-height:18px}
+#modal{position:fixed;inset:0;background:rgba(42,31,31,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+#modal.on{display:flex}
+#modal .box{background:var(--card);border-radius:var(--r);max-width:540px;width:100%;max-height:92vh;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+#modal h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
+#modal .ref{display:flex;gap:12px;align-items:flex-start}
+#modal .ref img{width:72px;height:90px;object-fit:cover;border-radius:12px;background:var(--soft);flex-shrink:0}
+#modal .ref p{font-size:12.5px;color:var(--mut)}
+.ang{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.ang.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.ang input{margin-top:4px;accent-color:var(--acc);width:17px;height:17px;flex-shrink:0}
+.ang b{font-size:14.5px}
+.ang span{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--acc-bg);color:var(--acc);margin-top:3px}
+.ang span.nuevo{background:var(--warn-bg);color:var(--warn)}
+#modal textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;background:var(--soft);resize:vertical}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--txt);color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+.frases{display:flex;flex-direction:column;gap:5px}
+.fr{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.4}
+.fr i{font-style:normal;font-size:10px;font-weight:600;color:var(--acc);background:var(--acc-bg);border-radius:99px;padding:2px 8px;white-space:nowrap;margin-top:1px}
+.tomas{display:flex;gap:4px;overflow-x:auto}
+.tomas img{width:54px;height:96px;object-fit:cover;border-radius:8px;background:var(--soft);flex-shrink:0}
+#modal input.ed{width:100%;border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:13.5px;background:var(--soft)}
+#modal label.bl{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div id="login">
+  <h1>Ads Random · Mi Luz</h1>
+  <p class="sub">Clips de 8 a 15 segundos sin voz: tomas reales de uñas, una frase arriba y el Fénix con color al final.</p>
+  <input id="clave" type="password" placeholder="Clave" autocomplete="current-password">
+  <div class="err" id="gerr"></div>
+  <button class="btn dark" id="entrar">Entrar</button>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <header>
+    <h1>Ads Random</h1>
+    <p class="sub">Todos los días te llegan <b>ideas listas</b>: el molde, las frases (salen de lo que dicen las clientas) y las tomas reales de las creadoras. Tocá <b>Elegir</b>, corregí las frases si querés, y salen <b>3 versiones</b> para un conjunto. Las revisás acá: aprobadas van a tu Drive en «Listos para subir / Random».</p>
+  </header>
+  <div class="top">
+    <div class="hero"><div class="blob"></div>
+      <div class="big" id="nHero">0</div>
+      <div class="hero-msg"><div class="ey" id="ey">Hoy</div><h3 id="heroT">Cargando…</h3><p id="heroP"></p></div>
+    </div>
+    <div class="kpis">
+      <button class="kpi" data-v="elegir"><span class="l">Ideas</span><span class="v" id="k1">–</span></button>
+      <button class="kpi alerta" data-v="curso"><span class="l">En curso</span><span class="v" id="k2">–</span></button>
+      <button class="kpi toca" data-v="revisar"><span class="l">Revisar</span><span class="v" id="k3">–</span></button>
+      <button class="kpi ok on" data-v="listos"><span class="l">Listos</span><span class="v" id="k4">–</span></button>
+      <button class="kpi mal" data-v="descartadas"><span class="l">Descartados</span><span class="v" id="k5">–</span></button>
+    </div>
+  </div>
+  <div class="barra"><div class="marcas" id="filtros"></div></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mT"><div class="box">
+  <h2 id="mT">Revisá las frases</h2>
+  <p class="sub" id="mSub" style="margin:0"></p>
+  <p class="sub" style="margin:0">Salen 3 videos con las mismas tomas, uno por cada versión del hook. Las «Toma 2/3…» van en los tres.</p>
+  <div id="mBloques" style="display:flex;flex-direction:column;gap:10px"></div>
+  <div><h4>Algo que quieras pedir (opcional)</h4><textarea id="mNota" placeholder="Ej: que el después sea con uñas rojas; música más tranqui"></textarea></div>
+  <div class="acciones"><button class="btn" id="mNo">Cancelar</button><button class="btn dark" id="mSi">Hacer las 3 versiones</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+const CLAVES = {"miluz-2026":"Luz","luz-2026":"Luz","cima-2026":"Nacho"};
+const ANG = {crecen:"Mis uñas no crecen", parten:"Se me parten con cualquier cosa", menopausia:"La menopausia me cambió las uñas"};
+const GRUPO = {nueva:"elegir", elegida:"curso", produciendo:"curso", cambiar:"curso", fallo:"curso", revisar:"revisar", aprobado:"listos", descartada:"descartadas"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let quien = null, docs = [], vista = "listos", molde = "", fs = null, abierto = null;
+try { quien = sessionStorage.getItem("random_quien"); vista = localStorage.getItem("random_vista") || "listos"; } catch (e) {}
+const toast = t => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); setTimeout(() => el.classList.remove("on"), 2200); };
+$("#entrar").onclick = entrar;
+$("#clave").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
+function entrar(){
+  const n = CLAVES[$("#clave").value.trim().toLowerCase()];
+  if (!n) { $("#gerr").textContent = "Clave incorrecta"; return; }
+  quien = n; try { sessionStorage.setItem("random_quien", n); } catch (e) {}
+  arrancar();
+}
+if (quien) arrancar();
+
+async function arrancar(){
+  $("#login").hidden = true; $("#app").hidden = false; marcarVista();
+  const [{initializeApp},{getFirestore,collection,doc,onSnapshot,updateDoc},{getAuth,signInAnonymously}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js")]);
+  const app = initializeApp({apiKey:"AIzaSyCTv4DiRCpbCpGYP6E86TPHlkPvaAZTN3g",authDomain:"cleargy-creators.firebaseapp.com",projectId:"cleargy-creators",storageBucket:"cleargy-creators.firebasestorage.app",messagingSenderId:"313543582398",appId:"1:313543582398:web:99fe78991adeea2e7cb4ef"});
+  await signInAnonymously(getAuth(app));
+  const db = getFirestore(app);
+  fs = {db, doc, updateDoc};
+  onSnapshot(collection(db, "random_luz"), snap => { docs = snap.docs.map(d => ({id: d.id, ...d.data()})); pintar(); },
+    err => { $("#grid").innerHTML = `<div class="vacio">No se pudo cargar (${esc(err.code)}). Recargá la página.</div>`; });
+}
+function marcarVista(){ document.querySelectorAll(".kpi").forEach(b => b.classList.toggle("on", b.dataset.v === vista)); }
+document.querySelectorAll(".kpi").forEach(b => b.onclick = () => { vista = b.dataset.v; try { localStorage.setItem("random_vista", vista); } catch (e) {} marcarVista(); pintar(); });
+
+function pintar(){
+  const g = k => docs.filter(d => GRUPO[d.estado] === k);
+  const n = {elegir: g("elegir"), curso: g("curso"), revisar: g("revisar"), listos: g("listos"), descartadas: g("descartadas")};
+  ["elegir","curso","revisar","listos","descartadas"].forEach((k, i) => $("#k" + (i + 1)).textContent = n[k].length);
+  $("#ey").textContent = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long"});
+  if (n.revisar.length) { $("#nHero").textContent = n.revisar.length; $("#heroT").textContent = `${n.revisar.length} para revisar`; $("#heroP").textContent = "Miralos y aprobá o pedí un cambio. Aprobados van a tu Drive."; }
+  else if (n.elegir.length) { $("#nHero").textContent = n.elegir.length; $("#heroT").textContent = `${n.elegir.length} ideas para elegir`; $("#heroP").textContent = "Cada idea elegida sale en 3 versiones."; }
+  else { $("#nHero").textContent = n.listos.length; $("#heroT").textContent = `${n.listos.length} listos para subir`; $("#heroP").textContent = "Están en tu Drive: Mi Luz · Bots / Listos para subir / Random."; }
+  let lista = n[vista];
+  const por = {}; lista.forEach(d => por[d.moldeNombre || "?"] = (por[d.moldeNombre || "?"] || 0) + 1);
+  if (molde && !por[molde]) molde = "";
+  $("#filtros").innerHTML = `<button class="mt ${molde ? "" : "on"}" data-m="">Todos<small>${lista.length}</small></button>` +
+    Object.keys(por).sort().map(m => `<button class="mt ${m === molde ? "on" : ""}" data-m="${esc(m)}">${esc(m)}<small>${por[m]}</small></button>`).join("");
+  $("#filtros").querySelectorAll(".mt").forEach(b => b.onclick = () => { molde = b.dataset.m; pintar(); });
+  if (molde) lista = lista.filter(d => (d.moldeNombre || "?") === molde);
+  const t = d => d.revisarEn || d.aprobadoEn || d.eligioEn || d.creado || d.fecha || "";
+  lista.sort((a, b) => t(b).localeCompare(t(a)) || (a.orden || 0) - (b.orden || 0));
+  if (!lista.length) { $("#grid").innerHTML = `<div class="vacio">${{elegir:"No hay ideas nuevas: llegan todos los días a la mañana.", curso:"No hay nada armándose.", revisar:"No hay nada para revisar.", listos:"Todavía no aprobaste ninguno.", descartadas:"No descartaste ninguno."}[vista]}</div>`; return; }
+  $("#grid").innerHTML = lista.map(tarjeta).join("");
+  $("#grid").querySelectorAll("[data-acc]").forEach(b => b.onclick = () => accion(b.dataset.id, b.dataset.acc));
+}
+const frases = d => `<div class="frases">${(d.bloques || []).filter(b => b.texto).map((b, i) => `<div class="fr"><i>${i === 0 ? "Hook" : "Toma " + (i + 1)}</i><span>${esc(b.texto)}</span></div>`).join("")}</div>`;
+function aviso(d){
+  if (d.estado === "elegida") return `<div class="aviso w">${d.turno === "mañana" ? "En fila: se hace mañana (tope por día)" : "En fila para armar"}</div>`;
+  if (d.estado === "produciendo") return `<div class="aviso w">Armando… ${esc(d.paso || "")}</div>`;
+  if (d.estado === "cambiar") return `<div class="aviso w">Haciendo el cambio: ${esc(d.cambioNota || "")}</div>`;
+  if (d.estado === "fallo") return `<div class="aviso mal">No salió: ${esc(d.falloMotivo || "")}</div>`;
+  if (d.estado === "aprobado") return `<div class="aviso ok">✓ ${d.enDrive ? "En tu Drive · " + esc(d.enDrive) : "Aprobado · pasando a Drive…"}</div>`;
+  return "";
+}
+function tarjeta(d){
+  const id = esc(d.id), video = d.final && ["revisar","aprobado","descartada"].includes(d.estado);
+  const mas = `<button class="btn sm" data-acc="mas" data-id="${id}">Más</button>`;
+  let bot = mas;
+  if (d.estado === "nueva") bot = `${mas}<button class="btn sm no" data-acc="descartar" data-id="${id}">Descartar</button><button class="btn sm dark" data-acc="elegir" data-id="${id}">Elegir</button>`;
+  else if (d.estado === "elegida") bot = `${mas}<button class="btn sm" data-acc="soltar" data-id="${id}">Cancelar</button>`;
+  else if (d.estado === "fallo") bot = `${mas}<button class="btn sm" data-acc="reintentar" data-id="${id}">Reintentar</button>`;
+  else if (d.estado === "revisar") bot = `${mas}<button class="btn sm no chico" data-acc="descartar" data-id="${id}">Descartar</button><button class="btn sm" data-acc="cambiar" data-id="${id}">Pedir cambio</button><button class="btn sm dark" data-acc="aprobar" data-id="${id}">Aprobar</button>`;
+  else if (d.estado === "descartada") bot = `${mas}<button class="btn sm" data-acc="volver" data-id="${id}">Recuperar</button>`;
+  const caja = d.estado === "revisar" ? `<div class="cambio" hidden><textarea rows="3" placeholder="¿Qué cambiamos? Ej: la frase del hook más corta; otra toma en el después; música más tranqui"></textarea><div class="acciones"><button class="btn sm" data-acc="nocambio" data-id="${id}">Cancelar</button><button class="btn sm dark" data-acc="enviarcambio" data-id="${id}">Enviar cambio</button></div></div>` : "";
+  const media = video ? `<div class="vid final"><video src="${esc(d.final)}" poster="${esc(d.thumb || "")}" preload="none" controls playsinline></video><span class="tag hecho">${esc(d.duracion || "?")} s</span></div>`
+    : (d.miniaturas || []).length ? `<div class="cuerpo" style="padding-bottom:0"><div class="tomas">${d.miniaturas.map(u => `<img src="${esc(u)}" alt="" loading="lazy">`).join("")}</div></div>` : "";
+  return `<article class="item ${d.estado === "descartada" ? "fuera" : ""}" data-card="${id}">
+    <div class="chead"><div class="av">${esc((d.molde || "R").replace("M", ""))}</div>
+      <div class="who"><b>${esc(d.codigo || d.moldeNombre || "Idea")}</b><small>${esc(d.moldeNombre || "")}${d.angulo && ANG[d.angulo] ? " · " + esc(ANG[d.angulo]) : ""}</small></div></div>
+    ${media}
+    <div class="cuerpo">
+      ${frases(d)}
+      ${aviso(d)}
+      <div class="extra">
+        ${(d.versiones || []).length ? `<div><h4>Las 3 versiones del hook</h4><div class="frases">${[d.bloques && d.bloques[0] && d.bloques[0].texto, ...d.versiones].filter(Boolean).map((t, i) => `<div class="fr"><i>V${i + 1}</i><span>${esc(t)}</span></div>`).join("")}</div></div>` : ""}
+        ${d.refMarca ? `<div class="links">Referencia: ${esc(d.refMarca)}${d.refTextos ? " · «" + esc(String(d.refTextos).slice(0, 90)) + "»" : ""}</div>` : ""}
+        ${d.fundamento ? `<div><h4>De dónde sale el hook</h4><div class="txt">${esc(d.fundamento)}</div></div>` : ""}
+        ${d.musica ? `<div class="links">Música: ${esc(d.musica)}</div>` : ""}
+        ${(d.bloques || []).length ? `<div class="links">Tomas: ${d.bloques.map(b => b.tomas.length).reduce((a, b) => a + b, 0)} reales de las creadoras</div>` : ""}
+        ${d.referencia ? `<div class="links"><a href="${esc(d.referencia)}" target="_blank" rel="noopener">ver la referencia</a></div>` : ""}
+      </div>
+      ${video ? `<div class="acciones"><a class="btn sm" href="${esc(d.final)}" target="_blank" rel="noopener">Ver</a>
+        ${d.driveLink ? `<a class="btn sm" href="${esc(d.driveLink)}" target="_blank" rel="noopener">Drive</a>` : `<span class="btn sm" style="opacity:.5">Drive…</span>`}</div>` : ""}
+      ${caja}
+      <div class="acciones">${bot}</div>
+    </div></article>`;
+}
+async function guardar(id, datos, msg){
+  try { await fs.updateDoc(fs.doc(fs.db, "random_luz", id), datos); toast(msg); } catch (e) { toast("No se pudo guardar: " + e.code); }
+}
+async function accion(id, acc){
+  const card = document.querySelector(`[data-card="${CSS.escape(id)}"]`);
+  if (acc === "mas") { card.classList.toggle("abierta"); card.querySelector('[data-acc="mas"]').textContent = card.classList.contains("abierta") ? "Menos" : "Más"; return; }
+  if (acc === "elegir") return abrir(id);
+  if (acc === "cambiar") { card.querySelector(".cambio").hidden = false; card.querySelector(".cambio textarea").focus(); return; }
+  if (acc === "nocambio") { card.querySelector(".cambio").hidden = true; return; }
+  const ahora = new Date().toISOString();
+  if (acc === "enviarcambio") {
+    const nota = card.querySelector(".cambio textarea").value.trim();
+    if (!nota) return toast("Escribí qué cambiamos");
+    return guardar(id, {estado: "cambiar", cambioNota: nota, cambioEn: ahora, cambio: quien}, "Enviado: se rehace con tu cambio");
+  }
+  if (acc === "aprobar") return guardar(id, {estado: "aprobado", aprobadoEn: ahora, aprobo: quien}, "Aprobado: va a tu Drive");
+  if (acc === "reintentar") return guardar(id, {estado: "elegida", falloMotivo: "", turno: ""}, "Se vuelve a intentar");
+  const est = {descartar: "descartada", volver: "nueva", soltar: "nueva"}[acc];
+  return guardar(id, {estado: est, ...(acc === "descartar" ? {descartadoEn: ahora} : {})}, {descartar: "Descartado", volver: "Recuperado", soltar: "Cancelado"}[acc]);
+}
+function abrir(id){
+  const d = docs.find(x => x.id === id); if (!d) return;
+  abierto = id;
+  $("#mSub").textContent = `${d.moldeNombre || ""}${d.angulo && ANG[d.angulo] ? " · " + ANG[d.angulo] : ""}. Cambiá lo que quieras: va encima de cada toma, en ese orden.`;
+  $("#mBloques").innerHTML = (d.bloques || []).map((b, i) => b.texto ? `<label class="bl">${i === 0 ? "Hook · versión 1" : "Toma " + (i + 1)}<input class="ed" data-i="${i}" value="${esc(b.texto)}" maxlength="90"></label>` : "").join("")
+    + (d.versiones || []).map((t, j) => `<label class="bl">Hook · versión ${j + 2}<input class="ed" data-v="${j}" value="${esc(t)}" maxlength="90"></label>`).join("");
+  $("#mNota").value = "";
+  $("#modal").classList.add("on");
+}
+const cerrar = () => { $("#modal").classList.remove("on"); abierto = null; };
+$("#mNo").onclick = cerrar;
+$("#modal").addEventListener("click", e => { if (e.target.id === "modal") cerrar(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && abierto) cerrar(); });
+$("#mSi").onclick = async () => {
+  const d = docs.find(x => x.id === abierto); if (!d) return cerrar();
+  const bloques = (d.bloques || []).map((b, i) => { const inp = document.querySelector(`#mBloques input[data-i="${i}"]`); return inp ? {...b, texto: inp.value.trim()} : b; });
+  if (bloques.some((b, i) => (d.bloques[i].texto && !b.texto))) return toast("Ninguna frase puede quedar vacía");
+  const versiones = (d.versiones || []).map((t, j) => { const inp = document.querySelector(`#mBloques input[data-v="${j}"]`); return inp ? inp.value.trim() || t : t; });
+  const id = abierto; cerrar();
+  await guardar(id, {estado: "elegida", bloques, versiones, nota: $("#mNota").value.trim(), eligio: quien, eligioEn: new Date().toISOString()}, "Elegida: salen 3 versiones ✓");
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A2335">
+<title>Sistemas Mi Luz · CIMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif}
+:root{--bg:#FAF7F4;--card:#FFFFFF;--soft:#F6F0EC;--line:#EFE6E1;--line2:#E0D2CB;--txt:#2A1F1F;--mut:#8A7B76;--mut2:#B7A8A2;
+  --acc:#7A2335;--acc-bg:#F6E3E6;--ok:#3F8F6B;--ok-bg:#E7F2EC;--warn:#A8742A;--warn-bg:#F7EEDD;--bad:#B5523A;--bad-bg:#F8E7DF}
+body{background:var(--bg);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+@media (max-width:600px){.wrap{padding:20px 16px 60px}}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--mut);font-size:13px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--card);border:1px solid var(--line);padding:10px 16px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;min-height:42px}
+.btn:hover{border-color:var(--line2)}
+.btn.dark{background:var(--acc);color:#fff;border-color:var(--acc)}
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr);gap:11px;margin-bottom:22px}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}}
+.hero{border-radius:26px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#9A3A4D 0%,#5E1A29 64%);display:flex;align-items:center;gap:20px;min-height:170px}
+.hero .blob{position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;bottom:-100px}
+.big{font-size:56px;font-weight:700;letter-spacing:-.04em;line-height:1;position:relative}
+.hero-msg{position:relative;min-width:0}
+.ey{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;opacity:.65}
+.hero-msg h3{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin:6px 0 6px}
+.hero-msg p{font-size:12.5px;opacity:.85}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+@media (max-width:600px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:15px 17px;display:flex;flex-direction:column;min-height:80px}
+.kpi .l{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.kpi .v{font-size:28px;font-weight:700;letter-spacing:-.035em;margin-top:auto;padding-top:6px;line-height:1}
+.kpi .h{font-size:11.5px;color:var(--mut2);margin-top:4px}
+h2{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+.bots{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));column-gap:12px;row-gap:12px;margin-bottom:26px}
+.bot{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:14px}
+.bh{display:flex;align-items:center;gap:12px}
+.ico{width:42px;height:42px;border-radius:14px;background:var(--acc-bg);color:var(--acc);display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.bh b{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.bh small{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt{min-width:0;flex:1}
+.bt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pz{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.st{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.st.ok{background:var(--ok-bg);color:var(--ok)} .st.warn{background:var(--warn-bg);color:var(--warn)} .st.off{background:var(--soft);color:var(--mut)}
+.que{font-size:12.5px;color:var(--mut)}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.n{background:var(--soft);border-radius:14px;padding:10px 10px;min-width:0}
+.n b{display:block;font-size:21px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.n span{font-size:10.5px;color:var(--mut);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.n.toca{background:var(--acc-bg)} .n.toca b{color:var(--acc)}
+.pie{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.pie small{color:var(--mut2);font-size:11.5px}
+.feed{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:6px 18px}
+.ev{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+.ev:last-child{border-bottom:0}
+.ev .t{color:var(--mut2);font-size:11.5px;width:74px;flex-shrink:0}
+.ev .q{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .p{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--soft);color:var(--mut);white-space:nowrap}
+#login{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:9}
+.lg{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:30px;width:min(360px,92vw);text-align:center}
+.lg h1{font-size:24px;margin-bottom:6px}
+.lg input{width:100%;margin:18px 0 10px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:15px;text-align:center}
+.lg .err{color:var(--bad);font-size:12.5px;min-height:18px}
+</style>
+</head>
+<body>
+<div id="login"><div class="lg">
+  <h1>Sistemas Mi Luz</h1><p class="sub">Tus 6 bots de CIMA en una pantalla</p>
+  <input id="clave" type="password" placeholder="Clave" autocomplete="current-password">
+  <button class="btn dark" style="width:100%" id="entrar">Entrar</button>
+  <div class="err" id="err"></div>
+</div></div>
+
+<div class="wrap" id="app" hidden>
+  <header>
+    <div><h1>Tus sistemas</h1><div class="sub" id="hola">Todo lo que hacen tus bots, en vivo</div></div>
+    <div class="sub" id="act">Cargando…</div>
+  </header>
+
+  <div class="top">
+    <div class="hero"><div class="blob"></div>
+      <div class="big" id="toca">–</div>
+      <div class="hero-msg"><div class="ey">Te toca hoy</div><h3 id="tocaT">Cargando…</h3><p id="tocaP"></p></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span class="l">Listos hoy</span><span class="v" id="k1">–</span><span class="h">piezas aprobadas para subir</span></div>
+      <div class="kpi"><span class="l">Haciéndose</span><span class="v" id="k2">–</span><span class="h">en producción ahora</span></div>
+      <div class="kpi"><span class="l">Ganadores</span><span class="v" id="k3">–</span><span class="h">anuncios para iterar esta semana</span></div>
+      <div class="kpi"><span class="l">Estáticos</span><span class="v" id="k4">–</span><span class="h">listos en total</span></div>
+      <div class="kpi"><span class="l">Animados</span><span class="v" id="k5">–</span><span class="h">producidos en total</span></div>
+      <div class="kpi"><span class="l">Variantes</span><span class="v" id="k6">–</span><span class="h">subidas en total</span></div>
+    </div>
+  </div>
+
+  <h2>Tus 6 bots</h2>
+  <div class="bots" id="bots"></div>
+
+  <h2>Lo último que pasó</h2>
+  <div class="feed" id="feed"><div class="ev"><span class="q">Cargando…</span></div></div>
+</div>
+
+<script type="module">
+const $ = s => document.querySelector(s);
+const CLAVES = {"miluz-2026":"Luz","luz-2026":"Luz","cima-2026":"Nacho","vane-2026":"Vane","abril-2026":"Abril"};
+const URL_BASE = "https://cima-creators.github.io";
+let quien = null;
+const datos = {est: [], ani: [], edi: [], var: [], gan: [], bro: [], rnd: [], sem: null};
+try { quien = CLAVES[localStorage.getItem("sistemas_miluz_clave") || ""] || null; } catch (e) {}
+function entrar() {
+  const c = $("#clave").value.trim().toLowerCase(), n = CLAVES[c];
+  if (!n) { $("#err").textContent = "Clave incorrecta"; return; }
+  try { localStorage.setItem("sistemas_miluz_clave", c); } catch (e) {}
+  quien = n; arrancar();
+}
+$("#entrar").onclick = entrar;
+$("#clave").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
+if (quien) arrancar();
+
+function cuando(iso) {
+  if (!iso) return "";
+  const d = new Date(iso), s = (Date.now() - d) / 1000;
+  if (s < 90) return "recién";
+  if (s < 3600) return `hace ${Math.round(s / 60)} min`;
+  if (s < 86400) return `hace ${Math.round(s / 3600)} h`;
+  return d.toLocaleDateString("es-AR", {day: "numeric", month: "short"});
+}
+const hoy = () => new Date().toISOString().slice(0, 10);
+const cuenta = (arr, ...est) => arr.filter(d => est.includes(d.estado)).length;
+const ultimo = arr => arr.map(d => d._t).filter(Boolean).sort().pop() || "";
+
+async function arrancar() {
+  $("#login").hidden = true; $("#app").hidden = false;
+  $("#hola").textContent = `Hola ${quien} · todo lo que hacen tus bots, en vivo`;
+  const [{initializeApp}, {getFirestore, collection, query, where, onSnapshot, doc}, {getAuth, signInAnonymously}] = await Promise.all([
+    import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
+    import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js")]);
+  const app = initializeApp({apiKey:"AIzaSyCTv4DiRCpbCpGYP6E86TPHlkPvaAZTN3g",authDomain:"cleargy-creators.firebaseapp.com",projectId:"cleargy-creators",storageBucket:"cleargy-creators.firebasestorage.app",messagingSenderId:"313543582398",appId:"1:313543582398:web:99fe78991adeea2e7cb4ef"});
+  await signInAnonymously(getAuth(app));
+  const db = getFirestore(app);
+  const t = (d, ...k) => k.map(x => d[x]).find(Boolean) || "";
+  const escuchar = (clave, q, tf) => onSnapshot(q, snap => {
+    datos[clave] = snap.docs.map(x => { const d = x.data(); d._id = x.id; d._t = tf(d); return d; });
+    pintar();
+  }, e => console.warn(clave, e));
+  escuchar("est", query(collection(db, "estaticos"), where("marca", "==", "miluz")), d => t(d, "actualizado", "creado"));
+  escuchar("ani", collection(db, "animados_luz"), d => t(d, "producidoEn", "aprobadoEn", "produciendoDesde", "listaEn", "eligioEn", "creado"));
+  escuchar("edi", query(collection(db, "edicion_cola"), where("marca", "==", "miluz")), d => t(d, "actualizado", "creado"));
+  escuchar("var", query(collection(db, "variantes_cola"), where("marca", "==", "miluz")), d => t(d, "actualizado", "creado"));
+  escuchar("bro", collection(db, "broll_luz"), d => t(d, "actualizado", "creado"));
+  escuchar("rnd", collection(db, "random_luz"), d => t(d, "revisarEn", "aprobadoEn", "eligioEn", "creado"));   // bot 6 Ads Random (12/10)
+  escuchar("gan", query(collection(db, "variantes_ganadores"), where("marca", "==", "miluz")), d => t(d, "procesado", "recibido") || d.fecha || "");
+  onSnapshot(doc(db, "variantes_semana", "miluz"), x => { datos.sem = x.exists() ? x.data() : null; pintar(); }, e => console.warn("sem", e));
+}
+
+function estado(ultimaVez, horas, apagado) {
+  if (apagado) return ["off", apagado];
+  if (!ultimaVez) return ["off", "Sin actividad todavía"];
+  return (Date.now() - new Date(ultimaVez)) / 3.6e6 < horas ? ["ok", "Funcionando"] : ["warn", "Sin actividad hace rato"];
+}
+
+function pintar() {
+  const {est, ani, edi, var: va, gan, bro} = datos;
+  const ugc = datos.rnd || [];   // bot 6 = Ads Random (random_luz) desde el 12/10
+  const bt = (tipo, ...es) => bro.filter(d => d.tipo === tipo && es.includes(d.estado)).length;
+  const sa = datos.sem && datos.sem.anuncios;
+  const ganadores = Array.isArray(sa) ? sa.length : (sa && typeof sa === "object" ? Object.keys(sa).length : 0);
+  const bots = [
+    {ico: "🖼️", nom: "Estáticos", cuando: "Todos los días a las 7", url: "/miluz-app/estaticos",
+     que: "Busca imágenes que venden en tu nicho y en otros, vos elegís y genera las tuyas con tu packaging.",
+     nums: [[cuenta(est, "elegir"), "elegir", true], [cuenta(est, "revisar"), "revisar", true], [cuenta(est, "elegida", "generando", "modificar"), "en curso"], [cuenta(est, "lista", "aprobada"), "listas"]],
+     ult: ultimo(est), horas: 30},
+    {ico: "🎬", nom: "Animados", cuando: "Propuestas a las 8 · produce cada 30 min", url: "/miluz-app/animados",
+     que: "Te propone anuncios animados que están escalando; los que elegís se producen solos.",
+     nums: [[cuenta(ani, "nueva"), "elegir", true], [cuenta(ani, "producido"), "revisar", true], [cuenta(ani, "elegida", "lista", "produciendo", "cambiar"), "en curso"], [cuenta(ani, "aprobado"), "listos"]],
+     ult: ultimo(ani), horas: 30},
+    {ico: "✂️", nom: "Edición de crudos", cuando: "Cada hora", url: "/miluz-app/edicion",
+     que: "Edita los crudos de tus creadoras con el estilo de la marca: cortes, subtítulos, b-roll y música.",
+     nums: [[edi.length, "crudos"], [cuenta(edi, "revisar"), "revisar", true], [cuenta(edi, "procesando", "corregir"), "en curso"], [cuenta(edi, "subido", "aprobado"), "listos"]],
+     ult: ultimo(edi), horas: 30, apagado: edi.length ? "" : "Arranca cuando suban crudos"},
+    {ico: "🎙️", nom: "B-roll + voz en off", cuando: "Todos los días a las 7", url: "/miluz-app/broll",
+     que: "Arma historias reales con las tomas de tus creadoras y una voz en off. Aprobás hooks, guiones y videos.",
+     nums: [[bt("hook", "propuesto") + bt("guion", "propuesto"), "elegir", true], [bt("video", "revisar"), "revisar", true],
+            [bt("guion", "aprobado", "armando", "corregir") + bt("video", "corregir") + bt("pedido", "pedido", "procesando"), "en curso"],
+            [bt("video", "subido", "aprobado"), "listos"]],
+     ult: ultimo(bro.filter(d => d.tipo !== "banco")), horas: 30},
+    {ico: "🚀", nom: "Variantes de ganadores", cuando: "Lee tus ventas a la 1 am", url: "/miluz-app/variantes",
+     que: "Cada noche lee lo que vendió en la semana (10+ ventas y ROAS 1,8+). Vos elegís cuál iterar y cuántas (3 · 5 · 9) y te llegan para aprobar.",
+     nums: [[ganadores, "elegir", true], [cuenta(va, "revisar"), "revisar", true], [cuenta(va, "procesando", "corregir"), "en curso"], [cuenta(va, "subido", "aprobado"), "listas"]],
+     ult: [ultimo(va), ultimo(gan), (datos.sem && datos.sem.recibido) || ""].sort().pop(), horas: 30},
+    {ico: "🎞️", nom: "Ads Random", cuando: "Ideas a la mañana · se arman cada 15 min", url: "/miluz-app/random",
+     que: "Clips cortos de 8 a 15 s sin voz: tomas reales de uñas, una frase arriba y el Fénix con color. Elegís la idea y salen 3 versiones.",
+     nums: [[cuenta(ugc, "nueva"), "elegir", true], [cuenta(ugc, "revisar"), "revisar", true], [cuenta(ugc, "elegida", "produciendo", "cambiar"), "en curso"], [cuenta(ugc, "aprobado"), "listos"]],
+     ult: ultimo(ugc), horas: 30},
+  ];
+  $("#bots").innerHTML = bots.map(b => {
+    const [cl, tx] = estado(b.ult, b.horas, b.apagado);
+    return `<div class="bot">
+      <div class="bh"><div class="ico">${b.ico}</div><div class="bt"><b>${b.nom}</b><small>${b.cuando}</small></div></div>
+      <div class="que">${b.que}</div>
+      <div class="nums">${b.nums.map(([v, l, toca]) =>
+        `<div class="n ${toca && v > 0 ? "toca" : ""}"><b>${v}</b><span>${l}</span></div>`).join("")}</div>
+      <div class="pie"><div class="pz"><span class="st ${cl}">${tx}</span><small>${b.ult ? "Último movimiento " + cuando(b.ult) : ""}</small></div>
+        ${b.url ? `<a class="btn dark" href="${URL_BASE}${b.url}" target="_blank" rel="noopener">Abrir →</a>` : ""}</div>
+    </div>`;
+  }).join("");
+
+  const pend = [[cuenta(est, "revisar"), "estáticos para revisar"], [cuenta(ani, "producido"), "animados para revisar"], [cuenta(ugc, "revisar"), "randoms para revisar"],
+                [cuenta(va, "revisar"), "variantes para revisar"], [ganadores, "ganadores para elegir cuál iterar"], [cuenta(ani, "nueva"), "animados nuevos para elegir"],
+                [cuenta(est, "elegir"), "estáticos nuevos para elegir"]].filter(x => x[0] > 0);
+  const totalRevisar = cuenta(est, "revisar") + cuenta(ani, "producido") + cuenta(va, "revisar") + cuenta(ugc, "revisar");
+  $("#toca").textContent = totalRevisar;
+  $("#tocaT").textContent = totalRevisar ? "piezas esperan tu OK" : "Nada para revisar ahora";
+  $("#tocaP").textContent = pend.length ? pend.map(([n, l]) => `${n} ${l}`).join(" · ") : "Tus bots siguen trabajando solos.";
+
+  const h = hoy(), esHoy = d => (d._t || "").startsWith(h);
+  $("#k1").textContent = est.filter(d => ["lista", "aprobada"].includes(d.estado) && esHoy(d)).length
+    + ani.filter(d => d.estado === "aprobado" && esHoy(d)).length + va.filter(d => ["subido", "aprobado"].includes(d.estado) && esHoy(d)).length + ugc.filter(d => d.estado === "aprobado" && esHoy(d)).length;
+  $("#k2").textContent = cuenta(est, "elegida", "generando") + cuenta(ani, "elegida", "lista", "produciendo") + cuenta(edi, "procesando") + cuenta(va, "procesando") + cuenta(ugc, "elegida", "produciendo", "cambiar");
+  $("#k3").textContent = ganadores;
+  $("#k4").textContent = cuenta(est, "lista", "aprobada");
+  $("#k5").textContent = cuenta(ani, "producido", "aprobado");
+  $("#k6").textContent = cuenta(va, "subido", "aprobado");
+
+  const NOM = {est: "Estáticos", ani: "Animados", edi: "Edición", var: "Variantes", bro: "B-roll"};
+  const ESTADO = {elegida: "elegida", generando: "generándose", revisar: "para revisar", lista: "lista", aprobada: "aprobada",
+    aprobado: "aprobado", producido: "producido", produciendo: "produciéndose", procesando: "procesándose", subido: "subida",
+    fallo: "no salió", error: "error", modificar: "con cambio", cambiar: "con cambio", rechazado: "descartada",
+    corregir: "con cambio", armando: "armándose", armado: "armado", clonando: "clonándose"};
+  const evs = [];
+  for (const k of ["est", "ani", "edi", "var", "bro"]) for (const d of (datos[k] || [])) if (d._t && ESTADO[d.estado] && d.tipo !== "banco")
+    evs.push({t: d._t, bot: NOM[k], txt: d.codigo || d.adNombre || d.formato || d.marca || d._id, est: ESTADO[d.estado]});
+  evs.sort((a, b) => a.t < b.t ? 1 : -1);
+  $("#feed").innerHTML = evs.slice(0, 12).map(e => `<div class="ev"><span class="t">${cuando(e.t)}</span>
+    <span class="q"><b>${e.bot}</b> · ${String(e.txt).replace(/[<>&]/g, "")}</span><span class="p">${e.est}</span></div>`).join("")
+    || `<div class="ev"><span class="q">Todavía no hay movimientos.</span></div>`;
+  $("#act").textContent = "Actualizado " + new Date().toLocaleTimeString("es-AR", {hour: "2-digit", minute: "2-digit"});
+}
+</script>
+</body>
+</html>
