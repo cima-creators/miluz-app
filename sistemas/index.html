@@ -86,6 +86,7 @@ h2{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
     <div><h1>Tus sistemas</h1><div class="sub" id="hola">Todo lo que hacen tus bots, en vivo</div></div>
     <div class="sub" id="act">Cargando…</div>
   </header>
+  <div data-carpeta=""></div><script src="../drive.js"></script>
 
   <div class="top">
     <div class="hero"><div class="blob"></div>
@@ -113,7 +114,8 @@ h2{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 const $ = s => document.querySelector(s);
 const CLAVES = {"miluz-2026":"Luz","luz-2026":"Luz","cima-2026":"Nacho","vane-2026":"Vane","abril-2026":"Abril"};
 const URL_BASE = "https://cima-creators.github.io";
-let quien = null;
+let quien = null, carp = null;
+try { window.miluzDrive.then(c => { carp = c; pintar(); }); } catch (e) {}
 const datos = {est: [], ani: [], edi: [], var: [], gan: [], bro: [], rnd: [], sem: null};
 try { quien = CLAVES[localStorage.getItem("sistemas_miluz_clave") || ""] || null; } catch (e) {}
 function entrar() {
@@ -176,29 +178,29 @@ function pintar() {
   const sa = datos.sem && datos.sem.anuncios;
   const ganadores = Array.isArray(sa) ? sa.length : (sa && typeof sa === "object" ? Object.keys(sa).length : 0);
   const bots = [
-    {ico: "🖼️", nom: "Estáticos", cuando: "Todos los días a las 7", url: "/miluz-app/estaticos",
+    {ico: "🖼️", nom: "Estáticos", fmt: "Estáticos", cuando: "Todos los días a las 7", url: "/miluz-app/estaticos",
      que: "Busca imágenes que venden en tu nicho y en otros, vos elegís y genera las tuyas con tu packaging.",
      nums: [[cuenta(est, "elegir"), "elegir", true], [cuenta(est, "revisar"), "revisar", true], [cuenta(est, "elegida", "generando", "modificar"), "en curso"], [cuenta(est, "lista", "aprobada"), "listas"]],
      ult: ultimo(est), horas: 30},
-    {ico: "🎬", nom: "Animados", cuando: "Propuestas a las 8 · produce cada 30 min", url: "/miluz-app/animados",
+    {ico: "🎬", nom: "Animados", fmt: "Animados", cuando: "Propuestas a las 8 · produce cada 30 min", url: "/miluz-app/animados",
      que: "Te propone anuncios animados que están escalando; los que elegís se producen solos.",
      nums: [[cuenta(ani, "nueva"), "elegir", true], [cuenta(ani, "producido"), "revisar", true], [cuenta(ani, "elegida", "lista", "produciendo", "cambiar"), "en curso"], [cuenta(ani, "aprobado"), "listos"]],
      ult: ultimo(ani), horas: 30},
-    {ico: "✂️", nom: "Edición de crudos", cuando: "Cada hora", url: "/miluz-app/edicion",
+    {ico: "✂️", nom: "Edición de crudos", fmt: "UGC", cuando: "Cada hora", url: "/miluz-app/edicion",
      que: "Edita los crudos de tus creadoras con el estilo de la marca: cortes, subtítulos, b-roll y música.",
      nums: [[edi.length, "crudos"], [cuenta(edi, "revisar"), "revisar", true], [cuenta(edi, "procesando", "corregir"), "en curso"], [cuenta(edi, "subido", "aprobado"), "listos"]],
      ult: ultimo(edi), horas: 30, apagado: edi.length ? "" : "Arranca cuando suban crudos"},
-    {ico: "🎙️", nom: "B-roll + voz en off", cuando: "Todos los días a las 7", url: "/miluz-app/broll",
+    {ico: "🎙️", nom: "B-roll + voz en off", fmt: "B-roll", cuando: "Todos los días a las 7", url: "/miluz-app/broll",
      que: "Arma historias reales con las tomas de tus creadoras y una voz en off. Aprobás hooks, guiones y videos.",
      nums: [[bt("hook", "propuesto") + bt("guion", "propuesto"), "elegir", true], [bt("video", "revisar"), "revisar", true],
             [bt("guion", "aprobado", "armando", "corregir") + bt("video", "corregir") + bt("pedido", "pedido", "procesando"), "en curso"],
             [bt("video", "subido", "aprobado"), "listos"]],
      ult: ultimo(bro.filter(d => d.tipo !== "banco")), horas: 30},
-    {ico: "🚀", nom: "Variantes de ganadores", cuando: "Lee tus ventas a la 1 am", url: "/miluz-app/variantes",
+    {ico: "🚀", nom: "Variantes de ganadores", fmt: "", cuando: "Lee tus ventas a la 1 am", url: "/miluz-app/variantes",
      que: "Cada noche lee lo que vendió en la semana (10+ ventas y ROAS 1,8+). Vos elegís cuál iterar y cuántas (3 · 5 · 9) y te llegan para aprobar.",
      nums: [[ganadores, "elegir", true], [cuenta(va, "revisar"), "revisar", true], [cuenta(va, "procesando", "corregir"), "en curso"], [cuenta(va, "subido", "aprobado"), "listas"]],
      ult: [ultimo(va), ultimo(gan), (datos.sem && datos.sem.recibido) || ""].sort().pop(), horas: 30},
-    {ico: "🎞️", nom: "Ads Random", cuando: "Ideas a la mañana · se arman cada 15 min", url: "/miluz-app/random",
+    {ico: "🎞️", nom: "Ads Random", fmt: "Random", cuando: "Ideas a la mañana · se arman cada 15 min", url: "/miluz-app/random",
      que: "Clips cortos de 8 a 15 s sin voz: tomas reales de uñas, una frase arriba y el Fénix con color. Elegís la idea y salen 3 versiones.",
      nums: [[cuenta(ugc, "nueva"), "elegir", true], [cuenta(ugc, "revisar"), "revisar", true], [cuenta(ugc, "elegida", "produciendo", "cambiar"), "en curso"], [cuenta(ugc, "aprobado"), "listos"]],
      ult: ultimo(ugc), horas: 30},
@@ -211,7 +213,8 @@ function pintar() {
       <div class="nums">${b.nums.map(([v, l, toca]) =>
         `<div class="n ${toca && v > 0 ? "toca" : ""}"><b>${v}</b><span>${l}</span></div>`).join("")}</div>
       <div class="pie"><div class="pz"><span class="st ${cl}">${tx}</span><small>${b.ult ? "Último movimiento " + cuando(b.ult) : ""}</small></div>
-        ${b.url ? `<a class="btn dark" href="${URL_BASE}${b.url}" target="_blank" rel="noopener">Abrir →</a>` : ""}</div>
+        <div style="display:flex;gap:7px">${carp ? `<a class="btn" title="Carpeta en Drive" href="${miluzDriveLinks(carp, b.fmt).listos}" target="_blank" rel="noopener">📁 Drive</a>` : ""}
+        ${b.url ? `<a class="btn dark" href="${URL_BASE}${b.url}" target="_blank" rel="noopener">Abrir →</a>` : ""}</div></div>
     </div>`;
   }).join("");
 
