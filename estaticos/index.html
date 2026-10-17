@@ -365,7 +365,7 @@ function pintar(){
   const n = k => todos.filter(GRUPOS[k]).length;
   const hechasHoy = todos.filter(d => d.generadoDia === hoy()).length;
   const enCola = todos.filter(d => d.estado === "elegida").length;
-  $("#resumen").textContent = `${NOMBRES[MARCA] || MARCA} · ${n("revisar")} para revisar · ${hechasHoy} de ${PIEZAS_DIA} piezas hoy` + (enCola ? ` · ${enCola} en cola` : "");
+  $("#resumen").textContent = `${NOMBRES[MARCA] || MARCA} · ${n("revisar")} para revisar · ${hechasHoy} piezas hechas hoy` + (enCola ? ` · ${enCola} en cola` : "");
   $("#tabs").innerHTML = Object.keys(GRUPOS).map(k => `<button class="tab ${k===tab?"on":""}" data-t="${k}">${TITULOS[k]}${n(k)&&k!=="descartadas"?`<b>${n(k)}</b>`:""}</button>`).join("");
   $("#tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.t; try{localStorage.setItem("estaticos_tab",tab)}catch(e){} pintar(); });
   ({elegir:vElegir, proceso:vProceso, revisar:vRevisar, listas:vListas, descartadas:vDescartadas})[tab](todos.filter(GRUPOS[tab]), hechasHoy, enCola);
@@ -388,9 +388,8 @@ function vElegir(lista, hechasHoy, enCola){
     .sort((a,b) => (b.fecha||"").localeCompare(a.fecha||"") || ORDEN_TIPO[TIPO(a)] - ORDEN_TIPO[TIPO(b)] || (b.ref?.senal||0) - (a.ref?.senal||0) || (b.ref?.d||0) - (a.ref?.d||0));
   const usados = hechasHoy + enCola, pct = Math.min(100, usados / PIEZAS_DIA * 100);
   $("#vista").innerHTML = `
-    <div class="banner"><div class="meter"><div class="lbl">Tu cupo de hoy</div>
-      <div style="font-size:14px;margin-top:2px"><b>${Math.min(usados,PIEZAS_DIA)} de ${PIEZAS_DIA}</b> piezas elegidas${usados > PIEZAS_DIA ? ` · ${usados-PIEZAS_DIA} pasan a mañana` : ""}</div>
-      <div class="bar"><i style="width:${pct}%"></i></div></div>
+    <div class="banner"><div class="meter"><div class="lbl">Sin límite por día</div>
+      <div style="font-size:14px;margin-top:2px"><b>${enCola}</b> en cola · <b>${hechasHoy}</b> hechas hoy</div></div>
       <div class="sub" style="max-width:420px;margin:0">Son anuncios de otras marcas que llevan 30 días o más al aire (si siguen prendidos, venden). Tocá <b>La quiero</b> en las que te gusten y la hacemos con tus productos: en un rato aparecen en <b>Revisar</b>.</div></div>
     <div class="filtros">
       ${[["todas","Todas"],["unas","Uñas"],["top","Marcas top"],["otro","Otros rubros"]].map(([k,t]) => { const delDia = filtroDia === "todas" ? lista : lista.filter(d=>d.fecha===filtroDia); const n = k === "todas" ? delDia.length : delDia.filter(d=>TIPO(d)===k).length; return n || k === "todas" ? `<button class="chip ${filtroTipo===k?"on":""}" data-tipo="${k}">${t} · ${n}</button>` : ""; }).join("")}</div>
@@ -446,7 +445,7 @@ const origen = d => d.ref?.img ? `<button class="origen" data-ref="${esc(d.id)}"
 function vProceso(lista, hechasHoy){
   const orden = {generando:0, modificar:1, elegida:2, error:3};
   lista.sort((a,b) => orden[a.estado]-orden[b.estado] || String(a.elegidaEn).localeCompare(String(b.elegidaEn)));
-  let cupo = Math.max(0, PIEZAS_DIA - hechasHoy);
+  let cupo = Infinity;
   $("#vista").innerHTML = lista.length ? `<div class="grid">${lista.map(d => {
     let est;
     if (d.estado === "generando") est = `<span class="pill warn">Generándose ahora</span>`;
