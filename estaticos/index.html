@@ -212,7 +212,8 @@ a.btn{display:inline-flex;align-items:center;justify-content:center;text-decorat
 </div></div>
 <div class="toast" id="toast"></div>
 <script type="module">
-const MARCA = location.pathname.split("/").filter(Boolean)[0] || new URLSearchParams(location.search).get("marca") || "miluz";
+// Luz 17/10: en miluz-app el 1er tramo de la dirección es "miluz-app", no la marca: este repo es solo de Mi Luz.
+const MARCA = new URLSearchParams(location.search).get("marca") || "miluz";
 const NOMBRES = {miluz:"Mi Luz"};
 const CLAVES = {"miluz-2026":"Luz","cima-2026":"Nacho"};
 const PIEZAS_DIA = 9;
