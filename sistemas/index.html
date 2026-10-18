@@ -64,7 +64,13 @@ h2{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 .ev{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
 .ev:last-child{border-bottom:0}
 .ev .t{color:var(--mut2);font-size:11.5px;width:74px;flex-shrink:0}
-.ev .q{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .q{flex:1;min-width:0;display:flex;flex-direction:column}
+.ev .l1,.ev .l2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .l2{font-size:12px;color:var(--mut)}
+.ev .w{font-size:12px;color:var(--mut);white-space:nowrap;width:86px;flex-shrink:0}
+a.ev:hover{background:var(--soft);margin:0 -18px;padding-left:18px;padding-right:18px}
+.ev .p.mal{background:var(--bad-bg);color:var(--bad)}
+@media (max-width:600px){.ev .w{display:none}}
 .ev .p{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--soft);color:var(--mut);white-space:nowrap}
 #login{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:9}
 .lg{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:30px;width:min(360px,92vw);text-align:center}
@@ -114,6 +120,7 @@ h2{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
 const $ = s => document.querySelector(s);
 const CLAVES = {"miluz-2026":"Luz","luz-2026":"Luz","cima-2026":"Nacho","vane-2026":"Vane","abril-2026":"Abril"};
 const URL_BASE = "https://cima-creators.github.io";
+const DRIVE_BUSCAR = "https://drive.google.com/drive/search?q=" + encodeURIComponent('type:folder "Listos para subir"');
 let quien = null, carp = null;
 try { window.miluzDrive.then(c => { carp = c; pintar(); }); } catch (e) {}
 const datos = {est: [], ani: [], edi: [], var: [], gan: [], bro: [], rnd: [], sem: null};
@@ -213,7 +220,7 @@ function pintar() {
       <div class="nums">${b.nums.map(([v, l, toca]) =>
         `<div class="n ${toca && v > 0 ? "toca" : ""}"><b>${v}</b><span>${l}</span></div>`).join("")}</div>
       <div class="pie"><div class="pz"><span class="st ${cl}">${tx}</span><small>${b.ult ? "Último movimiento " + cuando(b.ult) : ""}</small></div>
-        <div style="display:flex;gap:7px">${carp ? `<a class="btn" title="Carpeta en Drive" href="${miluzDriveLinks(carp, b.fmt).listos}" target="_blank" rel="noopener">📁 Drive</a>` : ""}
+        <div style="display:flex;gap:7px"><a class="btn" title="Carpeta en Drive" href="${(carp && miluzDriveLinks(carp, b.fmt).listos) || DRIVE_BUSCAR}" target="_blank" rel="noopener">📁 Drive</a>
         ${b.url ? `<a class="btn dark" href="${URL_BASE}${b.url}" target="_blank" rel="noopener">Abrir →</a>` : ""}</div></div>
     </div>`;
   }).join("");
@@ -235,17 +242,31 @@ function pintar() {
   $("#k5").textContent = cuenta(ani, "producido", "aprobado");
   $("#k6").textContent = cuenta(va, "subido", "aprobado");
 
-  const NOM = {est: "Estáticos", ani: "Animados", edi: "Edición", var: "Variantes", bro: "B-roll"};
   const ESTADO = {elegida: "elegida", generando: "generándose", revisar: "para revisar", lista: "lista", aprobada: "aprobada",
-    aprobado: "aprobado", producido: "producido", produciendo: "produciéndose", procesando: "procesándose", subido: "subida",
-    fallo: "no salió", error: "error", modificar: "con cambio", cambiar: "con cambio", rechazado: "descartada",
-    corregir: "con cambio", armando: "armándose", armado: "armado", clonando: "clonándose"};
+    aprobado: "aprobado", producido: "para revisar", produciendo: "produciéndose", procesando: "editándose", subido: "en Drive",
+    fallo: "no salió", error: "frenado", modificar: "pidió cambio", cambiar: "pidió cambio", rechazado: "descartado", descartada: "descartada",
+    corregir: "pidió cambio", armando: "armándose", armado: "armado", elegir: "", nueva: "", propuesto: ""};
+  const DE_PERSONA = ["elegida", "aprobada", "aprobado", "modificar", "cambiar", "rechazado", "descartada", "corregir", "subido"];
+  const limpio = x => String(x || "").replace(/[<>&]/g, "").replace(/^checklist del jefe:\s*\d*\.?\s*/i, "Lo frenó el control de calidad: ");
+  const BOT = {
+    est: ["Estáticos", "/miluz-app/estaticos", d => d.codigo || d.formato, d => d.por, d => d.estado === "modificar" ? "Cambio: " + (d.notaModificar || "") : d.error],
+    ani: ["Animados", "/miluz-app/animados", d => d.codigo || d.titulo, d => d.estado === "aprobado" ? d.aprobo : d.eligio, d => d.estado === "cambiar" ? "Cambio: " + (d.cambioNota || "") : d.estado === "fallo" ? d.error : ""],
+    edi: ["Edición", "/miluz-app/edicion", d => [d.creadora, d.guion].filter(Boolean).join(" · "), d => d.revisadoPor || d.aprobo,
+          d => d.estado === "error" ? d.error : d.estado === "revisar" ? "Crudo editado, espera tu OK" : d.estado === "corregir" ? "Cambio: " + (d.nota || "") : ""],
+    var: ["Variantes", "/miluz-app/variantes", d => [d.codigo || d.adNombre, d.creadora].filter(Boolean).join(" · "), d => d.revisadoPor, d => d.nota || (d.estado === "error" ? d.error : "")],
+    bro: ["B-roll", "/miluz-app/broll", d => [d.codigo || d.titulo, d.creadora].filter(Boolean).join(" · "), d => d.revisadoPor, d => d.estado === "error" ? d.error : d.nota],
+    rnd: ["Random", "/miluz-app/random", d => d.codigo || d.moldeNombre, d => d.estado === "aprobado" ? d.aprobo : d.eligio, d => d.falloMotivo || (d.estado === "cambiar" ? "Cambio: " + (d.cambioNota || "") : "")],
+  };
   const evs = [];
-  for (const k of ["est", "ani", "edi", "var", "bro"]) for (const d of (datos[k] || [])) if (d._t && ESTADO[d.estado] && d.tipo !== "banco")
-    evs.push({t: d._t, bot: NOM[k], txt: d.codigo || d.adNombre || d.formato || d.marca || d._id, est: ESTADO[d.estado]});
+  for (const k in BOT) for (const d of (datos[k] || [])) if (d._t && ESTADO[d.estado] && d.tipo !== "banco") {
+    const [nom, url, tit, per, det] = BOT[k];
+    const persona = DE_PERSONA.includes(d.estado) ? (per(d) || "") : "";
+    evs.push({t: d._t, bot: nom, url, txt: tit(d) || d._id, quien: persona || "el bot", det: limpio(det(d)), est: ESTADO[d.estado], mal: ["error", "fallo"].includes(d.estado)});
+  }
   evs.sort((a, b) => a.t < b.t ? 1 : -1);
-  $("#feed").innerHTML = evs.slice(0, 12).map(e => `<div class="ev"><span class="t">${cuando(e.t)}</span>
-    <span class="q"><b>${e.bot}</b> · ${String(e.txt).replace(/[<>&]/g, "")}</span><span class="p">${e.est}</span></div>`).join("")
+  $("#feed").innerHTML = evs.slice(0, 15).map(e => `<a class="ev" href="${URL_BASE}${e.url}" target="_blank" rel="noopener"><span class="t">${cuando(e.t)}</span>
+    <span class="q"><span class="l1"><b>${e.bot}</b> · ${limpio(e.txt)}</span>${e.det ? `<span class="l2">${e.det}</span>` : ""}</span>
+    <span class="w">${e.quien === "el bot" ? "🤖 bot" : "👤 " + limpio(e.quien)}</span><span class="p ${e.mal ? "mal" : ""}">${e.est}</span></a>`).join("")
     || `<div class="ev"><span class="q">Todavía no hay movimientos.</span></div>`;
   $("#act").textContent = "Actualizado " + new Date().toLocaleTimeString("es-AR", {hour: "2-digit", minute: "2-digit"});
 }
