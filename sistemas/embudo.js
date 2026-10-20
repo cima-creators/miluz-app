@@ -166,7 +166,8 @@ function mostrar(k, pin) {
     <p class="em-note" style="margin:0">${v.accion === "Asistidor" ? `Asistidor: ${esc(v.por.join(", "))}. Empuja ventas aunque no las cierre: no lo apagues por ROAS.` : v.accion === "Escalar" ? "Winner: candidato a subirle presupuesto o duplicarlo." : v.etapa === "TOF" ? "Llega a gente nueva: juzgalo por eso, no solo por ROAS." : v.etapa === "BOF" ? "Le llega a gente caliente: acá sí manda el ROAS." : "Calienta a gente que ya te vio."}</p>
     <div class="em-where">${(v.ads || []).map(a => `<div><i class="${a.on ? "on" : ""}"></i><span>${esc(a.campana)}<small>${esc(a.conjunto)} · ${plata(a.gasto, 0)}</small></span><span>ROAS ${fmt(a.roas, 2)}</span></div>`).join("")}</div>`}
     <div class="em-acts">${/^\d+_\d+$/.test(v.post || "") ? `<a class="btn" href="https://www.facebook.com/${esc(v.post)}" target="_blank" rel="noopener">Ver el video</a>` : ""}
-      ${v.ads ? `<a class="btn dark" href="${ads(v.ads.map(a => a.id))}" target="_blank" rel="noopener">Abrir / apagar en el Administrador →</a>` : ""}</div>`;
+      <a class="btn dark" href="${CLAUDE}#${S.cuenta}-${encodeURIComponent(v.k)}" target="_blank" rel="noopener">Prender / apagar →</a>
+      ${v.ads ? `<a class="btn" href="${ads(v.ads.map(a => a.id))}" target="_blank" rel="noopener">Ver en el Administrador</a>` : ""}</div>`;
   f.appendChild(p);
   const fr = f.getBoundingClientRect(), r = b.getBoundingClientRect(), w = p.offsetWidth, h = p.offsetHeight;
   const bl = r.left - fr.left, bt = r.top - fr.top;
