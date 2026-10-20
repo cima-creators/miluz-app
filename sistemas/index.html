@@ -112,22 +112,11 @@ a.ev:hover{background:var(--soft);margin:0 -18px;padding-left:18px;padding-right
   <h2>Tus 6 bots</h2>
   <div class="bots" id="bots"></div>
 
-  <!-- 19/10 Luz: el embudo de Meta Ads vive en Claude (lee su cuenta de Meta con su sesión); acá va el acceso. -->
-  <h2>Meta Ads</h2>
-  <div class="bots">
-    <div class="bot">
-      <div class="bh"><div class="ico">🔻</div><div class="bt"><b>Embudo vivo</b><small>Se actualiza cada vez que lo abrís</small></div></div>
-      <div class="que">Tus videos de Meta adentro de un embudo: cuáles prospectan, calientan y cierran. Asistidores en morado, winners en dorado, qué apagar hoy sin cortar la prospección y un chat para pedir cambios.</div>
-      <div class="nums">
-        <div class="n"><b>🛡️</b><span>prospecta</span></div>
-        <div class="n"><b>🟣</b><span>asistidores</span></div>
-        <div class="n"><b>🏆</b><span>escalar</span></div>
-        <div class="n toca"><b>🛑</b><span>apagar hoy</span></div>
-      </div>
-      <div class="pie"><div class="pz"><span class="st ok">En Claude</span><small>Dólares y pesos · se abre con tu sesión de Claude</small></div>
-        <div style="display:flex;gap:7px"><a class="btn dark" href="https://claude.ai/artifact/YKsevTbWQDhjppwHzaEQ3p" target="_blank" rel="noopener">Abrir →</a></div></div>
-    </div>
-  </div>
+  <!-- 20/10 Luz: embudo de Meta Ads adentro de sistemas. Solo lectura: los números los publica su Mac
+       (~/Miluz/scripts/optimizacion/embudo_panel.py) en Firebase (embudo_luz). Para apagar: Administrador o Claude. -->
+  <h2>Meta Ads · Embudo</h2>
+  <section id="embudo" style="margin-bottom:26px"></section>
+  <script type="module" src="embudo.js"></script>
 
   <h2>Lo último que pasó</h2>
   <div class="feed" id="feed"><div class="ev"><span class="q">Cargando…</span></div></div>
